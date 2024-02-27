@@ -1,0 +1,16 @@
+{
+  "name": "project_web",
+  "version": "1.0.0",
+  "description": "membuat sius berbagi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon rest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}

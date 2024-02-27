@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tambah paragraf</title>
+    <style>
+      *{
+        background-color:#e1e1d5
+        
+      }
+      .form-paragraf-style{
+        text-align: center;
+      }
+      .input-text-prg{
+        width:97.4%;
+        height:250px;
+        margin:19px;
+        border:0px;
+        background-color: aliceblue
+      }
+      .input-title-style{
+        width:96.3%;
+        height: 36px;
+        border:0px;
+        background-color: aliceblue;
+      
+
+
+      }
+      .input-prg-wrapper{
+        height:257px;
+        overflow-y: auto;
+
+      }
+      .btn-submid-style{
+        background-color:whitesmoke;
+        width:25%;
+        height: 34px;
+      }
+    </style>
+</head>
+<body>
+    
+    <form action="/post-prg" method="post" class="form-paragraf-style">
+      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+      <h1>
+        <a href="/first-page/<%=data.account_id%>" class="prg-sign">paragraf</a>
+      </h1>
+      <input type="hidden" value="<%=data.account_id %>" name="user_id"><br>
+      <input type="hidden" value="<%=data.username %>" name="user_name"><br>
+      <input type="text" name="input_title" class="input-title-style" placeholder="judul"><br>
+      <textarea name="input_prg" class="input-text-prg" placeholder="pembuka pembicaraan"></textarea><br>
+      <div class="input-prg-wrapper">
+      <textarea name="input_prg1" class="input-text-prg" placeholder="isi pembicaraan 1" style="color:blue"></textarea><br>
+      <textarea name="input_prg2" class="input-text-prg" placeholder="isi pembicaraan 2" style="color:blueviolet"></textarea><br>
+      <textarea name="input_prg3" class="input-text-prg" placeholder="isi pembicaraan 3" style="color:brown"></textarea><br>
+      </div>
+      <button type="submit" class="btn-submid-style"> posting</button>
+    </form>
+</body>
+</html>

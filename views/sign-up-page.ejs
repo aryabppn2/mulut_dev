@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+    *{
+      background-color:#e1e1d5
+    }
+    .input-text-style{
+      width:56%;
+      height: 36px;
+      background-color: whitesmoke;
+      margin: 12px;
+    }
+    .textarea-input-style{
+      width:56%;
+      background-color: whitesmoke;
+      height: 100px;
+    }
+    .btn-submit-style{
+      background-color:whitesmoke;
+      margin: 12px;
+        width:25%;
+        height: 34px;
+      
+    }
+    .sign-up-sign{
+      text-decoration:none;
+      color: brown;
+    }
+    </style>
+</head>
+<body>
+  
+    <form action="/sent-account-data" method="post" style="text-align: center;">
+      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+      <h1 >
+        <a href="/login-page" class="sign-up-sign"><%=title%></a>
+        </h1>
+      <input type="text" name="username_input" class="input-text-style" placeholder="masukan username baru"><br>
+      <input type="text" name="password_input" class="input-text-style" placeholder="masukan password baru"><br>
+      <textarea name="input_location"  class="textarea-input-style" placeholder="lokasi"></textarea><br>
+      <button type="submit" class="btn-submit-style">daftar</button>
+    </form>
+</body>
+</html>

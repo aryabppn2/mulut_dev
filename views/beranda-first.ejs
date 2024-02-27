@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beranda</title>
+    <style>
+      .prg-card{
+        text-align: center;
+      }
+      .search-wrapper{
+         background-color: antiquewhite;
+        text-align: center;
+
+      }
+      .input-text-search{
+         width:67.3%;
+         height:36px;
+         color:brown 
+      }
+      .btn-search-type{
+         width:45px;
+         height:40px;
+         margin-left: 0px;
+      }
+      .bar-option{
+         background-color: bisque;
+         
+      }
+      .bar-btn{
+         margin:100px;
+         text-decoration: none;
+      }
+      .prg-card{
+         background-color:burlywood;
+         border:0px
+      }
+    </style>
+</head>
+<body>
+   <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+    <h1 style="color:brown;text-align: center;">SELAMAT DATANG DI mulut.com</h1>
+    <div class="bar-option">
+    <a href="/login-page" class="bar-btn">login</a>
+    <a href="/sign-up-option" class="bar-btn" style="color:blue">sign-up</a>
+    <a href="/orang lain" class="bar-btn" style="color:green">orang lain</a>
+    </div>
+    <div class="content-wrapper">
+    <% paragraf.forEach(element => { %>
+      <fieldset class="prg-card">
+        <legend><%=element.userName %></legend>
+     
+        <h1 ><%=element.title%></h1>
+     <div>
+        <%=element.prg._ %>
+     </div>
+     <div style="color:blue">
+        <%=element.prg._1 %>
+     </div>
+     <div style="color:blueviolet">
+        <%=element.prg._2 %>
+     </div>
+     <div style="color:brown">
+        <%=element.prg._3 %>
+     </div>
+
+
+    </fieldset>  
+
+
+    <% }) %>
+    </div>
+</body>
+</html>

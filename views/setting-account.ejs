@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>
+        <a href="/login-page">log-out</a>
+    </h1>
+    <form action="/account-update" method="post">
+        <input type="hidden" name="id"  value="<%=old_account.account_id%>"><br>
+        <input type="text" name="input_newUsername" value="<%=old_account.username%>" class="input-text-style" placeholder="nama baru"><br>
+        <input type="text" name="input_newPass" value="<%=old_account.password%>" class="input-text-style" placeholder="password baru"><br>
+        <textarea name="input_newLocation" placeholder="lokasi baru" class="text-style"><%=old_account.location%></textarea>
+        <button type="submit" class="btn-submid-style"> update account</button>
+    </form>
+</body>
+</html>

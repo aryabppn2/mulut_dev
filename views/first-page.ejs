@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+
+<style>
+    body{
+        background-color: #dfdad5;
+    }
+   .username-style{
+    color:brown;
+    background-color: #ffe4c4;
+    height: 100px;
+    text-decoration: none;
+   }
+   .bar-private-container{
+    background-color: rgb(202, 166, 166);
+   }
+   .identity-private{
+    width:245px;
+    height: 36px;
+    background-color: rgb(201, 149, 149);
+    color:bisque;
+    border:0px;
+   }
+.btn-bar{
+    text-decoration: none;
+    margin-left: 100px;
+}
+.prg-card{
+    text-align: center;
+    background-color: burlywood;
+    border:0px
+}
+</style>
+
+
+<body>
+    <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+<h1>
+    <a href="setting/<%=data.account_id%>" class="username-style"><%=data.username%></a>
+    
+</h1>
+
+<div class="bar-private-container">
+<select  class="identity-private">
+<option>Info</option>
+<option class="username"><%=data.username%></option>
+<option class="password">"<%=data.password%></option>
+<option class="location"><%=data.location%></option>
+
+</select>
+
+    <a href="/input/<%=data.account_id%>"  style="color:aqua" class="btn-bar">tambah</a>
+
+<a href="/beranda/<%=data.account_id%>" class="btn-bar" style="color:whitesmoke">beranda</a>
+    <a href="/friends/<%=data.account_id%>" class="btn-bar" style="color:brown">teman</a>
+    <a href="/beFiends/<%=data.account_id%>" class="btn-bar" style="color:aqua">diteman</a>
+    <a href="/mulut.com" class="btn-bar" style="color:rgb(163, 123, 123)">log-out</a>
+</div>
+
+<div class="context-wrapper">
+<% paragraf.forEach(account_prg => { %>
+    <fieldset class="prg-card">
+        <legend><%=account_prg.userName %></legend>
+     
+        <h1 ><%=account_prg.title%></h1>
+     <div>
+        <%=account_prg.prg._ %>
+     </div>
+     <div style="color:blue">
+        <%=account_prg.prg._1 %>
+     </div>
+     <div style="color:blueviolet">
+        <%=account_prg.prg._2 %>
+     </div>
+     <div style="color:brown">
+        <%=account_prg.prg._3 %>
+     </div>
+
+
+    </fieldset>  
+
+
+
+
+<% }) %>
+
+</div>
+
+</body>
+</html>
