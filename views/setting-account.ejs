@@ -4,18 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .bar-mini{
+            background-color: gray;
+        }
+        .account-bar{
+            margin: 20px;
+            background-color: antiquewhite;
+        }
+        .btn-bar{
+            text-decoration: none;
+            height:36px;
+            margin:100px
+        }
+
+
+    </style>
+
 </head>
 <body>
+ <div class="bar-mini">
+    <a href="/mulut.com" class="btn-bar" style="color:rgb(217, 203, 203)">log-out</a>
+    <a href="/first-page/<%=account.account_id%>" class="btn-bar" style="color:blanchedalmond">kembali</a>
+ </div>
 
-    <h1>
-        <a href="/login-page">log-out</a>
-    </h1>
-    <form action="/account-update" method="post">
-        <input type="hidden" name="id"  value="<%=old_account.account_id%>"><br>
-        <input type="text" name="input_newUsername" value="<%=old_account.username%>" class="input-text-style" placeholder="nama baru"><br>
-        <input type="text" name="input_newPass" value="<%=old_account.password%>" class="input-text-style" placeholder="password baru"><br>
-        <textarea name="input_newLocation" placeholder="lokasi baru" class="text-style"><%=old_account.location%></textarea>
-        <button type="submit" class="btn-submid-style"> update account</button>
-    </form>
+
+ <div class="account-sett-wrwppwer">
+
+
+
+<fieldset class="account-bar" style="color:rgb(29, 52, 52);border-color: rgb(40, 49, 49);"><%=account.username%></fieldset>
+<fieldset class="account-bar" style="color:red;border-color:red"><%=account.password%></fieldset>
+<fieldset class="account-bar" style="color:gray;border-color:gray"><%=account.location%></fieldset>
+ 
+
+</div>
+
+
+
+ 
+
+
+    
 </body>
 </html>

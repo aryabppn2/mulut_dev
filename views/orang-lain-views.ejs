@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+      .orang-lain-card{
+        margin-top:20px;
+        border:10px;
+        background-color:rgb(216, 182, 167) ;
+        
+
+      }
+      .search-account-bar{
+        background-color: antiquewhite;
+        text-align: center;
+
+      }
+      .input-txt-src{
+        width: 67.5%;
+        height: 23px;
+        border: 0px;
+
+      }
+   .btn-bar-itm{
+       text-decoration: none;
+       margin-left: 100px;
+   }
+   .others-bar{
+      text-decoration: none;
+      text-align: center;
+      margin-left: 45px;
+      width: 108px;
+      height: 30px;
+      border:0px;
+      background-color:rgb(216, 182, 167);
+      
+   }
+      
+    </style>
+</head>
+<body>
+  <form action="/searchAccount/<%=account.account_id%>" method="post" class="search-account-bar">
+    <input type="text" name="search_input" class="input-txt-src" placeholder="cari siapa">
+    <button type="submit" class="btn-submid-container">cari </button>
+  </form>
+  <div class="account-bar">
+   <a href="/first-page/<%=account.account_id%>" class="btn-bar-itm">pulang</a>
+   <a href="/orang-lain/<%=account.account_id%>" class="btn-bar-itm">kembali</a>
+  </div>
+    <% all_account.forEach(element => { %>
+      <fieldset class="orang-lain-card">
+        <legend class="username-place"><%=element.username%></legend>
+        <select class="others-bar">
+          <option ><%=element.username%></option>
+          <option ><%=element.location%></option>
+        </select>
+      
+        <a href="/others-chat/<%=element.account_id%>/<%=account.account_id%>" class="others-bar" style="color:aquamarine">chat</a>
+        <a href="/others-content/<%=element.account_id%>/<%=account.account_id%>" class="others-bar" style="color:gray">konten</a>
+      </fieldset>     
+
+
+
+    <% }) %>
+
+
+
+</body>
+</html>

@@ -28,6 +28,7 @@
    }
 .btn-bar{
     text-decoration: none;
+    
     margin-left: 100px;
 }
 .prg-card{
@@ -41,7 +42,7 @@
 <body>
     <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
 <h1>
-    <a href="setting/<%=data.account_id%>" class="username-style"><%=data.username%></a>
+    <a href="/setting/<%=data.account_id%>" class="username-style"><%=data.username%></a>
     
 </h1>
 
@@ -57,9 +58,7 @@
     <a href="/input/<%=data.account_id%>"  style="color:aqua" class="btn-bar">tambah</a>
 
 <a href="/beranda/<%=data.account_id%>" class="btn-bar" style="color:whitesmoke">beranda</a>
-    <a href="/friends/<%=data.account_id%>" class="btn-bar" style="color:brown">teman</a>
-    <a href="/beFiends/<%=data.account_id%>" class="btn-bar" style="color:aqua">diteman</a>
-    <a href="/mulut.com" class="btn-bar" style="color:rgb(163, 123, 123)">log-out</a>
+<a href="/barusan/<%=data.account_id%>" class="btn-bar"  style="color:green"> barusan chat</a>
 </div>
 
 <div class="context-wrapper">

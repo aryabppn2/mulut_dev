@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+      body{
+         background-color: aliceblue;
+      }
+      .prg-card{
+         text-align: center;
+         background-color: burlywood;
+
+      }
+      .bar-btn{
+         width:100px;
+         height: 34px;
+         margin-left: 100px;
+         text-decoration: none;
+         background-color:lightgray;
+         border:0px;
+
+      }
+      .others-bar{
+         background-color:lightgray;
+      }
+    </style>
+</head>
+<body>
+
+<h1 class="others-name"><%=othersName%></h1>
+<div class="others-bar">
+
+   <a href="/first-page/<%=user%>" class="bar-btn" style="color:rgb(30, 57, 57)">pulang</a>
+   <a href="/orang-lain/<%=user%>" class="bar-btn" style="color:green">kembali</a>
+   <a href="/others-chat/<%=others%>/<%=user%>" class="bar-btn" style="color:blue">chat</a>
+    <select class="bar-btn">
+        <option><%=othersName%></option>
+        <option> <%=othersLocation%></option>
+    </select>
+
+</div>
+<% others_content.forEach(element => { %>
+    <fieldset class="prg-card">
+        <legend><%=element.userName %></legend>
+     
+        <h1 ><%=element.title%></h1>
+     <div>
+        <%=element.prg._ %>
+     </div>
+     <div style="color:blue">
+        <%=element.prg._1 %>
+     </div>
+     <div style="color:blueviolet">
+        <%=element.prg._2 %>
+     </div>
+     <div style="color:brown">
+        <%=element.prg._3 %>
+     </div>
+     </fieldset>
+<% }) %>
+
+    
+</body>
+</html>
