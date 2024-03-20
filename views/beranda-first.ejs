@@ -38,31 +38,27 @@
     </style>
 </head>
 <body>
-   <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
-    <h1 style="color:brown;text-align: center;">SELAMAT DATANG DI mulut.com</h1>
+   
+   <form action="/search-get" method="post" class="search-wrapper">
+      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+        <input type="text" name="search_input" class="input-text-search" placeholder="cari apa" >
+        <button class="btn-search-type" type="submit">cari</button>
+    </form>
     <div class="bar-option">
     <a href="/login-page" class="bar-btn">login</a>
-    <a href="/sign-up-option" class="bar-btn" style="color:blue">sign-up</a>
-   
+    <a href="/sign-up-option" class="bar-btn" style="color:blue">sign-up biasa</a>
     </div>
     <div class="content-wrapper">
     <% paragraf.forEach(element => { %>
       <fieldset class="prg-card">
-        <legend><%=element.userName %></legend>
-     
-        <h1 ><%=element.title%></h1>
-     <div>
-        <%=element.prg._ %>
-     </div>
-     <div style="color:blue">
-        <%=element.prg._1 %>
-     </div>
-     <div style="color:blueviolet">
-        <%=element.prg._2 %>
-     </div>
-     <div style="color:brown">
-        <%=element.prg._3 %>
-     </div>
+         <legend><%=element.userName %></legend>
+         <h1 class="qoutes-title"><%=element.qoutes_title%></h1>
+  <select class="qoutes-ket">
+    <option>waktu:<%=element.carry.time%></option>
+    <option> location:<%=element.carry.location%></option>
+  </select>
+
+           <div class="qoutes-contain"><%=element.qoutes%></div>
 
 
     </fieldset>  

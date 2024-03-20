@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+      
+        .qoutes-info{
+            width:500px;
+            height: 29px;
+            background-color: antiquewhite;
+            border:0px;
+            
+            
+        }
+       
+        .qoutes-mini-bar{
+            background-color: rgb(201, 181, 154);
+            
+        }
+        .title-bar{
+            color:blanchedalmond
+        }
+        .qoutes-paper{
+            background-color: aliceblue;
+            color:brown;
+            overflow-y: auto;
+            height: 370px;;
+        }
+        .coment-input-wrapper{
+            background-color: lightgoldenrodyellow;
+        }
+        .coment-input{
+            width:87.6%;
+            height:33px;
+            background-color: antiquewhite;
+            color:brown
+        }
+        .coment-card{
+            background-color: rgb(238, 236, 234);
+            color:rgb(138, 156, 90);
+            border-style: double;
+            margin:12px;
+        }
+        .user-name{
+            color:brown
+        }
+        .coment-value{
+            color:chocolate
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <div class="qoutes-mini-bar">
+        <a href=<%=link_back%>  style="text-decoration:none;color:whitesmoke">kembali</a>
+        <select class="qoutes-info">
+            <option><%=qoutes_data.qoutes_title%></option>
+            <option ><%=qoutes_data.userName%></option>
+            <option ><%=qoutes_data.carry.time%></option>
+        </select>
+        <h1 class="title-bar"><%=qoutes_data.qoutes_title%></h1>
+    </div>
+    <div class="qoutes-paper"><%=qoutes_data.qoutes%></div>
+
+<div class="coment-input-wrapper">
+    <form action=<%=post_method%> method="post">
+        <input type="hidden" name="username_input" value="<%=user_data.username%>">
+        <input type="hidden" name="userId_input" value="<%=user_data.account_id%>">
+        <input type="hidden" name="qoutesId_input" value="<%=qoutes_data.id_prg%>">
+        <textarea name="input_coment"  class="coment-input" placeholder="komen sesuatu"></textarea>
+        <button type="submit" class="btn-coment">kirim</button>
+    </form>
+    <div class="coment-container">
+        <b>komentar </b>
+
+        <% coments.forEach(datas => { %>
+        <div class="coment-card">
+        <h3 class="user-name"><%=datas.username%></h3>
+        <p class="coment-value"><%=datas.coment_Value%></p>
+
+        </div> 
+
+
+        <% }) %>
+        
+    </div>
+</div>
+</body>
+</html>

@@ -31,10 +31,50 @@
          margin:100px;
          text-decoration: none;
       }
-      .prg-card{
-         background-color:burlywood;
-         border:0px
-      }
+      .qoutes-card-container{
+    background-color: #dfdad5;
+    margin: 12px;
+    text-align: center;
+}
+
+.qoutes-bar{
+    background-color: rgb(219, 226, 199);
+    
+}
+
+.qoutes-info{
+    width:300px;
+    height: 30px;
+    background-color:rgb(219, 226, 199);
+    border:0px;
+}
+.qoutes-value{
+    background-color: #ffe4c4;
+    color:brown
+
+}
+.coment-coloum{
+    background-color: rgb(239, 232, 222);
+    
+}
+.coment-container-input{
+    width:400px;
+    background-color: #ffe4c4;
+    color:green;
+    border: 0px;
+}
+.coment-list{
+    width:400px;
+    background-color: blanchedalmond;
+}
+.detail-container{
+    text-decoration: none;
+color:brown;
+background-color: rgb(231, 201, 201);
+}
+  
+     
+     
     </style>
 </head>
 <body>
@@ -48,30 +88,30 @@
     <a href="/beranda/<%=account.account_id%>" class="bar-btn" style="color:blue">beranda</a>
     <a href="/orang-lain/<%=account.account_id%>" class="bar-btn" style="color:green">orang lain</a>
     </div>
-    <div class="content-wrapper">
-    <% paragraf.forEach(element => { %>
-      <fieldset class="prg-card">
-        <legend><%=element.userName %></legend>
-     
-        <h1 ><%=element.title%></h1>
-     <div>
-        <%=element.prg._ %>
-     </div>
-     <div style="color:blue">
-        <%=element.prg._1 %>
-     </div>
-     <div style="color:blueviolet">
-        <%=element.prg._2 %>
-     </div>
-     <div style="color:brown">
-        <%=element.prg._3 %>
-     </div>
+    <div class="context-wrapper">
+    <% paragraf.forEach(prg=> { %>
+      <div class="qoutes-card-container">
+        <div class="qoutes-bar">
+            <select class="qoutes-info">
+                <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
+                <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
+                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
+                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
+            </select>
+        </div>
+       <div class="qoutes-value">
+        <%=prg.qoutes%>
+        
+        </div> 
+        <div class="coment-coloum">
+            <a href="/open-coment-beranda/<%=prg.id_prg%>/<%=account.account_id%>" class="detail-container">lihat detail</a>
+         </div>
+        
 
-
-    </fieldset>  
-
+    </div>
 
     <% }) %>
     </div>
+    
 </body>
 </html>
