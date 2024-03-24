@@ -73,6 +73,13 @@
 color:brown;
 background-color: rgb(231, 201, 201);
 }
+.qoutes-delete-btn{
+    color:rgb(247, 226, 226);
+    background-color:red;
+    text-decoration: none;
+    margin-left:45px;
+
+}
 </style>
 
 
@@ -95,6 +102,7 @@ background-color: rgb(231, 201, 201);
     <a href="/input/<%=data.account_id%>"  style="color:aqua" class="btn-bar">tambah</a>
 
 <a href="/beranda/<%=data.account_id%>" class="btn-bar" style="color:whitesmoke">beranda</a>
+<a href="list-chat-open/<%=data.account_id%>" class="btn-bar" style="color:rgb(55, 91, 55)">barusan chat </a>
 </div>
 
 <div class="context-wrapper">
@@ -107,6 +115,7 @@ background-color: rgb(231, 201, 201);
                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
             </select>
+            <a href="/delete-qoutes?<%=data.account_id%>/<%=prg.id_prg%>" class="qoutes-delete-btn">hapus qoutes</a>
         </div>
        <div class="qoutes-value">
         <%=prg.qoutes%>

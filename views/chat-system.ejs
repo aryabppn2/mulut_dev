@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+        .chat-mini-bar{
+            background-color: bisque;
+        }
+        .btn-chat-bar{
+            text-decoration: none;
+            margin-left: 29px;
+        }
+        .user-chat-body{
+            height: 220px;
+            overflow-y: auto;
+            background-color: rgb(219, 235, 216);
+        }
+        .target-chat-body{
+            height: 220px;
+            overflow-y: auto;
+            background-color: lightgray;
+        }
+        .chat-input-text{
+            width:1208px;
+            height:29px;
+            border:0px;
+        }
+        .btn-sent{
+            width:44px;
+            height: 29px;
+            border-radius: 1px;
+            border: 0px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-mini-bar">
+        <a href="/orang-lain/<%=userId%>" class="btn-chat-bar" style="color:blue;background-color: aliceblue;">keluar</a>
+        <a href="/others-content/<%=targetId%>/<%=userId%>" class="btn-chat-bar" style="color:rgb(214, 205, 223);background-color: cadetblue;">lihat konten</a>
+        <h1 class="target-name-container"><%=targetName%></h1>
+    </div>
+    <div class="target-chat-body"></div>
+    <div class="user-chat-body">
+        <% user_chat.forEach(element => { %>
+              <b><%=element.chat_value%></b>
+        <% }) %>
+    </div>
+   <form action="<%=chat_room_system%>" method="post" class="chat-input-wrapper">
+    <input type="hidden" name="input_userName" value="<%=userName%>">
+    <input type="hidden" name="input_date" value="<%=date%>">
+ <textarea name="input_chat_value"  class="chat-input-text" placeholder="ketikan sesuatu"></textarea>
+  <button class="btn-sent">kirim</button>
+   </form>
+</body>
+</html>

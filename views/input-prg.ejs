@@ -19,8 +19,8 @@
         border:0px;
         background-color: aliceblue
       }
-      .input-title-style{
-        width:96.3%;
+      .input-text-style{
+        width:47.9%;
         height: 36px;
         border:0px;
         background-color: aliceblue;
@@ -57,12 +57,13 @@
       <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
      <div class="input-bar">
       <a href="/first-page/<%=data.account_id%>" class="btn-bar">pulang</a>
+      <b style="color:brown; margin-left: 400px;" >silahkan tulis qoutes  mu <%=data.username%></b>
      </div>
       <input type="hidden" value="<%=data.account_id %>" name="user_id"><br>
       <input type="hidden" value="<%=data.username %>" name="user_name"><br>
-      <input type="text" name="input_qoutes_title" class="input-title-style" placeholder="judul qoutes"><br>
+      <input type="text" name="input_qoutes_title" class="input-text-style" placeholder="judul qoutes">
       <input type="hidden" name="location_input" value="<%=data.location%>">
-      <input type="date" name="input_release_date" class="input-num-style"><br>
+      <input type="date" name="input_release_date" class="input-text-style"><br>
       <textarea name="input_qoutes"  class="input-text-prg" placeholder="isi qoutes"></textarea>
       <button type="submit" class="btn-submid-style"> posting</button>
     </form>

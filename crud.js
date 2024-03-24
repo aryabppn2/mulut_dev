@@ -22,6 +22,10 @@ function post_coment(data,json,url){
 
 }
 
+function sent_chatData(json,data,url){
+    json.push(data);
+    url.writeFileSync('mongodb/chat_db.json',JSON.stringify(json))
+}
 
 
 function account(json,id){
@@ -49,8 +53,11 @@ function find_othersPrg(id,json){
     return prg_filter
 }
 
+function findChat(datas,chat_id){
+    const data=datas.filter(data=>data.chatId.includes(chat_id));
+    return data
+}
 
 
-
-
-module.exports={accoundDb_Insert,account,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,find_coment}
+module.exports={accoundDb_Insert,account,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,
+    find_coment,sent_chatData,findChat}

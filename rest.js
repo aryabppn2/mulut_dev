@@ -4,7 +4,7 @@ const url=require('fs');
 const port=7000;
 //configue file system//
 const {accoundDb_Insert,account,Insert_data,get_paragrafAccount,
-    find_othersPrg,qoutes,post_coment,find_coment}=require('./crud.js')
+    find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,findChat}=require('./crud.js')
 
 const {find_paragraf,Find_account}=require('./machine.js')
 
@@ -16,7 +16,8 @@ http.use(express.urlencoded({extended:true}));
 ///databases connect//
 const get_accountDB=url.readFileSync('mongodb/account.json','utf-8');
 const get_prgDb=url.readFileSync('mongodb/paragraf.json','utf-8');
-const coment_db_url=url.readFileSync('mongodb/coment.json','utf-8')
+const coment_db_url=url.readFileSync('mongodb/coment.json','utf-8');
+const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8')
 
 
 //get//
@@ -180,6 +181,36 @@ http.get('/open-coment-beranda/:qoutes_id/:user_id',function(request,respont){
         
           })
     })
+   
+http.get('/open-chat-system/:user_ip/:target_ip',function(request,respont){
+    const get_ip={
+        user:request.params.user_ip,
+        target:request.params.target_ip
+    };
+    const get_account={
+        user:account(JSON.parse(get_accountDB),get_ip.user),
+        target:account(JSON.parse(get_accountDB),get_ip.target)
+    }
+   const chat_id={
+    user:`chat_sent-${get_account.user}-to${get_account.target}`,
+    target:`chat_sent-${get_account.target}-to${get_account.user}`
+   }
+respont.render('chat-system',{
+    title:'chating dengan '+get_account.target[0].username,
+    chat_room_system:`/chat-SentAt/${get_account.user[0].account_id}/${get_account.target[0].account_id}`,
+    userName:get_account.user[0].username,
+    targetName:get_account.target[0].username,
+    userId:get_account.user[0].account_id,
+    targetId:get_account.target[0].account_id,
+    user_chat:findChat(JSON.parse(chatDB_url),chat_id.user),
+    target_chat:findChat(JSON.parse(chatDB_url), chat_id.target),
+    date:new Date(),
+
+})
+
+
+})
+
 //post//
 
 http.post('/sent-account-data',function(request,respont){
@@ -281,7 +312,7 @@ http.post('/post-coment',function(request,respont){
 
     }
     post_coment(coment_input,JSON.parse(coment_db_url),url)
-    connect_UserInterface(coment_input)
+   
 
     respont.redirect(`/open-coment/${coment_input.qoutes_id}/${coment_input.userId}`)
   
@@ -314,7 +345,24 @@ http.post('/post-coment-others/:others_id/:user_id/:qoutes_id',function(request,
    
 })
 
+http.post('/chat-SentAt/:user_id/:target_id',function(request,respont){
+    const get_id={
+        user:request.params.user_id,
+        target:request.params.target_id
 
+    }
+const chat_id=`chat_sent-${get_id.user}-to${get_id.target}`;
+const chat_input={
+    chatId:chat_id,
+    user_name:request.body.input_userName,
+    date:request.body.input_date,
+    chat_value:request.body.input_chat_value
+}
+
+sent_chatData(JSON.parse(chatDB_url),chat_input,url)
+
+
+})
 
 
 http.listen(port,function(){
