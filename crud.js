@@ -7,7 +7,7 @@ function accoundDb_Insert(account_data,json,url){
 
 }
 function account(json,id){
-    json.filter(ip=>ip.account_id.includes(id))
+  const find=json.filter(ip=>ip.account_id.includes(id))
     return find
 }
 
@@ -29,8 +29,8 @@ function sent_chatData(json,data,url){
 
 
 function account(json,id){
-    const find=json.filter(ip=>ip.account_id.includes(id))
-    return find
+   const find=json.filter(data=>data.account_id.includes(id))
+   return find
 }
 function get_paragrafAccount(input,prg_json){
 const get_filter=prg_json.filter(flt=>flt.userId.includes(input));
@@ -58,6 +58,14 @@ function findChat(datas,chat_id){
     return data
 }
 
+function findChat_fromUser(json,address){
+    const data_sent=json.filter(get=>get.user_id.includes(address));
+    return data_sent
+}
+function findChat_toUser(json,address){
+    const data_sent=json.filter(get=>get.target_id.includes(address));
+    return data_sent
+}
 
 module.exports={accoundDb_Insert,account,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,
-    find_coment,sent_chatData,findChat}
+    find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser}

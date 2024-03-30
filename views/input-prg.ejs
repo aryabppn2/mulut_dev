@@ -48,6 +48,7 @@
         text-decoration: none;
         background-color: antiquewhite;
         height:45px;
+        margin:100px
       }
     </style>
 </head>
@@ -57,8 +58,11 @@
       <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
      <div class="input-bar">
       <a href="/first-page/<%=data.account_id%>" class="btn-bar">pulang</a>
-      <b style="color:brown; margin-left: 400px;" >silahkan tulis qoutes  mu <%=data.username%></b>
+      <a href="/input/<%=data.account_id%>" class="btn-bar" style="color:rgb(46, 67, 67)">berita</a>
+      <a href="?add-comunity/<%=data.account_id%>" class="btn-bar" style="color:blueviolet">komnitas</a>
+      
      </div>
+     <b style="color:brown; margin-left: 400px;" >silahkan tulis qoutes  mu <%=data.username%></b>
       <input type="hidden" value="<%=data.account_id %>" name="user_id"><br>
       <input type="hidden" value="<%=data.username %>" name="user_name"><br>
       <input type="text" name="input_qoutes_title" class="input-text-style" placeholder="judul qoutes">

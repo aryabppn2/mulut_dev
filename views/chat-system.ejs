@@ -23,33 +23,66 @@
             background-color: lightgray;
         }
         .chat-input-text{
-            width:1208px;
+            width:1198px;
             height:29px;
             border:0px;
         }
         .btn-sent{
-            width:44px;
+            width:40px;
             height: 29px;
             border-radius: 1px;
             border: 0px;
             background-color: antiquewhite;
         }
+        .target-chat-card{
+            background-color: antiquewhite;
+            margin-top:12px;
+            
+        }
+        .chat-info-wrapper{
+            background-color: antiquewhite;
+            border:0px
+        }
+        .user-chat-card{
+            background-color: rgb(220, 241, 234);
+            margin-top: 12px;;
+        }
     </style>
 </head>
 <body>
     <div class="chat-mini-bar">
-        <a href="/orang-lain/<%=userId%>" class="btn-chat-bar" style="color:blue;background-color: aliceblue;">keluar</a>
-        <a href="/others-content/<%=targetId%>/<%=userId%>" class="btn-chat-bar" style="color:rgb(214, 205, 223);background-color: cadetblue;">lihat konten</a>
+        <a href="/list-chat-open/<%=userId%>" class="btn-chat-bar" style="color:blue;">keluar</a>
+        <a href="/others-content/<%=targetId%>/<%=userId%>" class="btn-chat-bar" style="color:rgb(19, 95, 11);">lihat konten</a>
         <h1 class="target-name-container"><%=targetName%></h1>
     </div>
-    <div class="target-chat-body"></div>
-    <div class="user-chat-body">
-        <% user_chat.forEach(element => { %>
-              <b><%=element.chat_value%></b>
-        <% }) %>
+    <div class="target-chat-body" >
+       <% target_chat.forEach(element => { %>
+           <div class="target-chat-card">
+            <select class="chat-info-wrapper">
+                <option style="color:green"> nama pengirim:<%=element.user_name%></option>
+                <option><%=element.date%> </option>
+               </select><br>
+             <b style="color:gray">  <%=element.chat_value%></b>
+           </div>
+
+       <% }) %> 
+    </div>
+    <div class="user-chat-body"> 
+    <% user_chat.forEach(element => { %>
+         <div class="user-chat-card" >
+            <select class="chat-info-wrapper" style="background-color:rgb(220, 241, 234);">
+                <option style="color:green"> nama pengirim:<%=element.user_name%></option>
+                <option><%=element.date%> </option>
+               </select><br>
+             <b style="color:rgb(36, 88, 44)">  <%=element.chat_value%></b>
+         </div>
+    <% }) %>
+
+
     </div>
    <form action="<%=chat_room_system%>" method="post" class="chat-input-wrapper">
     <input type="hidden" name="input_userName" value="<%=userName%>">
+    <input type="hidden" name="input_targetName" value="<%=targetName%>">
     <input type="hidden" name="input_date" value="<%=date%>">
  <textarea name="input_chat_value"  class="chat-input-text" placeholder="ketikan sesuatu"></textarea>
   <button class="btn-sent">kirim</button>

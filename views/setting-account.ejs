@@ -30,13 +30,13 @@
 
 
  <div class="account-sett-wrwppwer">
-
-
-
-<fieldset class="account-bar" style="color:rgb(29, 52, 52);border-color: rgb(40, 49, 49);"><%=account.username%></fieldset>
-<fieldset class="account-bar" style="color:red;border-color:red"><%=account.password%></fieldset>
-<fieldset class="account-bar" style="color:gray;border-color:gray"><%=account.location%></fieldset>
- 
+     <div class="username-views">
+        <b><%=account.username%></b>
+     </div>
+<select class="identiy-password">
+    <option style="color:red"> password:<%=account.password%></option>
+    <option style="color:green"><%=account.location%></option>
+</select>
 
 </div>
 

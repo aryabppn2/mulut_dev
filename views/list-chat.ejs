@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+<style>
+    .chat-list-bar{
+        background-color: blanchedalmond;
+        
+    }
+    .btn-bar{
+        text-decoration: none;
+        margin-left: 98px;
+        margin-top: 15px;
+    }
+    .list-person-card{
+        background-color: beige;
+    }
+    .name{
+        color:brown
+    }
+    .chat-views{
+        text-decoration: none;
+        color:blueviolet;
+        width:600px
+    }
+    .list-user-card{
+       background-color: rgb(206, 227, 220);
+    }
+</style>
+
+</head>
+<body>
+    <div class="chat-list-bar">
+        <a href="/first-page/<%=user_id%>" class="btn-bar" style="color:cadetblue"> kembali</a>
+        <a href="/list-chat-open/<%=user_id%>" class="btn-bar" style="color:green">chat masuk</a>
+        <a href="/list-telepon-list/<%=user_id%>" class="btn-bar">telepon</a>
+        
+    </div>
+<div class="chat-target-wrapper">
+<% target_list.forEach(data_sent => { %>
+    <div class="list-person-card">
+        <p class="name"><%=data_sent.user_name%></p>
+         <a href="/open-chat-system/<%=user_id%>/<%=data_sent.user_id%>" class="chat-views"><%=data_sent.chat_value%></a>
+    </div>
+<% }) %>
+<div class="chat-user-wrapper">
+   <% user_list.forEach(data_get => { %>
+    <div class="list-user-card">
+        <p class="name"><%=data_get.target_name%></p>
+        <a href="/open-chat-system/<%=user_id%>/<%=data_get.target_id%>" class="chat-views"><%=data_get.chat_value%></a>
+    </div>
+
+
+   <% }) %>
+</div>
+
+
+
+</div>
+
+    
+</body>
+</html>

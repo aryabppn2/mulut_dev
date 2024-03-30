@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%+title%></title>
+    <title><%=title%></title>
     <style>
      
       .login-style-form{
@@ -47,14 +47,14 @@
     <a href="/mulut.com" class="btn-bar-container" style="color:brown">kembali</a>
     <a href="/sign-up-option" class="btn-bar-container" style="color:green">sign up</a>
   </div>
-     
+  <div class="correct-way-sign"></div>   
   <form class="login-style-form" method="post" action="/get-account">
     <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
     <h1>
       <a href="/sign-up-option" class="login-sign">login</a>
    </h1>
-    <input type="text" name="username_input" placeholder="username" class="input-text-style"><br>
-    <input type="password"  name="password_input" placeholder="password" class="input-text-style"><br>
+    <input type="text" name="username_input" placeholder="<%=username%>" class="input-text-style"><br>
+    <input type="password"  name="password_input" placeholder="<%=password%>" class="input-text-style"><br>
     
     <button type="submit" class="submid-btn-style">login</button>
 

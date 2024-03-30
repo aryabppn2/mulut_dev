@@ -4,7 +4,8 @@ const url=require('fs');
 const port=7000;
 //configue file system//
 const {accoundDb_Insert,account,Insert_data,get_paragrafAccount,
-    find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,findChat}=require('./crud.js')
+    find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
+    findChat,findChat_fromUser,findChat_toUser}=require('./crud.js')
 
 const {find_paragraf,Find_account}=require('./machine.js')
 
@@ -28,12 +29,20 @@ http.get('/mulut.com',function(req,res){
     })
 })
 http.get('/login-page',function(req,res){
-    res.render('login-page',{title:'login-page'})
+    res.render('login-page',{
+        title:'login-page',
+        username:'masukan username',
+        password:'masukan pasword',
+    }
+    )
 })
 http.get('/input/:id',function(request,respont){
     const get_id=request.params.id
     const account_id=account(JSON.parse(get_accountDB),get_id);
-   respont.render('input-prg',{title:'tambah qoutes ',data:account_id[0]})
+   respont.render('input-prg',{
+    title:'tambah qoutes ',
+    data:account_id[0]
+})
 })
 
 
@@ -192,9 +201,10 @@ http.get('/open-chat-system/:user_ip/:target_ip',function(request,respont){
         target:account(JSON.parse(get_accountDB),get_ip.target)
     }
    const chat_id={
-    user:`chat_sent-${get_account.user}-to${get_account.target}`,
-    target:`chat_sent-${get_account.target}-to${get_account.user}`
-   }
+    user:`chat_sent-${get_ip.user}-to${get_ip.target}`,
+    target:`chat_sent-${get_ip.target}-to${get_ip.user}`
+   } 
+  
 respont.render('chat-system',{
     title:'chating dengan '+get_account.target[0].username,
     chat_room_system:`/chat-SentAt/${get_account.user[0].account_id}/${get_account.target[0].account_id}`,
@@ -203,13 +213,29 @@ respont.render('chat-system',{
     userId:get_account.user[0].account_id,
     targetId:get_account.target[0].account_id,
     user_chat:findChat(JSON.parse(chatDB_url),chat_id.user),
-    target_chat:findChat(JSON.parse(chatDB_url), chat_id.target),
+    target_chat:findChat(JSON.parse(chatDB_url),chat_id.target),
     date:new Date(),
 
 })
 
 
 })
+http.get('/list-chat-open/:user_ip',function(request,respont){
+    const get_ip=request.params.user_ip;
+    const get_account=account(JSON.parse(get_accountDB),get_ip);
+    const get_chatList={
+        to_user:findChat_toUser(JSON.parse(chatDB_url),get_account[0].account_id),
+        fromUser:findChat_fromUser(JSON.parse(chatDB_url),get_account[0].account_id)
+    }
+   respont.render('list-chat',{
+    title:'daftar chat',
+    user_id:get_account[0].account_id,
+    target_list:get_chatList.to_user,
+    user_list: get_chatList.fromUser
+
+   })
+})
+
 
 //post//
 
@@ -229,17 +255,45 @@ http.post('/get-account',function(request,respont){
         username:request.body.username_input,
         password:request.body.password_input
     };
+   
     const get_id=`${requst_id.username}byId${requst_id.password}`
-    const get_account=account( JSON.parse(get_accountDB),get_id)
+    const get_account=account(JSON.parse(get_accountDB),get_id)
     const get_paragraf=get_paragrafAccount(get_id,JSON.parse(get_prgDb))
+    if(requst_id.username==""){
+        respont.render('login-page',{
+            title:'login-page:error',
+            username:'username harus diisi',
+            password:'masukan password'        
+       
+    
+    })
+
+
+    }
+else if(requst_id.password==""){
+    respont.render('login-page',{
+        title:'login-page:error',
+        username:'masukan username',
+        password:' password haris diIsi'
+    
+   
+
+})
+}
+
+else{
     respont.render('first-page',{
         data:get_account[0],
         paragraf:get_paragraf
     
-    }
-    )
+   
 
 })
+}
+
+
+}
+)
 
 http.post('/post-prg',function(request,response){
     const input_prgdata={
@@ -355,12 +409,15 @@ const chat_id=`chat_sent-${get_id.user}-to${get_id.target}`;
 const chat_input={
     chatId:chat_id,
     user_name:request.body.input_userName,
+    target_name:request.body.input_targetName,
+    user_id:request.params.user_id,
+    target_id:request.params.target_id,
     date:request.body.input_date,
     chat_value:request.body.input_chat_value
 }
 
 sent_chatData(JSON.parse(chatDB_url),chat_input,url)
-
+respont.redirect(`/open-chat-system/${get_id.user}/${get_id.target}`)
 
 })
 
