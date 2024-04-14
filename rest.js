@@ -2,7 +2,7 @@ const express=require('express');
 const http=express();
 const url=require('fs');
 const port=7000;
-//configue file system//
+//configue local file system//
 const {accoundDb_Insert,account,Insert_data,get_paragrafAccount,
     find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
     findChat,findChat_fromUser,findChat_toUser}=require('./crud.js')
@@ -41,10 +41,11 @@ http.get('/input/:id',function(request,respont){
     const account_id=account(JSON.parse(get_accountDB),get_id);
    respont.render('input-prg',{
     title:'tambah qoutes ',
-    data:account_id[0]
+    data:account_id[0],
+    time:new Date()
 })
 })
-
+http.get('/')
 
 http.get('/sign-up-option',function(request,respont){
     respont.render('sign-up-page',{title:'sign-up'})

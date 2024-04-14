@@ -5,9 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .bar-mini{
-            background-color: gray;
-        }
+      .account-sett-wrapper{
+        background-color: yellow;
+        ;
+      }
+      .username-fields{
+        background-color: antiquewhite;
+        border-color:rgb(25, 101, 15);
+        margin-top:20px
+        
+      }
+      .username-value{
+        color:rgb(25, 101, 15);
+      }
+
+      .password-fields{
+        background-color: antiquewhite;
+        border-color:red;
+        margin-top: 20px;
+
+      }
+      .password-value{
+        color:red;
+      }
+
         .account-bar{
             margin: 20px;
             background-color: antiquewhite;
@@ -15,31 +36,43 @@
         .btn-bar{
             text-decoration: none;
             height:36px;
-            margin:100px
+            width: 200px;
+            margin:75px;
+
         }
+.option-get{
+    text-align: center;
+    background-color: bisque;
+    height:150px;
+}
 
 
     </style>
 
 </head>
 <body>
- <div class="bar-mini">
-    <a href="/mulut.com" class="btn-bar" style="color:rgb(217, 203, 203)">log-out</a>
-    <a href="/first-page/<%=account.account_id%>" class="btn-bar" style="color:blanchedalmond">kembali</a>
- </div>
+ 
 
 
- <div class="account-sett-wrwppwer">
-     <div class="username-views">
-        <b><%=account.username%></b>
-     </div>
-<select class="identiy-password">
-    <option style="color:red"> password:<%=account.password%></option>
-    <option style="color:green"><%=account.location%></option>
-</select>
+ <div class="account-sett-wrapper">
+     <input type="hidden" name="old_UserId" value="<%-account.account_id%>">
+     <fieldset class="username-fields">
+    <legend style="color:rgb(79, 113, 29)">username</legend>
+
+        <span class="username-value"><%=account.username%></span>
+     </fieldset>
+     <fieldset class="password-fields">
+        <legend style="color:brown">password</legend>
+        <span class="password-value"><%=account.password%></span>
+     </fieldset>
 
 </div>
 
+
+<div class="option-get">
+    <a href="/mulut.com" ><button class="btn-bar" style="color:rgb(215, 83, 83);border-color:red">log-out</button></a>
+    <a href="/first-page/<%=account.account_id%>" ><button class="btn-bar" style="color:rgb(125, 96, 52);border-color:yellow">kembali</button></a>
+</div>
 
 
  

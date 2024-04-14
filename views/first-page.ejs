@@ -28,7 +28,10 @@
    }
 .btn-bar{
     text-decoration: none;
-    
+    width:100px;
+    height:38px;
+    background-color: rgb(202, 166, 166);
+    border:0px;
     margin-left: 100px;
 }
 .prg-card{
@@ -91,19 +94,13 @@ background-color: rgb(231, 201, 201);
 </h1>
 
 <div class="bar-private-container">
-<select  class="identity-private">
-<option>Info</option>
-<option class="username"><%=data.username%></option>
-<option class="password">"<%=data.password%></option>
-<option class="location"><%=data.location%></option>
-
-</select>
-
+    <a href="/list-chat-open/<%=data.account_id%>"><button  class="btn-bar" style="color:rgb(55, 91, 55)">barusan</button> </a>
     <a href="/input/<%=data.account_id%>"  style="color:aqua" class="btn-bar">tambah</a>
 
-<a href="/beranda/<%=data.account_id%>" class="btn-bar" style="color:whitesmoke">berita</a>
-<a href="/list-chat-open/<%=data.account_id%>" class="btn-bar" style="color:rgb(55, 91, 55)">barusan chat </a>
-<a href="/orang-lain/<%=data.account_id%>" class="btn-bar" style="color:aquamarine">orang lain</a>
+<a href="/beranda/<%=data.account_id%>" >
+ <button class="btn-bar" style="color:whitesmoke;"> berita</button>
+</a>
+<a href="/orang-lain/<%=data.account_id%>" ><button class="btn-bar" style="color:aquamarine">orang lain</button></a>
 </div>
 
 <div class="context-wrapper">
@@ -116,7 +113,7 @@ background-color: rgb(231, 201, 201);
                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
             </select>
-            <a href="/delete-qoutes?<%=data.account_id%>/<%=prg.id_prg%>" class="qoutes-delete-btn">hapus qoutes</a>
+           
         </div>
        <div class="qoutes-value">
         <%=prg.qoutes%>

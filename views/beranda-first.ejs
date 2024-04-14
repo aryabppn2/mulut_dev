@@ -35,33 +35,57 @@
          background-color:burlywood;
          border:0px
       }
+      .qoutes-card-container{
+    background-color: #dfdad5;
+    margin: 12px;
+    text-align: center;
+}
+
+.qoutes-bar{
+    background-color: rgb(219, 226, 199);
+    
+}
+
+.qoutes-info{
+    width:300px;
+    height: 30px;
+    background-color:rgb(219, 226, 199);
+    border:0px;
+}
+.qoutes-value{
+    background-color: #ffe4c4;
+    color:brown
+
+}
     </style>
 </head>
 <body>
    
    <form action="/search-get" method="post" class="search-wrapper">
-      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+      <b style="color:rgb(255, 183, 0);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
         <input type="text" name="search_input" class="input-text-search" placeholder="cari apa" >
         <button class="btn-search-type" type="submit">cari</button>
     </form>
     <div class="bar-option">
     <a href="/login-page" class="bar-btn">login</a>
     <a href="/sign-up-option" class="bar-btn" style="color:blue">sign-up biasa</a>
+    <a href="/mulut.com" class="bar-btn" style="color:brown">beranda</a>
     </div>
     <div class="content-wrapper">
-    <% paragraf.forEach(element => { %>
-      <fieldset class="prg-card">
-         <legend><%=element.userName %></legend>
-         <h1 class="qoutes-title"><%=element.qoutes_title%></h1>
-  <select class="qoutes-ket">
-    <option>waktu:<%=element.carry.time%></option>
-    <option> location:<%=element.carry.location%></option>
-  </select>
-
-           <div class="qoutes-contain"><%=element.qoutes%></div>
-
-
-    </fieldset>  
+    <% paragraf.forEach(prg=> { %>
+      <div class="qoutes-card-container">
+         <div class="qoutes-bar">
+             <select class="qoutes-info">
+                 <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
+                 <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
+                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
+                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
+             </select>
+         </div>
+        <div class="qoutes-value">
+         <%=prg.qoutes%>
+         
+         </div> 
 
 
     <% }) %>
