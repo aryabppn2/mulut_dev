@@ -3,7 +3,7 @@ const http=express();
 const url=require('fs');
 const port=7000;
 //configue local file system//
-const {accoundDb_Insert,account,Insert_data,get_paragrafAccount,
+const {accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,
     find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
     findChat,findChat_fromUser,findChat_toUser}=require('./crud.js')
 
@@ -296,13 +296,25 @@ else{
 }
 )
 
+http.post('/update-location/:user_id',function(request,respont){
+    const get={
+        account_id:request.params.user_id,
+        username:request.body.username,
+        password:request.body.password,
+        location:request.body.location_update_input
+    }
+    getUpdate_location(JSON.parse(get_accountDB),get.account_id,get,url);
+    respont.redirect('/first-page/'+get.account_id)
+})
+
+
 http.post('/post-prg',function(request,response){
     const input_prgdata={
         userId:request.body.user_id,
         userName:request.body.user_name,
         carry:{
             time:request.body.input_release_date,
-            location:request.body.location
+            location:request.body.input_location
         },
         qoutes_title:request.body.input_qoutes_title,
         id_prg:`${request.body.input_qoutes_title}BySend${request.body.user_id}`,

@@ -43,7 +43,7 @@
 <body>
   <form action="/searchAccount/<%=account.account_id%>" method="post" class="search-account-bar">
     <input type="text" name="search_input" class="input-txt-src" placeholder="cari siapa">
-    <button type="submit" class="btn-submid-container">cari </button>
+    <button type="submit" class="btn-submid-container">🔍 </button>
   </form>
   <div class="account-bar">
    <a href="/first-page/<%=account.account_id%>" class="btn-bar-itm">pulang</a>
@@ -59,7 +59,6 @@
         </select>
         <a href="/others-content/<%=element.account_id%>/<%=account.account_id%>" class="others-bar" style="color:gray">konten</a>
         <a href="/open-chat-system/<%=account.account_id%>/<%=element.account_id%>" class="others-bar" style="color:green">buka chat</a>
-        <a href="/open-call/<%=account.account_id%>/<%=element.account_id%>" class="others-bar" style="color:blue">panggil</a>
       </fieldset>     
 
 

@@ -37,6 +37,17 @@ const get_filter=prg_json.filter(flt=>flt.userId.includes(input));
 return get_filter
 }
 
+function getUpdate_location(json,account_id,new_data,url){
+   const filter_data=json.filter(address => address.account_id !== account_id);
+filter_data.push(new_data);
+
+url.writeFileSync('mongodb/account.json',JSON.stringify(filter_data))
+
+
+}
+
+
+
 function qoutes(json,id){
     const datas_filter=json.filter(data=>data.id_prg.includes(id));
     return datas_filter
@@ -67,5 +78,5 @@ function findChat_toUser(json,address){
     return data_sent
 }
 
-module.exports={accoundDb_Insert,account,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,
+module.exports={accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,
     find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser}

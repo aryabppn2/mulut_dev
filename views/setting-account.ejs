@@ -46,7 +46,18 @@
     height:150px;
 }
 
+.location-update{
+  width:1256px;
+  height: 45px;
+  border-color:blue;
+  background-color: antiquewhite;
+  color:blue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+}
+.location{
+  margin-top: 20px;
+}
     </style>
 
 </head>
@@ -65,6 +76,14 @@
         <legend style="color:brown">password</legend>
         <span class="password-value"><%=account.password%></span>
      </fieldset>
+
+    <form action="/update-location/<%=account.account_id%>" method="post" class="location">
+    <b style="color:blue;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">location</b>
+    <input type="hidden" name="username" value="<%=account.username%>">
+    <input type="hidden" name="password" value="<%=account.password%>">
+    <textarea name="location_update_input" class="location-update"><%=account.location%></textarea>
+    <button>update lokasi</button>
+    </form>
 
 </div>
 
