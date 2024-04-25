@@ -24,12 +24,18 @@
          margin-left: 0px;
       }
       .bar-option{
-         background-color: bisque;
+         background-color: rgb(199, 175, 145);
+         text-align: center;
          
       }
       .bar-btn{
-         margin:100px;
+         margin-left:0px;
          text-decoration: none;
+         margin-left:20px;
+         width:auto;
+         border-style:solid;
+         border-color:rgb(147, 144, 54);
+         background-color:rgb(220, 198, 171) ;
       }
       .qoutes-card-container{
     background-color: #dfdad5;
@@ -73,20 +79,35 @@ color:brown;
 background-color: rgb(231, 201, 201);
 }
   
-     
+     .username-value{
+        color:brown;
+        margin-right:12px;
+     }
      
     </style>
 </head>
 <body>
     <form action='/search-data/<%=account.account_id%>'  method="post" class="search-wrapper">
-      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
+        <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
+           <span class="username-value"><%=account.username%></span>
+            </a>
         <input type="text" name="search_input" class="input-text-search" placeholder="cari apa" >
         <button class="btn-search-type" type="submit">🔍</button>
     </form>
     <div class="bar-option">
-    <a href="/first-page/<%=account.account_id%>" class="bar-btn">pulang</a>
-    <a href="/beranda/<%=account.account_id%>" class="bar-btn" style="color:blue">beranda</a>
-    <a href="/orang-lain/<%=account.account_id%>" class="bar-btn" style="color:green">orang lain</a>
+    <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
+    <button class="bar-btn">pulang</button>
+    </a>
+    <a href="/all-in/<%=account.account_id%>" style="text-decoration: none;">
+    <button class="bar-btn" style="color:rgb(77, 147, 45)">semua</button>
+    </a>
+    <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
+    <button class="bar-btn" style="color:brown">qoutes</button>
+    </a>
+    <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
+    <button class="bar-btn" style="color:green">orang lain</button>
+    </a>
+    
     </div>
     <div class="context-wrapper">
     <% paragraf.forEach(prg=> { %>

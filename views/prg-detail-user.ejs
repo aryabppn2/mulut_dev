@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+        .qoutes-user-bar{
+            background-color: bisque;
+            text-align: center;
+        }
+      .btn-bar{
+        border:0px;
+        background-color: rgb(201, 181, 154);
+        color:whitesmoke;
+        width:100px;
+        height:29px ;
+        margin-left:20px;
+        margin-right: 20px;
+      }
+      .qoutes-info{
+        width:500px;
+            height: 29px;
+            background-color: antiquewhite;
+            border:0px;
+      }
+      .qoutes-textarea{
+        background-color: aliceblue;
+            color:brown;
+            overflow-y: auto;
+            height: 370px;
+            width:1244px;
+            border: 0px;;
+      }
+      .btn-update{
+        width:100px;
+        height: 29px;
+        background-color: rgb(69, 145, 213);
+        color:rgb(233, 229, 236);
+        margin-left:530px;
+        border:0px
+      }
+      .coment-input-wrapper{
+            background-color: lightgoldenrodyellow;
+        }
+        .coment-input{
+            width:87.6%;
+            height:33px;
+            background-color: antiquewhite;
+            color:brown;
+        
+        }
+        .coment-container{
+            text-align: center;
+        }
+        .coment-card{
+            background-color: rgb(238, 236, 234);
+            color:rgb(138, 156, 90);
+            border-style: double;
+            margin:12px;
+            text-align: center;
+        }
+        .user-name{
+            color:brown
+        }
+        .coment-value{
+            color:chocolate
+        }
+        .btn-coment{
+            width:100px;
+            height: 33px;
+            margin-top:0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="qoutes-user-bar">
+        <a href="/first-page/<%=user_data.account_id%>"><button class="btn-bar">kembali</button></a>
+        <select class="qoutes-info">
+            <option><%=qoutes_data.qoutes_title%></option>
+            <option ><%=qoutes_data.userName%></option>
+            <option ><%=qoutes_data.carry.time%></option>
+            <option><%=qoutes_data.carry.location%></option>
+        </select>
+        <a href="/delete-qoutes/<%=qoutes_data.id_prg%>/<%=qoutes_data.userId%>"><button class="btn-bar" style="color:rgb(200, 129, 129);background-color: antiquewhite;" >hapus qoutes</button></a>
+    </div>
+    <form action="/qoutes-update/<%=qoutes_data.id_prg%>/<%=user_data.account_id%>" method="post" style="background-color: azure;">
+    <input type="hidden" name="username" value="<%=qoutes_data.userName%>">
+    <input type="hidden" value="<%=qoutes_data.qoutes_title%>" name="title">
+     <input type="hidden" value="<%=qoutes_data.carry.time%>" name="time"> 
+     <input type="hidden" name="location" value="<%=qoutes_data.carry.location%>">
+     <textarea name="input_qoutes_update" class="qoutes-textarea"><%=qoutes_data.qoutes%></textarea>
+      <button class="btn-update" type="submit">update</button>
+    </form>
+    <form action=<%=post_method%> method="post" style="margin-top:24px">
+        <input type="hidden" name="username_input" value="<%=user_data.username%>">
+        <input type="hidden" name="userId_input" value="<%=user_data.account_id%>">
+        <input type="hidden" name="qoutesId_input" value="<%=qoutes_data.id_prg%>">
+        <textarea name="input_coment"  class="coment-input" placeholder="komen sesuatu"></textarea>
+        <button type="submit" class="btn-coment">kirim</button>
+    </form>
+    <div class="coment-container">
+        <b>komentar </b>
+
+        <% coments.forEach(datas => { %>
+        <div class="coment-card">
+        <h3 class="user-name"><%=datas.username%></h3>
+        <p class="coment-value"><%=datas.coment_Value%></p>
+
+        </div> 
+
+
+        <% }) %>
+
+
+
+</body>
+</html>

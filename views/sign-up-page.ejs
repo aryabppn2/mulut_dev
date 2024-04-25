@@ -41,6 +41,11 @@
         margin-left: 160px;
         text-decoration: none;;
       }
+      .style-bar{
+        margin-left: 500px;
+        border:14px;
+
+      }
     </style>
 </head>
 <body>
@@ -48,12 +53,12 @@
     <a href="/mulut.com" class="btn-bar-container" style="color:brown">kembali</a>
     <a href="/login-page" class="btn-bar-container" style="color:green">login</a>
   </div>
-    <form action="/sent-account-data" method="post" style="text-align: center;">
+    <form action="/sent-account-data" method="post" style="text-align: center;" >
       <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
       <h1 >
         <a href="/login-page" class="sign-up-sign"><%=title%></a>
         </h1>
-      <input type="text" name="username_input" class="input-text-style" placeholder="masukan username baru"><br>
+      <input type="text" name="username_input" class="input-text-style" placeholder="masukan username baru" id="username-input"><br>
       <input type="text" name="password_input" class="input-text-style" placeholder="masukan password baru"><br>
       <textarea name="input_location"  class="textarea-input-style" placeholder="lokasi"></textarea><br>
       <button type="submit" class="btn-submit-style">daftar</button>

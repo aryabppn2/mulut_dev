@@ -3,11 +3,14 @@ const http=express();
 const url=require('fs');
 const port=7000;
 //configue local file system//
-const {accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,
+const {accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,delete_qoutes,
     find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
-    findChat,findChat_fromUser,findChat_toUser}=require('./crud.js')
+    findChat,findChat_fromUser,findChat_toUser,get_qoutesUpdate}=require('./crud.js')    
 
 const {find_paragraf,Find_account}=require('./machine.js')
+const {logo_design}=require('./logo.js')
+
+
 
 
 
@@ -25,7 +28,8 @@ const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8')
 http.get('/mulut.com',function(req,res){
     res.render('beranda-first',{
         title:'beranda',
-        paragraf:JSON.parse(get_prgDb)
+        paragraf:JSON.parse(get_prgDb),
+        logo:logo_design
     })
 })
 http.get('/login-page',function(req,res){
@@ -33,6 +37,7 @@ http.get('/login-page',function(req,res){
         title:'login-page',
         username:'masukan username',
         password:'masukan pasword',
+        logo:logo_design
     }
     )
 })
@@ -40,15 +45,22 @@ http.get('/input/:id',function(request,respont){
     const get_id=request.params.id
     const account_id=account(JSON.parse(get_accountDB),get_id);
    respont.render('input-prg',{
+    logo:logo_design,
     title:'tambah qoutes ',
     data:account_id[0],
     time:new Date()
 })
 })
-http.get('/')
+http.get('/add-jurnal-page/:user_id',function(req,res){
+   const get_account=account(JSON.parse(get_accountDB),req.params.user_id);
+   res.render('add-jurnal-page',{
+    title:'tambah jurnal',
+
+   })
+})
 
 http.get('/sign-up-option',function(request,respont){
-    respont.render('sign-up-page',{title:'sign-up'})
+    respont.render('sign-up-page',{title:'sign-up',logo:logo_design})
 })
 
 http.get('/first-page/:id',function(request,respont){
@@ -56,6 +68,7 @@ http.get('/first-page/:id',function(request,respont){
     const get_account=account(JSON.parse(get_accountDB),get_id);
     
     respont.render('first-page',{
+        logo:logo_design,
         data:get_account[0],
         paragraf:get_paragrafAccount(get_id,JSON.parse(get_prgDb))
     
@@ -72,6 +85,7 @@ http.get('/beranda/:id',function(request,respont){
     const get_userId=request.params.id;
     
     respont.render('beranda',{
+        logo:logo_design,
         title:'beranda',
         paragraf:JSON.parse(get_prgDb),
         account:account(JSON.parse(get_accountDB),get_userId)[0]
@@ -81,6 +95,7 @@ http.get('/beranda/:id',function(request,respont){
 http.get('/orang-lain/:user_id',function(request,respont){
     const call_allAccount=JSON.parse(get_accountDB);
     respont.render('orang-lain-views',{
+        logo:logo_design,
         title:'orang lain',
         all_account:call_allAccount,
         account:account(JSON.parse(get_accountDB),request.params.user_id)[0]
@@ -91,6 +106,7 @@ http.get('/setting/:account_id',function(request,respont){
     const get_id=request.params.account_id;
     const get_account=account(JSON.parse(get_accountDB),get_id);
     respont.render('setting-account',{
+     logo:logo_design,
       title:'setting-account',
       account:get_account[0]
     }
@@ -117,6 +133,8 @@ http.get('/others-content/:others_id/:user_id',function(request,respont){
 })
 
 
+
+
 http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
   const get_id={
     user:request.params.user_id,
@@ -127,8 +145,8 @@ http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
        qoutes:qoutes(JSON.parse(get_prgDb),get_id.qoutes),
   }
   const get_coment=find_coment(JSON.parse(coment_db_url),find_data.qoutes[0].id_prg)
-  respont.render('prg-detail',{
-   title:'membaca '+find_data.qoutes[0].qoutes_title,
+  respont.render('prg-detail-user',{
+   title:'melihat '+find_data.qoutes[0].qoutes_title,
    link_back:`/first-page/${find_data.account[0].account_id}`,
    qoutes_data:find_data.qoutes[0],
    user_data:find_data.account[0],
@@ -140,6 +158,19 @@ http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
 
   })
 })
+
+http.get('/delete-qoutes/:qoutes_id/:user_id',function(request,respont){
+    const get_id={
+        user:request.params.user_id,
+        qoutes:request.params.qoutes_id
+    }
+
+    delete_qoutes(JSON.parse(get_prgDb),get_id.qoutes,url)
+
+    respont.redirect('/first-page/'+get_id.user)
+})
+
+
 
 
 http.get('/open-coment-beranda/:qoutes_id/:user_id',function(request,respont){
@@ -245,7 +276,8 @@ http.post('/sent-account-data',function(request,respont){
         username:request.body.username_input,
         password:request.body.password_input,
         location:request.body.input_location,
-        account_id:`${request.body.username_input}byId${request.body.password_input}`
+        account_id:`${request.body.username_input}byId${request.body.password_input}`,
+       
     }
     accoundDb_Insert(data_input,JSON.parse(get_accountDB),url);
     respont.redirect('/login-page')
@@ -296,12 +328,13 @@ else{
 }
 )
 
-http.post('/update-location/:user_id',function(request,respont){
+http.post('/update-data/:user_id',function(request,respont){
     const get={
         account_id:request.params.user_id,
         username:request.body.username,
         password:request.body.password,
-        location:request.body.location_update_input
+        location:request.body.location_update_input,
+        
     }
     getUpdate_location(JSON.parse(get_accountDB),get.account_id,get,url);
     respont.redirect('/first-page/'+get.account_id)
@@ -327,7 +360,22 @@ http.post('/post-prg',function(request,response){
    response.redirect('/first-page/'+input_prgdata.userId)
     
 })
+http.post('/qoutes-update/:qoutes_id/:user_id',function(request,respont){
+    const get_data={
+        userId:request.params.user_id,
+        userName:request.body.username,
+        id_prg:request.params.qoutes_id,
+        qoutes_title:request.body.title,
+        qoutes:request.body.input_qoutes_update,
+        carry:{
+            time:request.body.time,
+            location:request.body.location
+        }
+    }
 
+   get_qoutesUpdate(JSON.parse(get_prgDb),get_data,get_data.id_prg,url)
+   respont.redirect('/open-coment/'+get_data.id_prg+'/'+get_data.userId) 
+})
 
 
 http.post('/search-data/:id',function(request,respont){

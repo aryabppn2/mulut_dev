@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title>📖<%=title%></title>
     <style>
       
         .qoutes-info{
@@ -19,6 +19,11 @@
             background-color: rgb(201, 181, 154);
             
         }
+        .btn-bar{
+            border:0px;
+            background-color:rgb(201, 181, 154);
+            color:azure
+        }
         .title-bar{
             color:blanchedalmond
         }
@@ -26,7 +31,9 @@
             background-color: aliceblue;
             color:brown;
             overflow-y: auto;
-            height: 370px;;
+            height: 370px;
+            border: opx;
+            width:1244px;
         }
         .coment-input-wrapper{
             background-color: lightgoldenrodyellow;
@@ -53,16 +60,19 @@
 </head>
 <body style="text-align: center;">
     <div class="qoutes-mini-bar">
-        <a href=<%=link_back%>  style="text-decoration:none;color:whitesmoke">kembali</a>
+        <a href=<%=link_back%>  ><button class="btn-bar">kembali</button></a>
         <select class="qoutes-info">
             <option><%=qoutes_data.qoutes_title%></option>
             <option ><%=qoutes_data.userName%></option>
             <option ><%=qoutes_data.carry.time%></option>
             <option><%=qoutes_data.carry.location%></option>
         </select>
+        <a href="/delete-qoutes/<%=qoutes_data.id_prg%>">
+        <button class="btn-delete">hapus</button>
+        </a>
         <h1 class="title-bar"><%=qoutes_data.qoutes_title%></h1>
     </div>
-    <div class="qoutes-paper"><%=qoutes_data.qoutes%></div>
+    <textarea class="qoutes-paper"><%=qoutes_data.qoutes%></textarea>
 
 <div class="coment-input-wrapper">
     <form action=<%=post_method%> method="post">
@@ -72,6 +82,7 @@
         <textarea name="input_coment"  class="coment-input" placeholder="komen sesuatu"></textarea>
         <button type="submit" class="btn-coment">kirim</button>
     </form>
+    </div>
     <div class="coment-container">
         <b>komentar </b>
 

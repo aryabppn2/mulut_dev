@@ -15,10 +15,9 @@
         margin-top:20px
         
       }
-      .username-value{
-        color:rgb(25, 101, 15);
-      }
-
+     .username-value{
+       color:brown
+     }
       .password-fields{
         background-color: antiquewhite;
         border-color:red;
@@ -58,6 +57,28 @@
 .location{
   margin-top: 20px;
 }
+.color-menu{
+  background-color:lightgray;
+  width:auto;
+  margin-left:340px;
+  border:12px;
+}
+.color-input{
+  width:400px;
+  background-color: aliceblue;
+
+  height:38px;
+}
+.bgcolor-input{
+  width:400px;
+  background-color: aliceblue;
+
+  height:38px;
+}
+.running-btn{
+  width:100px;
+  height: 76px;;
+}
     </style>
 
 </head>
@@ -67,30 +88,34 @@
 
  <div class="account-sett-wrapper">
      <input type="hidden" name="old_UserId" value="<%-account.account_id%>">
-     <fieldset class="username-fields">
-    <legend style="color:rgb(79, 113, 29)">username</legend>
+     
+        
+    
 
-        <span class="username-value"><%=account.username%></span>
+     <fieldset class="username-fields" >
+    <legend style="color:rgb(79, 113, 29)" >username</legend>
+
+        <span class="username-value" id="username-value"><%=account.username%></span>
      </fieldset>
      <fieldset class="password-fields">
         <legend style="color:brown">password</legend>
         <span class="password-value"><%=account.password%></span>
      </fieldset>
 
-    <form action="/update-location/<%=account.account_id%>" method="post" class="location">
+    <form action="/update-data/<%=account.account_id%>" method="post" class="location">
     <b style="color:blue;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">location</b>
     <input type="hidden" name="username" value="<%=account.username%>">
     <input type="hidden" name="password" value="<%=account.password%>">
     <textarea name="location_update_input" class="location-update"><%=account.location%></textarea>
-    <button>update lokasi</button>
+    <button>update </button>
     </form>
 
 </div>
 
 
 <div class="option-get">
-    <a href="/mulut.com" ><button class="btn-bar" style="color:rgb(215, 83, 83);border-color:red">log-out</button></a>
-    <a href="/first-page/<%=account.account_id%>" ><button class="btn-bar" style="color:rgb(125, 96, 52);border-color:yellow">kembali</button></a>
+    <a href="/mulut.com" ><button class="btn-bar" style="color:rgb(227, 201, 201);border-color:rgb(210, 193, 193);background-color: rgb(174, 143, 143);">log-out</button></a>
+    <a href="/first-page/<%=account.account_id%>" ><button class="btn-bar" style="color:rgb(125, 96, 52);border-color:rgb(187, 39, 163)">kembali</button></a>
 </div>
 
 

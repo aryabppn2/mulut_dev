@@ -20,7 +20,7 @@
         background-color: aliceblue
       }
       .input-text-style{
-        width:47.9%;
+        width:97.4%;
         height: 36px;
         border:0px;
         background-color: aliceblue;
@@ -59,7 +59,7 @@
      <div class="input-bar">
       <a href="/first-page/<%=data.account_id%>" class="btn-bar">pulang</a>
       <a href="/input/<%=data.account_id%>" class="btn-bar" style="color:rgb(46, 67, 67)">berita</a>
-      <a href="/add-annacoument/<%=data.account_id%>" class="btn-bar" style="color:blueviolet">pengumuman</a>
+      <a href="/add-jurnal-page/<%=data.account_id%>" class="btn-bar" style="color:rgb(24, 144, 146)">jurnal</a>
       
      </div>
      <b style="color:brown; margin-left: 400px;" >silahkan tulis qoutes  mu <%=data.username%></b>
@@ -69,7 +69,6 @@
       <input type="hidden" name="input_location"  value="<%=data.location%>"><br>
       <input type="text" name="input_qoutes_title" class="input-text-style" placeholder="judul qoutes">
       <input type="hidden" name="location_input" value="<%=data.location%>">
-
       <textarea name="input_qoutes"  class="input-text-prg" placeholder="isi qoutes"></textarea>
       <button type="submit" class="btn-submid-style"> posting</button>
     </form>

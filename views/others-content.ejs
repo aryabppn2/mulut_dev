@@ -19,7 +19,9 @@
          margin-left: 100px;
          text-decoration: none;
          background-color:lightgray;
-         border:0px;
+         border:7px;
+
+
 
       }
       .others-bar{
@@ -32,8 +34,16 @@
 }
 
 .qoutes-bar{
-    background-color: rgb(219, 226, 199);
+    background-color:lightgray;
+    color:aliceblue;
     
+}
+.bar-info{
+    height: 34px;
+    width:344px;
+    border:0px;
+    background-color: beige;
+    margin-left: 100px;
 }
 
 .qoutes-info{
@@ -65,22 +75,63 @@
 color:brown;
 background-color: rgb(231, 201, 201);
 }
+.othersname{
+    height:38px;
+    background-color: #ffe4c4;
+    text-decoration: none;
+    border-color:brown;
+    border:10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+
+}
+.bar-option{
+    margin-left: 103px;
+    height: 29px;
+    background-color: antiquewhite;
+    border-radius: 7px;
+}
+.context-wrapper{
+    height: 480px;
+    overflow-y: auto;
+}
+.add-container{
+    background-color:transparentbrown;
+    text-align: left;
+}
+.btn-humanity{
+    width:200px;
+    height:39px;
+    background-color: #ffe4c4;
+    
+}
     </style>
+
 </head>
 <body>
-
-<h1 class="others-name"><%=othersName%></h1>
 <div class="others-bar">
+   <button class="othersname"><%=othersName%></button>
+   <a href="/first-page/<%=user%>" style="text-decoration: none;" >
+  <button class="bar-btn" style="color:rgb(30, 57, 57)">pulang</button>  
+</a>
+   <a href="/orang-lain/<%=user%>"  style="text-decoration: none;">
+   <button  class="bar-btn" style="color:green">kembali</button>  
+</a>
+   <a href="/open-chat-system/<%=user%>/<%=others%>" style="text-decoration: none;">
+    <button class="bar-btn"  style="color:lightslategrey">chat </button>  
+</a>
 
-   <a href="/first-page/<%=user%>" class="bar-btn" style="color:rgb(30, 57, 57)">pulang</a>
-   <a href="/orang-lain/<%=user%>" class="bar-btn" style="color:green">kembali</a>
-   <a href="/open-chat-system/<%=user%>/<%=others%>"class="bar-btn"  style="color:lightslategrey"> chat</a>
-    <select class="bar-btn">
+
+    <select class="bar-info">
+        <option  >info</option>
         <option><%=othersName%></option>
         <option> <%=othersLocation%></option>
     </select>
-
+    
+ 
 </div>
+<div class="context-wrapper">
 <% others_content.forEach(prg => { %>
    <div class="qoutes-card-container">
       <div class="qoutes-bar">
@@ -100,7 +151,6 @@ background-color: rgb(231, 201, 201);
          </div>
   </div>
 <% }) %>
-
-    
+</div>
 </body>
 </html>

@@ -11,10 +11,11 @@
         background-color: #dfdad5;
     }
    .username-style{
-    color:brown;
-    background-color: #ffe4c4;
-    height: 100px;
+    height:38px;
+    width:100px;
     text-decoration: none;
+    border:0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    }
    .bar-private-container{
     background-color: rgb(202, 166, 166);
@@ -83,24 +84,36 @@ background-color: rgb(231, 201, 201);
     margin-left:45px;
 
 }
+.context-wrapper{
+    height: 480px;
+    overflow-y: auto;
+}
+.add-container{
+    background-color:transparentbrown;
+    text-align: left;
+}
+.btn-humanity{
+    width:200px;
+    height:39px;
+    background-color: #ffe4c4;
+    
+}
+
 </style>
 
 
 <body>
-    <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
-<h1>
-    <a href="/setting/<%=data.account_id%>" class="username-style"><%=data.username%></a>
+   
     
-</h1>
+    <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
 
 <div class="bar-private-container">
-    <a href="/list-chat-open/<%=data.account_id%>"><button  class="btn-bar" style="color:rgb(55, 91, 55)">barusan</button> </a>
-    <a href="/input/<%=data.account_id%>" ><button  class="btn-bar" style="color:rgb(11, 138, 11)">tambah</button></a>
-
-<a href="/beranda/<%=data.account_id%>" >
+    <a href="/setting/<%=data.account_id%>" style="text-decoration: none;" ><button class="username-style"><%=data.username%></button></a>
+    <a href="/input/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:aqua">tambah</button></a>
+    <a href="/list-chat-open/<%=data.account_id%>" style="text-decoration: none;"><button  class="btn-bar" style="color:rgb(55, 91, 55)">barusan</button> </a>
+    <a href="/beranda/<%=data.account_id%>"  style="text-decoration: none;" >
  <button class="btn-bar" style="color:whitesmoke;">navigasi</button>
 </a>
-<a href="/orang-lain/<%=data.account_id%>" ><button class="btn-bar" style="color:aquamarine">orang lain</button></a>
 </div>
 
 <div class="context-wrapper">
@@ -131,6 +144,9 @@ background-color: rgb(231, 201, 201);
 <% }) %>
 
 </div>
+
+
+
 
 </body>
 </html>

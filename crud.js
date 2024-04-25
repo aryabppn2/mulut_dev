@@ -45,7 +45,20 @@ url.writeFileSync('mongodb/account.json',JSON.stringify(filter_data))
 
 
 }
+function get_qoutesUpdate(json,new_qoutes,qoutes_id,url){
+    const filter_json=json.filter(data=>data.id_prg !=qoutes_id)
+    filter_json.push(new_qoutes)
+    url.writeFileSync('mongodb/paragraf.json',JSON.stringify(filter_json))
+}
 
+
+
+
+
+function delete_qoutes(json,qoutes_id,url){
+    const filter_qoutes=json.filter(dat_id=>dat_id.id_prg !=qoutes_id);
+    url.writeFileSync('mongodb/paragraf.json',JSON.stringify(filter_qoutes))
+}
 
 
 function qoutes(json,id){
@@ -78,5 +91,5 @@ function findChat_toUser(json,address){
     return data_sent
 }
 
-module.exports={accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,find_othersPrg,qoutes,post_coment,
-    find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser}
+module.exports={accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,delete_qoutes,find_othersPrg,qoutes,post_coment,
+    find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser,get_qoutesUpdate}
