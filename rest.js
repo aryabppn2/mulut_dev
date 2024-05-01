@@ -3,11 +3,12 @@ const http=express();
 const url=require('fs');
 const port=7000;
 //configue local file system//
-const {accoundDb_Insert,account,getUpdate_location,Insert_data,get_paragrafAccount,delete_qoutes,
+const {accoundDb_Insert,account,getUpdate_location,Insert_data,insert_annacoumentData,get_paragrafAccount,get_userAnnacoument,delete_qoutes,
     find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
-    findChat,findChat_fromUser,findChat_toUser,get_qoutesUpdate}=require('./crud.js')    
+    findChat,findChat_fromUser,findChat_toUser,get_qoutesUpdate,get_annacoumentData,get_updateAnnacoument,
+    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}=require('./crud.js')    
 
-const {find_paragraf,Find_account}=require('./machine.js')
+const {find_paragraf,get_annacouments,Find_account}=require('./machine.js')
 const {logo_design}=require('./logo.js')
 
 
@@ -21,14 +22,16 @@ http.use(express.urlencoded({extended:true}));
 const get_accountDB=url.readFileSync('mongodb/account.json','utf-8');
 const get_prgDb=url.readFileSync('mongodb/paragraf.json','utf-8');
 const coment_db_url=url.readFileSync('mongodb/coment.json','utf-8');
-const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8')
-
+const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8');
+const anncoument_db=url.readFileSync('mongodb/annacoument.json','utf-8');
+const annacoumentComent_db=url.readFileSync('mongodb/annacoumentComent_db.json','utf-8')
 
 //get//
 http.get('/mulut.com',function(req,res){
     res.render('beranda-first',{
         title:'beranda',
         paragraf:JSON.parse(get_prgDb),
+        annacouments:JSON.parse(anncoument_db),
         logo:logo_design
     })
 })
@@ -51,13 +54,7 @@ http.get('/input/:id',function(request,respont){
     time:new Date()
 })
 })
-http.get('/add-jurnal-page/:user_id',function(req,res){
-   const get_account=account(JSON.parse(get_accountDB),req.params.user_id);
-   res.render('add-jurnal-page',{
-    title:'tambah jurnal',
 
-   })
-})
 
 http.get('/sign-up-option',function(request,respont){
     respont.render('sign-up-page',{title:'sign-up',logo:logo_design})
@@ -70,7 +67,8 @@ http.get('/first-page/:id',function(request,respont){
     respont.render('first-page',{
         logo:logo_design,
         data:get_account[0],
-        paragraf:get_paragrafAccount(get_id,JSON.parse(get_prgDb))
+        paragraf:get_paragrafAccount(get_id,JSON.parse(get_prgDb)),
+        annacoument_user:get_userAnnacoument(get_id,JSON.parse(anncoument_db))
     
     
     
@@ -88,6 +86,7 @@ http.get('/beranda/:id',function(request,respont){
         logo:logo_design,
         title:'beranda',
         paragraf:JSON.parse(get_prgDb),
+        annacouments:JSON.parse(anncoument_db),
         account:account(JSON.parse(get_accountDB),get_userId)[0]
     })
 
@@ -112,6 +111,17 @@ http.get('/setting/:account_id',function(request,respont){
     }
     )
 })
+http.get('/add-annacoument-page/:user_id',function(request,respont){
+    const get_id=request.params.user_id;
+    const get_account=account(JSON.parse(get_accountDB),get_id);
+    respont.render('annacoument',{
+        title:'tambah pengumuman',
+        username:get_account[0].username,
+        user_id:get_account[0].account_id
+    })
+})
+
+
 http.get('/others-content/:others_id/:user_id',function(request,respont){
     const get_id={
         user:request.params.user_id,
@@ -121,18 +131,48 @@ http.get('/others-content/:others_id/:user_id',function(request,respont){
         user_account:account(JSON.parse(get_accountDB),get_id.user),
         others_account:account(JSON.parse(get_accountDB),get_id.others),
         others_content:find_othersPrg(get_id.others,JSON.parse(get_prgDb)),
+        others_annacoumrnt:get_userAnnacoument(get_id.others,JSON.parse(anncoument_db))
     }
     respont.render('others-content',{
         title:'kontent  dari'+find.others_account[0].username,
         user:find.user_account[0].account_id,
         others:find.others_account[0].account_id,
+        userName:find.user_account[0].username,
         othersName:find.others_account[0].username,
         othersLocation:find.others_account[0].location,
-        others_content:find.others_content
+        others_content:find.others_content,
+        others_annacouments:find.others_annacoumrnt
     })
 })
 
 
+
+
+
+
+
+
+
+
+
+http.get('/delete-qoutes/:qoutes_id/:user_id',function(request,respont){
+    const get_id={
+        user:request.params.user_id,
+        qoutes:request.params.qoutes_id
+    }
+
+    delete_qoutes(JSON.parse(get_prgDb),get_id.qoutes,url)
+
+    respont.redirect('/first-page/'+get_id.user)
+})
+http.get('/delete-annacoument/:user_id/:annacoument_id',function(request,respont){
+   const get_id={
+    user:request.params.user_id,
+    annacoument:request.params.annacoument_id
+   }
+   DELETE_ANNACOUMENT(JSON.parse(anncoument_db),get_id.annacoument,url);
+   respont.redirect('/first-page/'+get_id.user)
+})
 
 
 http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
@@ -158,20 +198,6 @@ http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
 
   })
 })
-
-http.get('/delete-qoutes/:qoutes_id/:user_id',function(request,respont){
-    const get_id={
-        user:request.params.user_id,
-        qoutes:request.params.qoutes_id
-    }
-
-    delete_qoutes(JSON.parse(get_prgDb),get_id.qoutes,url)
-
-    respont.redirect('/first-page/'+get_id.user)
-})
-
-
-
 
 http.get('/open-coment-beranda/:qoutes_id/:user_id',function(request,respont){
     const get_id={
@@ -222,7 +248,74 @@ http.get('/open-coment-beranda/:qoutes_id/:user_id',function(request,respont){
         
           })
     })
+
+http.get('/open-user-annacoument/:user_id/:annacoument_id',function(input,output){
+    const get_id={
+         user:input.params.user_id,
+         annacoument:input.params.annacoument_id
+    }
+    const get_data={
+        user:account(JSON.parse(get_accountDB),get_id.user),
+        annacoument:get_annacoumentData(JSON.parse(anncoument_db),get_id.annacoument),
+
+    }
    
+    output.render('annacoument-interface-user',{
+        title:'melihat :'+get_data.annacoument[0].annacoument_title,
+        user_id:get_data.user[0].account_id,
+        username:get_data.user[0].username,
+        annacoument:get_data.annacoument[0],
+        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument)
+
+    })
+    
+})
+
+   
+http.get('/open-annacoument/:user_id/:annacoument_id',function(request,respont){
+    const get_id={
+        user:request.params.user_id,
+        annacoument:request.params.annacoument_id
+    }
+    const get_data={
+        user:account(JSON.parse(get_accountDB),get_id.user),
+        annacoument:get_annacoumentData(JSON.parse(anncoument_db),get_id.annacoument)
+    }
+    respont.render('annacoument-detail',{
+        title:'melihat :'+get_data.annacoument[0].annacoument_title,
+        user_id:get_id.user,
+        username:get_data.user[0].username,
+        annacoument:get_data.annacoument[0],
+        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument),
+        link_back:'beranda/'+get_id.user
+
+    })
+})
+
+http.get('/open-annacoument/:user_id/:target_id/:annacoument_id',function(input,output){
+    const get_id={
+        user:input.params.user_id,
+        target:input.params.target_id,
+        annacoument:input.params.annacoument_id
+
+    }
+    const get_data={
+        user:account(JSON.parse(get_accountDB),get_id.user),
+        target:account(JSON.parse(get_accountDB),get_id.target),
+        annacoument:get_annacoumentData(JSON.parse(anncoument_db),get_id.annacoument)
+    }
+    output.render('annacoument-detail',{
+        title:'melihat :'+get_data.annacoument[0].annacoument_title,
+        user_id:get_id.user,
+        username:get_data.user[0].username,
+        annacoument:get_data.annacoument[0],
+        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument),
+        link_back:'others-content/'+get_id.target+'/'+get_id.user
+
+    })
+})
+
+
 http.get('/open-chat-system/:user_ip/:target_ip',function(request,respont){
     const get_ip={
         user:request.params.user_ip,
@@ -262,6 +355,7 @@ http.get('/list-chat-open/:user_ip',function(request,respont){
    respont.render('list-chat',{
     title:'daftar chat',
     user_id:get_account[0].account_id,
+    username:get_account[0].username,
     target_list:get_chatList.to_user,
     user_list: get_chatList.fromUser
 
@@ -291,7 +385,8 @@ http.post('/get-account',function(request,respont){
    
     const get_id=`${requst_id.username}byId${requst_id.password}`
     const get_account=account(JSON.parse(get_accountDB),get_id)
-    const get_paragraf=get_paragrafAccount(get_id,JSON.parse(get_prgDb))
+    const get_paragraf=get_paragrafAccount(get_id,JSON.parse(get_prgDb));
+    const get_annacouments=get_userAnnacoument(get_id,JSON.parse(anncoument_db))
     if(requst_id.username==""){
         respont.render('login-page',{
             title:'login-page:error',
@@ -317,7 +412,9 @@ else if(requst_id.password==""){
 else{
     respont.render('first-page',{
         data:get_account[0],
-        paragraf:get_paragraf
+        paragraf:get_paragraf,
+        annacoument_user:get_annacouments
+
     
    
 
@@ -360,6 +457,41 @@ http.post('/post-prg',function(request,response){
    response.redirect('/first-page/'+input_prgdata.userId)
     
 })
+http.post('/post-annacoument',function(request,respont){
+    const data_get={
+        username:request.body.input_username,
+        user_id:request.body.input_userId,
+        annacoument_title:request.body.input_title,
+        annacoument_id:`annacoument_${request.body.input_title}ById${request.body.input_username}`,
+        carry:{
+            date:request.body.input_date,
+            time:request.body.input_time,
+             place:request.body.input_location,
+        },
+        annacoument_value:request.body.input_annacoumentValue
+    }
+    insert_annacoumentData(data_get,JSON.parse(anncoument_db),url)
+    respont.redirect('/first-page/'+data_get.user_id)
+})
+
+http.post('/annacoument-update',function(input,output){
+    const get_data={
+        username:input.body.input_username,
+        user_id:input.body.input_userId,
+        annacoument_title:input.body.input_annacoumentTitle,
+        annacoument_id:input.body.input_annacoumentId,
+        annacoument_value:input.body.new_annacoument_value,
+        carry:{
+            date:input.body.new_date,
+            time:input.body.new_time,
+            place:input.body.new_place
+        }
+    }
+    get_updateAnnacoument(JSON.parse(anncoument_db),get_data,get_data.annacoument_id,url)
+    output.redirect('/open-user-annacoument/'+get_data.user_id+'/'+get_data.annacoument_id)
+})
+
+
 http.post('/qoutes-update/:qoutes_id/:user_id',function(request,respont){
     const get_data={
         userId:request.params.user_id,
@@ -380,10 +512,12 @@ http.post('/qoutes-update/:qoutes_id/:user_id',function(request,respont){
 
 http.post('/search-data/:id',function(request,respont){
     const search_input=request.body.search_input;
-    const findPrg=find_paragraf(search_input,JSON.parse(get_prgDb))
+    const findPrg=find_paragraf(search_input,JSON.parse(get_prgDb));
+    const find_annacoument=get_annacouments(search_input,JSON.parse(anncoument_db))
     respont.render('beranda',{
         title:search_input+'menamilkan',
         paragraf:findPrg,
+        annacouments:find_annacoument,
         account:account(JSON.parse(get_accountDB),request.params.id)[0],
 
     })
@@ -391,10 +525,12 @@ http.post('/search-data/:id',function(request,respont){
 })
 http.post('/search-get',function(request,respont){
     const input_search=request.body.search_input;
-    const findPrg=find_paragraf(input_search,JSON.parse(get_prgDb))
+    const findPrg=find_paragraf(input_search,JSON.parse(get_prgDb));
+    const annacouments_find=get_annacouments(input_search,JSON.parse(anncoument_db))
     respont.render('beranda-first',{
         title:input_search+' menampilkan',
-        paragraf:findPrg
+        paragraf:findPrg,
+        annacouments:annacouments_find
     })
 })
 
@@ -408,15 +544,7 @@ http.post('/searchAccount/:account_id',function(request,respont){
     })
 })
 
-http.post('/search-data/',function(request,respont){
-    const search_input=request.body.search_input;
-    const findPrg=find_paragraf(search_input,JSON.parse(get_prgDb))
-    respont.render('beranda',{
-        title:search_input+'menamilkan',
-        paragraf:findPrg,
 
-    })
-})
 
 http.post('/post-coment',function(request,respont){
     const coment_input={
@@ -458,6 +586,26 @@ http.post('/post-coment-others/:others_id/:user_id/:qoutes_id',function(request,
      post_coment(coment_input,JSON.parse(coment_db_url),url)
      respont.redirect('/open-coment-others/'+request.params.qoutes_id+'/'+request.params.user_id+'/'+request.params.others_id)
    
+})
+http.post('/post-annacoument-coment',function(request,respont){
+    const input_coment={
+        username:request.body.username_input,
+        userId:request.body.userId_input,
+        annacoument_id:request.body.annacoumentId_input,
+        coment_Value:request.body.input_coment
+    }
+    post_comentAnnacoument(input_coment,JSON.parse(annacoumentComent_db),url);
+    respont.redirect('/open-user-annacoument/'+input_coment.userId+'/'+input_coment.annacoument_id)
+})
+http.post('/post-annacoument-coment-beranda',function(request,respont){
+    const get_data={
+        username:request.body.username_input,
+        userId:request.body.userId_input,
+        annacoument_id:request.body.annacoumentId_input,
+        coment_Value:request.body.input_coment
+    }
+   post_comentAnnacoument(get_data,JSON.parse(annacoumentComent_db),url)
+   respont.redirect('/open-annacoument/'+get_data.userId+'/'+get_data.annacoument_id)
 })
 
 http.post('/chat-SentAt/:user_id/:target_id',function(request,respont){

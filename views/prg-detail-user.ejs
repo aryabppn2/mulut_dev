@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="qoutes-user-bar">
-        <a href="/first-page/<%=user_data.account_id%>"><button class="btn-bar">kembali</button></a>
+        <a href="/first-page/<%=user_data.account_id%>"><button class="btn-bar"><%=user_data.username%></button></a>
         <select class="qoutes-info">
             <option><%=qoutes_data.qoutes_title%></option>
             <option ><%=qoutes_data.userName%></option>
@@ -92,7 +92,7 @@
      <textarea name="input_qoutes_update" class="qoutes-textarea"><%=qoutes_data.qoutes%></textarea>
       <button class="btn-update" type="submit">update</button>
     </form>
-    <form action=<%=post_method%> method="post" style="margin-top:24px">
+    <form action='<%=post_method%>' method="post" style="margin-top:24px">
         <input type="hidden" name="username_input" value="<%=user_data.username%>">
         <input type="hidden" name="userId_input" value="<%=user_data.account_id%>">
         <input type="hidden" name="qoutesId_input" value="<%=qoutes_data.id_prg%>">

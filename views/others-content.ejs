@@ -106,6 +106,16 @@ background-color: rgb(231, 201, 201);
     background-color: #ffe4c4;
     
 }
+ .annacoument-card-container{
+    background-color: whitesmoke;
+    text-align: center;
+
+    
+}
+.annacoument-body{
+    height: 100px;
+    overflow-y: auto;
+}
     </style>
 
 </head>
@@ -113,7 +123,7 @@ background-color: rgb(231, 201, 201);
 <div class="others-bar">
    <button class="othersname"><%=othersName%></button>
    <a href="/first-page/<%=user%>" style="text-decoration: none;" >
-  <button class="bar-btn" style="color:rgb(30, 57, 57)">pulang</button>  
+  <button class="bar-btn" style="color:rgb(30, 57, 57)"><%=userName%></button>  
 </a>
    <a href="/orang-lain/<%=user%>"  style="text-decoration: none;">
    <button  class="bar-btn" style="color:green">kembali</button>  
@@ -151,6 +161,30 @@ background-color: rgb(231, 201, 201);
          </div>
   </div>
 <% }) %>
+
 </div>
+
+    <div class="annacoument-wrapper">
+        <% others_annacouments.forEach(DATA => { %>
+            <div class="annacoument-card-container">
+            <h3 class="annacoument-title"><%=DATA.username%></h3>
+            <b><%=DATA.carry.place%></b>
+            <fieldset class="annacoument-body">
+                <h3><%=DATA.annacoument_title%></h3>
+                <span><%=DATA.annacoument_value%></span>
+            </fieldset>
+               <a href="/open-annacoument/<%=user%>/<%=others%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
+              <span >buka</span>
+            </a>
+        
+        
+            </div>
+        
+        
+        
+        <% }) %>
+    
+    
+    </div>
 </body>
 </html>

@@ -1,0 +1,104 @@
+<html>
+<head>
+<title><%=title%></title>
+<style>
+.annacoument-bar{
+	background-color:beige;
+}
+.btn-bar{
+   border:0px;
+   
+   height:45px;
+
+}
+.annacoument-paper{
+  text-align: center;
+  background-color: rgb(245, 248, 251);
+}
+.textarea-container{
+  width: 1220px;
+  height: 290px;
+  border:0px;
+}
+.mini-input{
+  width:120px;
+  height: 39px;
+  margin: 23px;
+}
+.coment-input{
+  width:1214px;
+  height: 40px;
+  background-color: beige;
+  border:0px;
+}
+.coment-input{
+            width:87.6%;
+            height:33px;
+            background-color: antiquewhite;
+            color:brown
+        }
+        .coment-card{
+            background-color: rgb(238, 236, 234);
+            color:rgb(138, 156, 90);
+            border-style: double;
+            margin:12px;
+        }
+        .user-name{
+            color:brown
+        }
+        .coment-value{
+            color:chocolate
+        }
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="annacoument-bar">
+<a href='/first-page/<%=user_id%> 'style='text-decoration:none'>
+<button class='btn-bar'><%=username%></button>
+</a>
+<a href='/<%=link_back%>' style="text-decoration: none;">
+<button class="btn-bar" style='color:brown'>kembali</button>
+</a>  
+</div>
+<div class="annacoument-paper">
+  <h1><%=username%></h1>
+  <a href='/open-chat-system/<%=user_id%>/<%=annacoument.user_id%>' style='text-decoration:none'>
+  <h3>hubungi  <%=annacoument.username%></h3>
+  </a>
+<fieldset class='annacoument-body'>
+<h3><%=annacoument.annacoument_title%></h3>
+<textarea name='new_annacoument_value' class='textarea-container'><%=annacoument.annacoument_value%></textarea><br>
+<input type='date' name='new_date' value='<%=annacoument.carry.date%>' class='mini-input'>
+<input type='time' name='new_time' value='<%=annacoument.carry.time%>' class='mini-input'>
+<input type='text' name='new_place' value='<%=annacoument.carry.place%>' class='mini-input' placeholder="lokasi baru">
+</fieldset>
+
+
+
+
+<form action='/post-annacoument-coment-beranda' method="post" style="margin-top:24px;background-color:lightblue;" >
+        <input type="hidden" name="username_input" value="<%=username%>">
+        <input type="hidden" name="userId_input" value="<%=user_id%>">
+        <input type="hidden" name="annacoumentId_input" value="<%=annacoument.annacoument_id%>">
+        <textarea name="input_coment"  class="coment-input" placeholder="komen sesuatu"></textarea>
+        <button type="submit" class="btn-coment">kirim</button>
+    </form>
+<div class='coment-container'>
+ <b>komentar </b>
+   <% coments.forEach(datas => { %>
+    <div class="coment-card">
+     <h3 class="user-name"><%=datas.username%></h3>
+      <p class="coment-value"><%=datas.coment_Value%></p>
+        </div> 
+
+
+        <% }) %>
+
+</div>
+
+</body>

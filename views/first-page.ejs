@@ -29,11 +29,12 @@
    }
 .btn-bar{
     text-decoration: none;
-    width:100px;
+    width:150px;
     height:38px;
     background-color: rgb(202, 166, 166);
-    border:0px;
-    margin-left: 100px;
+    border:17;
+    margin-left:6px;
+    border-color:red;
 }
 .prg-card{
     text-align: center;
@@ -98,7 +99,16 @@ background-color: rgb(231, 201, 201);
     background-color: #ffe4c4;
     
 }
+.annacoument-card-container{
+    background-color: whitesmoke;
+    text-align: center;
 
+    
+}
+.annacoument-body{
+    height:100px;
+    overflow-y: auto;
+}
 </style>
 
 
@@ -110,7 +120,7 @@ background-color: rgb(231, 201, 201);
 <div class="bar-private-container">
     <a href="/setting/<%=data.account_id%>" style="text-decoration: none;" ><button class="username-style"><%=data.username%></button></a>
     <a href="/input/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:aqua">tambah</button></a>
-    <a href="/list-chat-open/<%=data.account_id%>" style="text-decoration: none;"><button  class="btn-bar" style="color:rgb(55, 91, 55)">barusan</button> </a>
+    <a href="/list-chat-open/<%=data.account_id%>" style="text-decoration: none;"><button  class="btn-bar" style="color:springgreen;">barusan</button> </a>
     <a href="/beranda/<%=data.account_id%>"  style="text-decoration: none;" >
  <button class="btn-bar" style="color:whitesmoke;">navigasi</button>
 </a>
@@ -142,6 +152,29 @@ background-color: rgb(231, 201, 201);
 
 
 <% }) %>
+
+</div>
+
+<div class="annacoument-wrapper">
+    <% annacoument_user.forEach(DATA => { %>
+        <div class="annacoument-card-container">
+        <h3 class="annacoument-title"><%=DATA.username%></h3>
+        <b><%=DATA.carry.place%></b>
+        <fieldset class="annacoument-body">
+            <h3><%=DATA.annacoument_title%></h3>
+            <span><%=DATA.annacoument_value%></span>
+        </fieldset>
+           <a href="/open-user-annacoument/<%=data.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
+          <span >buka</span>
+        </a>
+    
+    
+        </div>
+    
+    
+    
+    <% }) %>
+
 
 </div>
 

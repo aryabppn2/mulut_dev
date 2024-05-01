@@ -57,6 +57,26 @@
     color:brown
 
 }
+.annacoument-card-container{
+    background-color: whitesmoke;
+    text-align: center;
+
+    
+}
+
+.annacoument-card-container{
+    background-color: whitesmoke;
+    text-align: center;
+
+    
+}
+.annacoument-body{
+    height:100px;
+    overflow-y: auto;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -89,6 +109,26 @@
 
 
     <% }) %>
+    </div>
+    <div class="annacoument-wrapper">
+        <% annacouments.forEach(DATA => { %>
+            <div class="annacoument-card-container">
+            <h3 class="annacoument-title"><%=DATA.username%></h3>
+            <b><%=DATA.carry.place%></b>
+            <fieldset class="annacoument-body">
+                <h3><%=DATA.annacoument_title%></h3>
+                <span><%=DATA.annacoument_value%></span>
+            </fieldset>
+              
+        
+        
+            </div>
+        
+        
+        
+        <% }) %>
+    
+    
     </div>
 </body>
 </html>

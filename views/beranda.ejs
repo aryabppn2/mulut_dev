@@ -83,7 +83,16 @@ background-color: rgb(231, 201, 201);
         color:brown;
         margin-right:12px;
      }
-     
+     .annacoument-card-container{
+    background-color: whitesmoke;
+    text-align: center;
+
+    
+}
+.annacoument-body{
+    height: 100px;
+    overflow-y: auto;
+}
     </style>
 </head>
 <body>
@@ -98,11 +107,18 @@ background-color: rgb(231, 201, 201);
     <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
     <button class="bar-btn">pulang</button>
     </a>
-    <a href="/all-in/<%=account.account_id%>" style="text-decoration: none;">
-    <button class="bar-btn" style="color:rgb(77, 147, 45)">semua</button>
-    </a>
     <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
-    <button class="bar-btn" style="color:brown">qoutes</button>
+    <button class="bar-btn" style="color:brown">semua</button>
+    </a>
+    <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+    
+    <button class="bar-btn" style='color:lightgreeen'>qoutes</button>
+
+    </a>
+    <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+    
+    <button class="bar-btn" style='color:blue'>pengumuman</button>
+
     </a>
     <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
     <button class="bar-btn" style="color:green">orang lain</button>
@@ -132,6 +148,29 @@ background-color: rgb(231, 201, 201);
     </div>
 
     <% }) %>
+    </div>
+
+    <div class="annacoument-wrapper">
+        <% annacouments.forEach(DATA => { %>
+            <div class="annacoument-card-container">
+            <h3 class="annacoument-title"><%=DATA.username%></h3>
+            <b><%=DATA.carry.place%></b>
+            <fieldset class="annacoument-body">
+                <h3><%=DATA.annacoument_title%></h3>
+                <span><%=DATA.annacoument_value%></span>
+            </fieldset>
+               <a href="/open-annacoument/<%=account.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
+              <span >buka</span>
+            </a>
+        
+        
+            </div>
+        
+        
+        
+        <% }) %>
+    
+    
     </div>
     
 </body>

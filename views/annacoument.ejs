@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+     .bar-annacoument-input{
+       background-color:brown;
+       text-align:center
+
+     }
+  .btn-bar{
+     height:36px;
+     background-color:brown;
+     border:14;
+     border-color:white;
+     width:100px
+  }
+
+.paper-input-container{
+
+text-align:center;
+border-style:dotted;
+}
+.text-input{
+     width:1220px;
+     height:39px;
+     font:italic small-caps bold 12px/30px Georgia, serif;
+     border:0px;
+
+}
+.input-textarea{
+    width:1219px;
+    height:255px;
+    border:0px;
+}
+
+
+.input-mini{
+    width:100px;
+    height:39px;
+    border:0px;
+}
+
+.btn-submid-type{
+    width:1209px;
+    height:45px;
+     background-color:green;
+     color:whitesmoke
+}
+
+
+    </style>
+
+
+</head>
+<body>
+<div class="bar-annacoument-input">
+<a href="/first-page/<%=user_id%>" style="text-decoration: none;">
+<button class="btn-bar" style='color:whitesmoke'><%=username%></button>
+</a>
+<a href="/input/<%=user_id%>" style="text-decoration: none;">
+<button class="btn-bar" style='color:lightgray'>qoutes</button>
+</a>
+<a href="/add-annacoument-page/<%=user_id%>" style="text-decoration: none;">
+<button class="btn-bar" style='color:aqua'>pengumuman</button>
+</a>
+
+</div>
+
+<form action="/post-annacoument" method="post" class='paper-input-container'>
+<input type="hidden" value="<%=username%>" name="input_username">
+<input type="hidden"  value="<%=user_id%>"  name="input_userId">
+<h1><%=username%></h1>
+<a href='/open-chat-system/<%=user_id%>/<%=user_id%>' style='text-decoration:none'>
+<b class='hub-class-btn'>hubungi <%=username%></b>
+</a>
+<fieldset class='annacoument-body'>
+<input type='text' name='input_title' placeholder='judul pengumuman' class='text-input'><br>
+<textarea name='input_annacoumentValue' class='input-textarea' placeholder='isi pengumuman'></textarea><br>
+<table class='keterangan'>
+<tr>
+<th class='name'> lokasi</th>
+<td>
+<input type='text' name='input_location' class='input-mini' placeholder='lokasi'>
+</td>
+</tr>
+<tr>
+<th class='name'>tanggal</th>
+<td>
+<input type='date' name='input_date' class='input-mini'>
+</td>
+</tr>
+<tr>
+<th class='name'>pukul</th>
+<td>
+<input type='time' name='input_time' class='input-mini'>
+</td>
+</tr>
+
+
+</table>
+
+</fieldset>
+
+
+<button type='submit' class='btn-submid-type'>posting</button>
+
+
+
+
+
+</form>
+
+
+
+
+
+</body>
+</html>
