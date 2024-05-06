@@ -61,7 +61,8 @@
 <body style="text-align: center;">
     <div class="qoutes-mini-bar">
         <a href="/first-page/<%=user_data.account_id%>" class="btn-bar" style="color:rgb(197, 219, 197);text-decoration: none;"><%=user_data.username%></a>
-        <a href='<%=link_back%>'  ><button class="btn-bar">kembali</button></a>
+        <a href='<%=link_back%>'  style='text-decoration:none;'><button class="btn-bar">kembali</button></a>
+       
         <select class="qoutes-info">
             <option><%=qoutes_data.qoutes_title%></option>
             <option ><%=qoutes_data.userName%></option>
@@ -86,6 +87,10 @@
     </div>
     <div class="coment-container">
         <b>komentar </b>
+        <a href='/open-chat-system/<%=user_data.account_id%>/<%=qoutes_data.userId%>'>
+
+       <button class="open-chat">selengkapnya</button>
+        </a>
 
         <% coments.forEach(datas => { %>
         <div class="coment-card">

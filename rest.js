@@ -6,10 +6,12 @@ const port=7000;
 const {accoundDb_Insert,account,getUpdate_location,Insert_data,insert_annacoumentData,get_paragrafAccount,get_userAnnacoument,delete_qoutes,
     find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
     findChat,findChat_fromUser,findChat_toUser,get_qoutesUpdate,get_annacoumentData,get_updateAnnacoument,
-    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}=require('./crud.js')    
+    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument,
+    account}=require('./crud.js')    
 
 const {find_paragraf,get_annacouments,Find_account}=require('./machine.js')
 const {logo_design}=require('./logo.js')
+const {add_friends,add_friendList}= require('./friends-data.js')
 
 
 
@@ -91,6 +93,28 @@ http.get('/beranda/:id',function(request,respont){
     })
 
 })
+
+http.get('/qoutes-navigation/:user_id',function(request,respont){
+    const get_id=request.params.user_id;
+    const get_account=account(JSON.parse(get_accountDB),get_id)[0]
+    respont.render('qoutes-page',{
+        paragraf:JSON.parse(get_prgDb),
+        account:get_account
+    })
+})
+http.get('/annacoument-navigation/:user_id',function(request,respont){
+    const get_id=request.params.user_id;
+    const get_data=account(JSON.parse(get_accountDB),get_id)
+    
+respont.render('annacoument-page',{
+    title:'pengumuman',
+    account:get_data[0],
+    annacouments:JSON.parse(anncoument_db)
+    
+})
+
+})
+
 http.get('/orang-lain/:user_id',function(request,respont){
     const call_allAccount=JSON.parse(get_accountDB);
     respont.render('orang-lain-views',{
@@ -361,7 +385,13 @@ http.get('/list-chat-open/:user_ip',function(request,respont){
 
    })
 })
-
+http.get('/friends-list/:user_id',function(input,output){
+    const id=input.params.user_id;
+    const data=account=account(JSON.parse(get_accountDB),id)[0];
+    respont.render('orang-lain-views',{
+        title:'berteman'
+    })
+})
 
 //post//
 
@@ -510,6 +540,9 @@ http.post('/qoutes-update/:qoutes_id/:user_id',function(request,respont){
 })
 
 
+
+//search data//
+
 http.post('/search-data/:id',function(request,respont){
     const search_input=request.body.search_input;
     const findPrg=find_paragraf(search_input,JSON.parse(get_prgDb));
@@ -545,6 +578,37 @@ http.post('/searchAccount/:account_id',function(request,respont){
 })
 
 
+http.post('/search_qoutes_input/:user_id',function(input,output){
+    const get={
+        user_id:input.params.user_id,
+        search_input:input.body.search_input
+    }
+    const get_qoutes=find_paragraf(get.search_input,JSON.parse(get_prgDb))
+   output.render('qoutes-page',{
+     title:get.search_input+' menampilkan',
+     paragraf:get_qoutes,
+     account:account(JSON.parse(get_accountDB),get.user_id)[0]
+     
+   })
+
+
+})
+
+http.post('/search-annacouments/:user_id',function(input,output){
+    const get={
+        user_id:input.params.user_id,
+        search_input:input.body.search_annacoument_input
+    }
+    const get_annacoument=get_annacouments(get.search_input,JSON.parse(anncoument_db))
+    output.render('annacoument-page',{
+        title:get.search_input +' menampilkan',
+        annacouments:get_annacoument,
+        account:account(JSON.parse(get_accountDB),get.user_id)[0]
+    })
+})
+
+
+// post coment//
 
 http.post('/post-coment',function(request,respont){
     const coment_input={
@@ -628,6 +692,40 @@ const chat_input={
 sent_chatData(JSON.parse(chatDB_url),chat_input,url)
 respont.redirect(`/open-chat-system/${get_id.user}/${get_id.target}`)
 
+})
+
+http.post('/get-friends-data',function(input,output){
+    const get={
+        user:input.body.get_userId,
+        target:input.body.get_targetId
+    }
+    const get_data={
+        user:account(JSON.parse(get_accountDB),get.user),
+        target:account(JSON.parse(get_accountDB),get.target)
+    }
+    add_friends(
+      JSON.parse(get_accountDB),
+       get_data.user[0].account_id,
+      {
+        username:get_data.target[0].username,
+        user_id:get_data.target[0].account_id
+      },
+      url
+        
+        )
+    add_friendList(
+      JSON.parse(get_accountDB),
+      get_data.target[0].account_id,
+      {
+        username:get_data.user[0].username,
+        user_id:get_data.user[0].account_id
+      },
+      url
+      
+
+        )
+
+    output.redirect('/others-content/'+get.target+'/'+get.user)
 })
 
 

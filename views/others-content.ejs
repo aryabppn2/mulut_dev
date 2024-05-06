@@ -116,6 +116,22 @@ background-color: rgb(231, 201, 201);
     height: 100px;
     overflow-y: auto;
 }
+.get-friends-btn{
+    width:90px;
+    height:34px;
+    margin: 12px;
+    border-radius: 12px;
+    background-color: aqua;
+    color:brown
+}
+.delete-friends-btn{
+    width:90px;
+    height:34px;
+    margin: 12px;
+    border-radius: 12px;
+    background-color:gray;
+    color:rgb(233, 219, 219)
+}
     </style>
 
 </head>
@@ -141,6 +157,16 @@ background-color: rgb(231, 201, 201);
     
  
 </div>
+<form action="/get-friends-data" method="post"  id="post-id">
+    <input type="hidden" name="get_userId" value="<%=user%>">
+    <input type="hidden" name="get_targetId" value="<%=others%>">
+    <button class="get-friends-btn" type="submit">berteman</button>
+</form>
+<form action="/delete-friends-data" method="post"  id="post-id">
+    <input type="hidden" name="get_userId" value="<%=user%>">
+    <input type="hidden" name="get_targetId" value="<%=others%>">
+    <button class="delete-friends-btn">tinggalkan</button>
+</form>
 <div class="context-wrapper">
 <% others_content.forEach(prg => { %>
    <div class="qoutes-card-container">

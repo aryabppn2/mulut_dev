@@ -16,29 +16,31 @@
       .input-text-search{
          width:67.3%;
          height:36px;
-         color:brown 
+         color:blue;
       }
       .btn-search-type{
          width:45px;
          height:40px;
          margin-left: 0px;
+         border:0px;
+         background-color: burlywood;
       }
       .bar-option{
-         background-color: rgb(248, 244, 238);
-         text-align:left;
+         background-color: rgb(199, 175, 145);
+         text-align: center;
          
       }
       .bar-btn{
          margin-left:0px;
          text-decoration: none;
          margin-left:20px;
-         margin-top:5px;
-         border:0px;
          width:auto;
          height: 29px;
-         border-radius: 9px;
+         border-style:solid;
          border-color:rgb(147, 144, 54);
          background-color:rgb(220, 198, 171) ;
+         border-radius: 14px;
+         border:0px;
       }
       .qoutes-card-container{
     background-color: #dfdad5;
@@ -65,6 +67,10 @@
 .coment-coloum{
     background-color: rgb(239, 232, 222);
     
+}
+.bar-wrapper{
+    text-align: left;
+    background-color: #dfdad5;
 }
 .coment-container-input{
     width:400px;
@@ -99,7 +105,7 @@ background-color: rgb(231, 201, 201);
     </style>
 </head>
 <body>
-    <form action='/search-data/<%=account.account_id%>'  method="post" class="search-wrapper">
+    <form action='/search_qoutes_input/<%=account.account_id%>'  method="post" class="search-wrapper">
         <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
            <span class="username-value"><%=account.username%></span>
             </a>
@@ -107,23 +113,21 @@ background-color: rgb(231, 201, 201);
         <button class="btn-search-type" type="submit">🔍</button>
     </form>
     <div class="bar-option">
-    
-    <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
-    <button class="bar-btn" style="color:brown">semua</button>
-    </a>
-    <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
-    
-    <button class="bar-btn" style='color:lightgreeen'>qoutes</button>
+   
+    <div class="bar-wrapper">
+        <a href="/qoutes-navigation/<%=account.account_id%>" style="text-decoration: none;">
+            <button class="bar-btn" style="color:brown"><-</button>
+            </a>
+        <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
+            <button class="bar-btn" style="color:brown">semua</button>
+            </a>
+            <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+            
+            <button class="bar-btn" style='color:blue'>pengumuman</button>
+        
+            </a>
 
-    </a>
-    <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
-    
-    <button class="bar-btn" style='color:blue'>pengumuman</button>
-
-    </a>
-    <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
-    <button class="bar-btn" style="color:green">orang lain</button>
-    </a>
+    </div>
     
     </div>
     <div class="context-wrapper">
@@ -151,28 +155,7 @@ background-color: rgb(231, 201, 201);
     <% }) %>
     </div>
 
-    <div class="annacoument-wrapper">
-        <% annacouments.forEach(DATA => { %>
-            <div class="annacoument-card-container">
-            <h3 class="annacoument-title"><%=DATA.username%></h3>
-            <b><%=DATA.carry.place%></b>
-            <fieldset class="annacoument-body">
-                <h3><%=DATA.annacoument_title%></h3>
-                <span><%=DATA.annacoument_value%></span>
-            </fieldset>
-               <a href="/open-annacoument/<%=account.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
-              <span >buka</span>
-            </a>
-        
-        
-            </div>
-        
-        
-        
-        <% }) %>
     
-    
-    </div>
     
 </body>
 </html>
