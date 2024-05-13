@@ -48,47 +48,8 @@
     text-align: center;
 }
 
-.qoutes-bar{
-    background-color: rgb(219, 226, 199);
-    
-}
 
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(219, 226, 199);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:rgb(173, 96, 96)
 
-}
-.coment-coloum{
-    background-color: blanchedalmond;
-}
-.coment-container-input{
-    width:400px;
-    background-color: #ffe4c4;
-    color:green;
-    border: 0px;
-}
-.detail-container{
-    text-decoration: none;
-color:brown;
-background-color: rgb(231, 201, 201);
-}
-.qoutes-delete-btn{
-    color:rgb(247, 226, 226);
-    background-color:red;
-    text-decoration: none;
-    margin-left:45px;
-
-}
-.context-wrapper{
-    height: 480px;
-    overflow-y: auto;
-}
 .add-container{
     background-color:transparentbrown;
     text-align: left;
@@ -99,6 +60,43 @@ background-color: rgb(231, 201, 201);
     background-color: #ffe4c4;
     
 }
+.context-wrapper{
+    height:500px ;
+    overflow-y:auto ;
+    background-color: rgb(155, 173, 189);
+    text-align: center;
+}
+.qoutes-card{
+    width:500px;
+    overflow-y: auto;
+    margin-left:250px;
+    margin-top:24px
+
+}
+.qoutes-info{
+    width:300px;
+    height: 30px;
+    background-color:rgb(233, 241, 210);
+    border:0px;
+}
+.qoutes-value{
+    background-color: #ffe4c4;
+    color:rgb(173, 96, 96)
+
+}
+.coment-coloum{
+    background-color: blanchedalmond;
+}
+
+.qoutes-delete-btn{
+    color:rgb(247, 226, 226);
+    background-color:red;
+    text-decoration: none;
+    margin-left:45px;
+
+}
+   
+
 .annacoument-card-container{
     background-color: whitesmoke;
     text-align: center;
@@ -133,49 +131,41 @@ background-color: rgb(231, 201, 201);
     <a href="/setting/<%=data.account_id%>" style="text-decoration: none;" ><button class="username-style"><%=data.username%></button></a>
     <a href="/input/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:aqua">tambah</button></a>
     <a href="/friends-list/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:rgb(229, 225, 234)">berteman</button></a>
-    <a href="/friends/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:rgb(229, 225, 234)">diteman</button></a>
-
-    
-</div>
-<div class="add-bar">
     <a href="/list-chat-open/<%=data.account_id%>" style="text-decoration: none;"><button  class="btn-add" style="color:rgb(85, 112, 99);">barusan</button> </a>
-    <a href="/beranda/<%=data.account_id%>"  style="text-decoration: none;" >
+    <a href="/beranda/<%=data.account_id%>"  style="text-decoration: none;">
  <button class="btn-add" style="color:rgb(51, 20, 20);">navigasi</button>
 </a>
+    
 </div>
-
 <div class="context-wrapper">
-<% paragraf.forEach(prg => { %>
-    <div class="qoutes-card-container">
-        <div class="qoutes-bar">
-            <select class="qoutes-info">
-                <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
-            </select>
-           
-        </div>
-       <div class="qoutes-value">
-        <%=prg.qoutes%>
-        
-        </div> 
- <div class="coment-coloum">
-    <a href="/open-coment/<%=prg.id_prg%>/<%=data.account_id%>" class="detail-container">lihat detail</a>
- </div>
 
-
+<% paragraf.forEach(datas => { %>
+   <div class="qoutes-card"  style="background-color: <%=datas.bgcolor%>;" >
+    <div class="qoutes-bar">
+        <a href="/qoutes-update/<%=datas.qoutes_id%>/datas.account_id%>" style="text-decoration: none;">
+            <button>update</button>
+        </a>
+        <select  class="qoutes-info">
+            <option><%=datas.username%></option>
+            <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
+            <option><%=datas.carry.location%></option>
+        </select>
+        <a href="/delete-qoutes/<%=data.qoutes_id%>" style="text-decoration: none;">
+        <button style="color:red">hapus qoutes</button>
+        </a>
     </div>
 
+    
+<h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
 
 
-<% }) %>
-
+   
 </div>
-
+<% }) %>
+</div>
 <div class="annacoument-wrapper">
     <% annacoument_user.forEach(DATA => { %>
-        <div class="annacoument-card-container">
+        <div class="annacoument-card-container" >
         <h3 class="annacoument-title"><%=DATA.username%></h3>
         <b><%=DATA.carry.place%></b>
         <fieldset class="annacoument-body">
@@ -189,7 +179,7 @@ background-color: rgb(231, 201, 201);
     
         </div>
     
-    
+       
     
     <% }) %>
 

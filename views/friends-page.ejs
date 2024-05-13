@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+        .friends-bar-container{
+            background-color: beige;
+
+        }
+        .btn-bar{
+            width:100px;
+            height: 25px;
+            border:0px;
+            background-color: lightgray;
+        }
+        .search{
+            width:199px;
+            height:25px;
+            color:brown;
+        }
+        .btn-search{
+            width:58px;
+            height: 25px;
+            border:0px;
+            background-color: blanchedalmond;
+        }
+        .orang-lain-card{
+            border:0px;
+            background-color: gainsboro;
+        }
+        .others-bar{
+            text-decoration: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="friends-bar-container">
+        <table>
+            <tr>
+                <td>
+                  <a href="/first-page/<%=userId%>" style="text-decoration: none;">
+                  <button class="btn-bar" style="color:blue"><%=username%></button>
+                  </a>
+                </td>
+                <td>
+                    <a href="/list-chat-open/<%=userId%>" style="text-decoration: none;">
+                    <button class="btn-bar">chatting</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/beranda/<%=userId%>" style="text-decoration: none;">
+                        <button class="btn-bar">navigasi</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/friends-list/<%=userId%>" style="text-decoration: none;">
+                    <button class="btn-bar"><--</button>
+                    </a>
+                </td>
+                <td>
+                    <form action="/search-friends" method="post">
+                        <input type="hidden" value="<%=userId%>" name="user_id">
+                        <input type="text" name="input_search" placeholder="cari siapa" class="search">
+                        <button type="submit" class="btn-search">cari</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="friends-navigation">
+        <% friends.forEach(element => { %>
+            <fieldset class="orang-lain-card">
+              <legend class="username-place"><%=element.target_name%></legend>
+              
+              <a href="/others-content/<%=element.target_id%>/<%=userId%>" class="others-bar" style="color:gray">konten</a>
+              <a href="/open-chat-system/<%=userId%>/<%=element.target_id%>" class="others-bar" style="color:green">buka chat</a>
+            </fieldset>     
+      
+     <%})%>
+    </div>
+</body>
+</html>

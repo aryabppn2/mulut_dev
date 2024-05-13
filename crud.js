@@ -8,9 +8,9 @@ function accoundDb_Insert(account_data,json,url){
 }
 
 
-function Insert_data(data,json,url){
-   json.push(data);
-   url.writeFileSync('mongodb/paragraf.json',JSON.stringify(json))
+function Insert_qoutesData(datas,data,url){
+   datas.push(data);
+   url.writeFileSync('mongodb/paragraf.json',JSON.stringify(datas))
 }
 
 function insert_annacoumentData(data,json,url){
@@ -56,8 +56,8 @@ function annacoumentComents(json,id){
 
 
 
-function get_paragrafAccount(input,prg_json){
-const get_filter=prg_json.filter(flt=>flt.userId.includes(input));
+function get_qoutesAccount(userId,datas){
+const get_filter=datas.filter(flt=>flt.userId.includes(userId));
 return get_filter
 }
 
@@ -92,7 +92,7 @@ function get_updateAnnacoument(json,data,data_id,url){
 
 
  function delete_qoutes(json,qoutes_id,url){
-    const filter_qoutes=json.filter(dat_id=>dat_id.id_prg !=qoutes_id);
+    const filter_qoutes=json.filter(dat_id=>dat_id.qoutes_id !=qoutes_id);
     url.writeFileSync('mongodb/paragraf.json',JSON.stringify(filter_qoutes))
 }
 function DELETE_ANNACOUMENT(json,data_id,url){
@@ -107,8 +107,8 @@ function find_coment(json,qoutes_name){
 }
 
 
-function find_othersPrg(id,json){
-    const prg_filter=json.filter(prg=>prg.userId.includes(id));
+function find_othersPrg(id,datas){
+    const prg_filter=datas.filter(prg=>prg.userId.includes(id));
     return prg_filter
 }
 
@@ -126,5 +126,5 @@ function findChat_toUser(json,address){
     return data_sent
 }
 
-module.exports={accoundDb_Insert,account,getUpdate_location,Insert_data,insert_annacoumentData,get_paragrafAccount,get_userAnnacoument,delete_qoutes,find_othersPrg,qoutes,post_coment,
+module.exports={accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_annacoumentData,get_qoutesAccount,get_userAnnacoument,delete_qoutes,find_othersPrg,qoutes,post_coment,
     find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser,get_qoutesUpdate,get_annacoumentData,get_updateAnnacoument,DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}

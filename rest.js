@@ -3,15 +3,14 @@ const http=express();
 const url=require('fs');
 const port=7000;
 //configue local file system//
-const {accoundDb_Insert,account,getUpdate_location,Insert_data,insert_annacoumentData,get_paragrafAccount,get_userAnnacoument,delete_qoutes,
-    find_othersPrg,qoutes,post_coment,find_coment,sent_chatData,
-    findChat,findChat_fromUser,findChat_toUser,get_qoutesUpdate,get_annacoumentData,get_updateAnnacoument,
-    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument,
-    account}=require('./crud.js')    
+const {accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_annacoumentData,get_qoutesAccount,get_userAnnacoument,delete_qoutes,
+    find_othersPrg,sent_chatData,
+    findChat,findChat_fromUser,findChat_toUser,get_annacoumentData,get_updateAnnacoument,
+    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}=require('./crud.js')    
 
 const {find_paragraf,get_annacouments,Find_account}=require('./machine.js')
 const {logo_design}=require('./logo.js')
-const {add_friends,add_friendList}= require('./friends-data.js')
+const {add_friendList,friends_find}= require('./friends-data.js')
 
 
 
@@ -23,7 +22,6 @@ http.use(express.urlencoded({extended:true}));
 ///databases connect//
 const get_accountDB=url.readFileSync('mongodb/account.json','utf-8');
 const get_prgDb=url.readFileSync('mongodb/paragraf.json','utf-8');
-const coment_db_url=url.readFileSync('mongodb/coment.json','utf-8');
 const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8');
 const anncoument_db=url.readFileSync('mongodb/annacoument.json','utf-8');
 const annacoumentComent_db=url.readFileSync('mongodb/annacoumentComent_db.json','utf-8')
@@ -48,12 +46,14 @@ http.get('/login-page',function(req,res){
 })
 http.get('/input/:id',function(request,respont){
     const get_id=request.params.id
-    const account_id=account(JSON.parse(get_accountDB),get_id);
+    const time=new Date()
    respont.render('input-prg',{
     logo:logo_design,
     title:'tambah qoutes ',
-    data:account_id[0],
-    time:new Date()
+    data:account(JSON.parse(get_accountDB),get_id)[0],
+    hours:time.getHours(),
+    minutes:time.getMinutes(),
+
 })
 })
 
@@ -69,7 +69,7 @@ http.get('/first-page/:id',function(request,respont){
     respont.render('first-page',{
         logo:logo_design,
         data:get_account[0],
-        paragraf:get_paragrafAccount(get_id,JSON.parse(get_prgDb)),
+        paragraf:get_qoutesAccount(get_id,JSON.parse(get_prgDb)),
         annacoument_user:get_userAnnacoument(get_id,JSON.parse(anncoument_db))
     
     
@@ -155,7 +155,7 @@ http.get('/others-content/:others_id/:user_id',function(request,respont){
         user_account:account(JSON.parse(get_accountDB),get_id.user),
         others_account:account(JSON.parse(get_accountDB),get_id.others),
         others_content:find_othersPrg(get_id.others,JSON.parse(get_prgDb)),
-        others_annacoumrnt:get_userAnnacoument(get_id.others,JSON.parse(anncoument_db))
+        others_annacoument:get_userAnnacoument(get_id.others,JSON.parse(anncoument_db))
     }
     respont.render('others-content',{
         title:'kontent  dari'+find.others_account[0].username,
@@ -165,10 +165,20 @@ http.get('/others-content/:others_id/:user_id',function(request,respont){
         othersName:find.others_account[0].username,
         othersLocation:find.others_account[0].location,
         others_content:find.others_content,
-        others_annacouments:find.others_annacoumrnt
+        others_annacouments:find.others_annacoument
     })
 })
+http.get('/friends-list/:user_id',function(input,output){
+    const user_id=input.params.user_id;
+    const user_account=account(JSON.parse(get_accountDB),user_id)
 
+    output.render('friends-page',{
+        title:'kenalan',
+        friends:user_account[0].friends_list,
+        username:user_account[0].username,
+        userId:user_account[0].account_id,
+    })
+})
 
 
 
@@ -199,79 +209,9 @@ http.get('/delete-annacoument/:user_id/:annacoument_id',function(request,respont
 })
 
 
-http.get('/open-coment/:qoutes_id/:user_id',function(request,respont){
-  const get_id={
-    user:request.params.user_id,
-    qoutes:request.params.qoutes_id
-  };
-  const find_data={
-       account:account(JSON.parse(get_accountDB),get_id.user),
-       qoutes:qoutes(JSON.parse(get_prgDb),get_id.qoutes),
-  }
-  const get_coment=find_coment(JSON.parse(coment_db_url),find_data.qoutes[0].id_prg)
-  respont.render('prg-detail-user',{
-   title:'melihat '+find_data.qoutes[0].qoutes_title,
-   link_back:`/first-page/${find_data.account[0].account_id}`,
-   qoutes_data:find_data.qoutes[0],
-   user_data:find_data.account[0],
-   post_method:'/post-coment',
-   coments:get_coment
-   
 
 
 
-  })
-})
-
-http.get('/open-coment-beranda/:qoutes_id/:user_id',function(request,respont){
-    const get_id={
-        user:request.params.user_id,
-        qoutes:request.params.qoutes_id
-      };
-      const find_data={
-           account:account(JSON.parse(get_accountDB),get_id.user),
-           qoutes:qoutes(JSON.parse(get_prgDb),get_id.qoutes)
-      }
-      const get_coment=find_coment(JSON.parse(coment_db_url),find_data.qoutes[0].id_prg)
-      respont.render('prg-detail',{
-       title:'membaca '+find_data.qoutes[0].qoutes_title,
-       link_back:`/beranda/${find_data.account[0].account_id}`,
-       qoutes_data:find_data.qoutes[0],
-       user_data:find_data.account[0],
-       post_method:`/post-coment-beranda/${get_id.user}/${get_id.qoutes}`,
-       coments:get_coment
-    
-    
-    
-    
-      })
-    })
-
-
-    http.get('/open-coment-others/:qoutes_id/:user_id/:others_id',function(request,respont){
-        const get_id={
-            user:request.params.user_id,
-            qoutes:request.params.qoutes_id,
-            others:request.params.others_id
-          };
-          const find_data={
-               account:account(JSON.parse(get_accountDB),get_id.user),
-               qoutes:qoutes(JSON.parse(get_prgDb),get_id.qoutes),
-               others_account:account(JSON.parse(get_accountDB),get_id.others)
-          }
-          const get_coment=find_coment(JSON.parse(coment_db_url),find_data.qoutes[0].id_prg)
-          respont.render('prg-detail',{
-           title:'membaca '+find_data.qoutes[0].qoutes_title,
-           link_back:`/others-content/${find_data.others_account[0].account_id}/${find_data.account[0].account_id}`,
-           qoutes_data:find_data.qoutes[0],
-           user_data:find_data.account[0],
-            post_method:`/post-coment-others/${get_id.others}/${get_id.user}/${get_id.qoutes}`,
-           coments:get_coment
-    
-        
-        
-          })
-    })
 
 http.get('/open-user-annacoument/:user_id/:annacoument_id',function(input,output){
     const get_id={
@@ -415,7 +355,7 @@ http.post('/get-account',function(request,respont){
    
     const get_id=`${requst_id.username}byId${requst_id.password}`
     const get_account=account(JSON.parse(get_accountDB),get_id)
-    const get_paragraf=get_paragrafAccount(get_id,JSON.parse(get_prgDb));
+    const get_paragraf=get_qoutesAccount(get_id,JSON.parse(get_prgDb));
     const get_annacouments=get_userAnnacoument(get_id,JSON.parse(anncoument_db))
     if(requst_id.username==""){
         respont.render('login-page',{
@@ -455,12 +395,35 @@ else{
 }
 )
 
+http.post('/post-qoutes',function(input,output){
+    
+    const get_data={
+        username:input.body.input_username,
+        userId:input.body.input_userId,
+        qoutes_value:input.body.input_qoutes,
+        qoutes_id:input.body.input_qoutes+'ById-'+input.body.input_userId,
+        carry:{
+            hours:input.body.input_hours,
+            minutes:input.body.input_minutes,
+            location:input.body.input_location
+        },
+        color:input.body.input_signColor,
+        bgcolor:input.body.input_background
+    }
+    const get_userAccount= account(JSON.parse(get_accountDB),get_data.userId)
+    Insert_qoutesData(JSON.parse(get_prgDb),get_data,url)
+    output.redirect('/first-page/'+get_userAccount[0].account_id)
+})
+
+
 http.post('/update-data/:user_id',function(request,respont){
+    const data=account(JSON.parse(get_accountDB),request.params.user_id)
     const get={
         account_id:request.params.user_id,
         username:request.body.username,
         password:request.body.password,
         location:request.body.location_update_input,
+        friends_list:data[0].friends_list
         
     }
     getUpdate_location(JSON.parse(get_accountDB),get.account_id,get,url);
@@ -468,25 +431,7 @@ http.post('/update-data/:user_id',function(request,respont){
 })
 
 
-http.post('/post-prg',function(request,response){
-    const input_prgdata={
-        userId:request.body.user_id,
-        userName:request.body.user_name,
-        carry:{
-            time:request.body.input_release_date,
-            location:request.body.input_location
-        },
-        qoutes_title:request.body.input_qoutes_title,
-        id_prg:`${request.body.input_qoutes_title}BySend${request.body.user_id}`,
-        qoutes:request.body.input_qoutes
-    }
 
-   
-   Insert_data(input_prgdata,JSON.parse(get_prgDb),url);
-
-   response.redirect('/first-page/'+input_prgdata.userId)
-    
-})
 http.post('/post-annacoument',function(request,respont){
     const data_get={
         username:request.body.input_username,
@@ -522,22 +467,9 @@ http.post('/annacoument-update',function(input,output){
 })
 
 
-http.post('/qoutes-update/:qoutes_id/:user_id',function(request,respont){
-    const get_data={
-        userId:request.params.user_id,
-        userName:request.body.username,
-        id_prg:request.params.qoutes_id,
-        qoutes_title:request.body.title,
-        qoutes:request.body.input_qoutes_update,
-        carry:{
-            time:request.body.time,
-            location:request.body.location
-        }
-    }
 
-   get_qoutesUpdate(JSON.parse(get_prgDb),get_data,get_data.id_prg,url)
-   respont.redirect('/open-coment/'+get_data.id_prg+'/'+get_data.userId) 
-})
+
+   
 
 
 
@@ -695,39 +627,39 @@ respont.redirect(`/open-chat-system/${get_id.user}/${get_id.target}`)
 })
 
 http.post('/get-friends-data',function(input,output){
-    const get={
+    const get_id={
         user:input.body.get_userId,
         target:input.body.get_targetId
     }
-    const get_data={
-        user:account(JSON.parse(get_accountDB),get.user),
-        target:account(JSON.parse(get_accountDB),get.target)
-    }
-    add_friends(
-      JSON.parse(get_accountDB),
-       get_data.user[0].account_id,
-      {
-        username:get_data.target[0].username,
-        user_id:get_data.target[0].account_id
-      },
-      url
-        
-        )
+    const target_data=account(JSON.parse(get_accountDB),get_id.target)
     add_friendList(
+       get_id.user,
       JSON.parse(get_accountDB),
-      get_data.target[0].account_id,
       {
-        username:get_data.user[0].username,
-        user_id:get_data.user[0].account_id
+        target_id:get_id.target,
+        target_name:target_data[0].username,
+        
       },
       url
       
 
         )
 
-    output.redirect('/others-content/'+get.target+'/'+get.user)
+    output.redirect('/others-content/'+get_id.target+'/'+get_id.user)
 })
-
+http.post('/search-friends',function(input,output){
+    const get={
+        user_id:input.body.user_id,
+        search_input:input.body.input_search
+    }
+    const user_account=account(JSON.parse(get_accountDB),get.user_id)
+    output.render('friends-page',{
+        title:'menampilkan :'+get.search_input,
+        friends:friends_find(get.search_input,user_account[0].friends_list),
+        username:user_account[0].username,
+        userId:user_account[0].account_id
+    })
+})
 
 http.listen(port,function(){
     console.log('berhasil terkoneksi dengan:localhost:'+port+'/mulut.com')

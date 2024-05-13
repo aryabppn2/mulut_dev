@@ -127,26 +127,8 @@ background-color: rgb(231, 201, 201);
     
     </div>
     <div class="context-wrapper">
-    <% paragraf.forEach(prg=> { %>
-      <div class="qoutes-card-container">
-        <div class="qoutes-bar">
-            <select class="qoutes-info">
-                <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
-                <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
-            </select>
-        </div>
-       <div class="qoutes-value">
-        <%=prg.qoutes%>
-        
-        </div> 
-        <div class="coment-coloum">
-            <a href="/open-coment-beranda/<%=prg.id_prg%>/<%=account.account_id%>" class="detail-container">lihat detail</a>
-         </div>
-        
-
-    </div>
+    <% paragraf.forEach(datas=> { %>
+     
 
     <% }) %>
     </div>

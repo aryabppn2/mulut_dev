@@ -1,76 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tambah paragraf</title>
-    <style>
-      *{
-        background-color:#e1e1d5
-        
-      }
-      .form-paragraf-style{
-        text-align: center;
-      }
-      .input-text-prg{
-        width:97.4%;
-        height:250px;
-        margin:19px;
-        border:0px;
-        background-color: aliceblue
-      }
-      .input-text-style{
-        width:97.4%;
-        height: 36px;
-        border:0px;
-        background-color: aliceblue;
-      
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buat qoutes</title>
+  <style>
+    .input-qoutes-wrapper{
+      background-color: bisque;
+    }
 
+    .btn-name{
+     background-color:whitesmoke;
+     color:brown;
+     height: 34px;
+     border:0px
+    }
+    .btn-bar{
+      width:100px;
+      margin-left: 130px;
+      height:34px;
+      border:0px;
+      background-color: bisque;
 
-      }
-      .input-prg-wrapper{
-        height:257px;
-        overflow-y: auto;
-
-      }
-      .btn-submid-style{
-        background-color:whitesmoke;
-        width:25%;
-        height: 34px;
-      }
-      .input-bar{
-        background-color: antiquewhite;
-        text-align: left;
-
-      }
-      .btn-bar{
-        color:green;
-        text-decoration: none;
-        background-color: antiquewhite;
-        height:45px;
-        margin:100px
-      }
-    </style>
+    }
+    .clock{
+      margin-left: 300px;
+    }
+    .input-style{
+      margin-left: 500px;
+      margin-bottom: 12px;
+    }
+    .input-qoutes{
+      width:94.3%;
+      height: 400px;
+       border:0px
+    }
+    .submid-btn{
+      width:100px;
+      height: 45px;
+      border: 0px;
+    }
+  </style>
 </head>
 <body>
-    
-    <form action="/post-prg" method="post" class="form-paragraf-style">
-      <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
-     <div class="input-bar">
-      <a href="/first-page/<%=data.account_id%>" class="btn-bar">pulang</a>
-      <a href="/input/<%=data.account_id%>" class="btn-bar" style="color:rgb(46, 67, 67)">berita</a>
-      <a href="/add-annacoument-page/<%=data.account_id%>" class="btn-bar" style="color:rgb(24, 144, 146)">pengumuman</a>
-      
-     </div>
-     <b style="color:brown; margin-left: 400px;" >silahkan tulis qoutes  mu <%=data.username%></b>
-      <input type="hidden" value="<%=data.account_id %>" name="user_id"><br>
-      <input type="hidden" value="<%=data.username %>" name="user_name"><br>
-      <input type="hidden" name="input_release_date"  value="<%=time%>"><br>
-      <input type="hidden" name="input_location"  value="<%=data.location%>"><br>
-      <input type="text" name="input_qoutes_title" class="input-text-style" placeholder="judul qoutes">
-      <input type="hidden" name="location_input" value="<%=data.location%>">
-      <textarea name="input_qoutes"  class="input-text-prg" placeholder="isi qoutes"></textarea>
-      <button type="submit" class="btn-submid-style"> posting</button>
+  <div class="input-qoutes-wrapper">
+    <a href="/first-page/<%=data.account_id%>" style="text-decoration: none;">
+    <button class="btn-name"><%=data.username%></button>
+    </a>
+    <a href="/add-annacoument-page/<%=data.account_id%>" style="text-decoration: none;">
+      <button class="btn-bar">pengumuman</button>
+    </a>
+
+    <span class="clock">
+      <b class="hours-time" ><%=hours%></b>:
+    <b class="minutes-time"><%=minutes%></b>
+    </span>
+  </div>
+  <div style="text-align: center;">
+    <div class="input-style">
+      <table>
+        <tr>
+          <th>tulisan</th>
+          <td><input type="color" id="input-sign-color" class="input-color" onclick="
+          const input={
+            color:document.getElementById('input-sign-color').value,
+            input:document.getElementById('sign'),
+            element:document.getElementById('qoutes')
+          }
+          
+          input.input.setAttribute('value',input.color)
+          input.element.style.color=input.color
+          "></td>
+        </tr>
+        <tr>
+          <td>latar belakang</td>
+          <td><input type="color" id="input-background-color" class="input-color" onclick="
+          const inputCol={
+            color:document.getElementById('input-background-color').value,
+            input:document.getElementById('background'),
+            element:document.getElementById('qoutes')
+          }
+          
+          inputCol.input.setAttribute('value',inputCol.color)
+          inputCol.element.style.backgroundColor=inputCol.color
+          "></td>
+        </tr>
+      </table>
+    </div>
+    <form action="/post-qoutes" method="post" class="">
+      <input type="hidden" value="" name="input_signColor" id="sign">
+      <input type="hidden" name="input_background" value="" id="background">
+      <input type="hidden" name="input_username" value="<%=data.username%>" >
+      <input type="hidden" name="input_userId" value="<%=data.account_id%>">
+      <input type="hidden" name="input_hours" value="<%=hours%>">
+      <input type="hidden" name="input_minutes" value="<%=minutes%>">
+      <input type="hidden" name="input_location" value="<%=data.location%>">
+       <textarea name="input_qoutes" placeholder="isi qoutes" class="input-qoutes" id="qoutes"></textarea><br>
+       <button class="submid-btn" type="submit">post</button>
     </form>
+  </div>
 </body>
 </html>
