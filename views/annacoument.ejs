@@ -5,117 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=title%></title>
     <style>
-     .bar-annacoument-input{
-       background-color:brown;
-       text-align:center
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #efc7c7;
+        }
 
-     }
-  .btn-bar{
-     height:36px;
-     background-color:brown;
-     border:14;
-     border-color:white;
-     width:100px
+        .bar-annacoument-input {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px;
+            background-color: #500303;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-bar {
+            background-color: #e07e28;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            text-decoration: none;
+        }
+
+        .paper-input-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .hub-class-btn {
+            display: block;
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .annacoument-body {
+            margin: 20px 0;
+        }
+
+        .text-input, .input-textarea, .input-mini {
+            width: 92.8%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+  .input-textarea{
+    height:149px;
   }
+        .input-mini {
+            width: calc(100% - 22px);
+        }
 
-.paper-input-container{
+        .keterangan {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-text-align:center;
-border-style:dotted;
-}
-.text-input{
-     width:1220px;
-     height:39px;
-     font:italic small-caps bold 12px/30px Georgia, serif;
-     border:0px;
+        .keterangan th, .keterangan td {
+            padding: 10px;
+            text-align: left;
+        }
 
-}
-.input-textarea{
-    width:1219px;
-    height:255px;
-    border:0px;
-}
+        .keterangan th {
+            width: 30%;
+            background-color: #f1f1f1;
+        }
 
+        .btn-submid-type {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
 
-.input-mini{
-    width:100px;
-    height:39px;
-    border:0px;
-}
+        @media (max-width: 768px) {
+            .bar-annacoument-input {
+                flex-direction: column;
+            }
 
-.btn-submid-type{
-    width:1209px;
-    height:45px;
-     background-color:green;
-     color:whitesmoke
-}
+            .btn-bar, .btn-submid-type {
+                width: 100%;
+                margin: 5px 0;
+            }
 
-
+            .text-input, .input-textarea, .input-mini {
+                width: 88.2%;
+            
+            }
+        }
     </style>
-
-
 </head>
 <body>
 <div class="bar-annacoument-input">
-<a href="/first-page/<%=user_id%>" style="text-decoration: none;">
-<button class="btn-bar" style='color:whitesmoke'><%=username%></button>
-</a>
-<a href="/input/<%=user_id%>" style="text-decoration: none;">
-<button class="btn-bar" style='color:lightgray'>qoutes</button>
-</a>
-<a href="/add-annacoument-page/<%=user_id%>" style="text-decoration: none;">
-<button class="btn-bar" style='color:aqua'>pengumuman</button>
-</a>
-
+    <a href="/first-page/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:whitesmoke'><%= username %></button>
+    </a>
+    <a href="/input/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:lightgray'>qoutes</button>
+    </a>
+    <a href="/add-annacoument-page/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:aqua'>pengumuman</button>
+    </a>
 </div>
 
 <form action="/post-annacoument" method="post" class='paper-input-container'>
-<input type="hidden" value="<%=username%>" name="input_username">
-<input type="hidden"  value="<%=user_id%>"  name="input_userId">
-<h1><%=username%></h1>
-<a href='/open-chat-system/<%=user_id%>/<%=user_id%>' style='text-decoration:none'>
-<b class='hub-class-btn'>hubungi <%=username%></b>
-</a>
-<fieldset class='annacoument-body'>
-<input type='text' name='input_title' placeholder='judul pengumuman' class='text-input'><br>
-<textarea name='input_annacoumentValue' class='input-textarea' placeholder='isi pengumuman'></textarea><br>
-<table class='keterangan'>
-<tr>
-<th class='name'> lokasi</th>
-<td>
-<input type='text' name='input_location' class='input-mini' placeholder='lokasi'>
-</td>
-</tr>
-<tr>
-<th class='name'>tanggal</th>
-<td>
-<input type='date' name='input_date' class='input-mini'>
-</td>
-</tr>
-<tr>
-<th class='name'>pukul</th>
-<td>
-<input type='time' name='input_time' class='input-mini'>
-</td>
-</tr>
-
-
-</table>
-
-</fieldset>
-
-
-<button type='submit' class='btn-submid-type'>posting</button>
-
-
-
-
-
+    <input type="hidden" value="<%= username %>" name="input_username">
+    <input type="hidden" value="<%= user_id %>" name="input_userId">
+    <h1><%= username %></h1>
+    <a href='/open-chat-system/<%= user_id %>/<%= user_id %>' style='text-decoration:none'>
+        <b class='hub-class-btn'>hubungi <%= username %></b>
+    </a>
+    <fieldset class='annacoument-body'>
+        <input type='text' name='input_title' placeholder='judul pengumuman' class='text-input'><br>
+        <textarea name='input_annacoumentValue' class='input-textarea' placeholder='isi pengumuman'></textarea><br>
+        <table class='keterangan'>
+            <tr>
+                <th class='name'>lokasi</th>
+                <td>
+                    <input type='text' name='input_location' class='input-mini' placeholder='lokasi'>
+                </td>
+            </tr>
+            <tr>
+                <th class='name'>tanggal</th>
+                <td>
+                    <input type='date' name='input_date' class='input-mini'>
+                </td>
+            </tr>
+            <tr>
+                <th class='name'>pukul</th>
+                <td>
+                    <input type='time' name='input_time' class='input-mini'>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <button type='submit' class='btn-submid-type'>posting</button>
 </form>
-
-
-
-
-
 </body>
 </html>

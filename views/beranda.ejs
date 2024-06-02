@@ -5,97 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beranda</title>
     <style>
-      .prg-card{
-        text-align: center;
-      }
-      .search-wrapper{
-         background-color: antiquewhite;
-        text-align: center;
-
-      }
-      .input-text-search{
-         width:67.3%;
-         height:36px;
-         color:brown 
-      }
-      .btn-search-type{
-         width:45px;
-         height:40px;
-         margin-left: 0px;
-      }
-      .bar-option{
-         background-color: rgb(248, 244, 238);
-         text-align:left;
-         
-      }
-      .bar-btn{
-         margin-left:0px;
-         text-decoration: none;
-         margin-left:20px;
-         margin-top:5px;
-         border:0px;
-         width:auto;
-         height: 29px;
-         border-radius: 9px;
-         border-color:rgb(147, 144, 54);
-         background-color:rgb(220, 198, 171) ;
-      }
-      .qoutes-card-container{
-    background-color: #dfdad5;
-    margin: 12px;
-    text-align: center;
-}
-
-.qoutes-bar{
-    background-color: rgb(219, 226, 199);
-    
-}
-
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(219, 226, 199);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:brown
-
-}
-.coment-coloum{
-    background-color: rgb(239, 232, 222);
-    
-}
-.coment-container-input{
-    width:400px;
-    background-color: #ffe4c4;
-    color:green;
-    border: 0px;
-}
-.coment-list{
-    width:400px;
-    background-color: blanchedalmond;
-}
-.detail-container{
-    text-decoration: none;
-color:brown;
-background-color: rgb(231, 201, 201);
-}
-  
-     .username-value{
-        color:brown;
-        margin-right:12px;
-     }
-     .annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
-
-    
-}
-.annacoument-body{
-    height: 100px;
-    overflow-y: auto;
-}
+      body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .search-wrapper {
+            background-color: #e7b690;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .username-value {
+            margin-right: 10px;
+        }
+        .input-text-search {
+            flex: 1;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-search-type {
+            height: 30px;
+            width: 30px;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .bar-option {
+            background-color: #f8f8f8;
+            padding: 10px;
+            display: flex;
+            overflow-x: auto;
+        }
+        .bar-btn {
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .context-wrapper {
+            padding: 10px;
+        }
+        .qoutes-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        .qoutes-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .qoutes-card h3 {
+            margin-top: 0;
+        }
+        .annacoument-wrapper {
+            padding: 10px;
+        }
+        .annacoument-card-container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        .annacoument-card-container a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .annacoument-title {
+            margin-top: 0;
+        }
+        .annacoument-body {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -128,7 +119,20 @@ background-color: rgb(231, 201, 201);
     </div>
     <div class="context-wrapper">
     <% paragraf.forEach(datas=> { %>
-     
+        <div class="qoutes-card" style="background-color:<%=datas.bgcolor%>;">
+            <div>
+                <a href="/others-content/<%=datas.userId%>/<%=account.account_id%>" style="text-decoration: none;">
+                 <b style="color:<%=datas.color%>"><%=datas.username%></b>
+                </a>
+                <select style="background-color: <%=datas.color%>;">
+                <option style="color:<%=datas.bgcolor%>"><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
+                <option  style="color:<%=datas.bgcolor%>"><%=datas.carry.location%></option>
+                </select>
+            </div>
+            <a href="/open-qoutes/<%=account.account_id%>/<%=datas.qoutes_id%>" style="text-decoration: none;">
+            <h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
+            </a>           
+        </div>
 
     <% }) %>
     </div>

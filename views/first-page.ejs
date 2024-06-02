@@ -3,191 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .bar-private-container {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ecb2b2;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-bar, .username-style {
+            background-color: burlywood;
+            color: brown;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-bar {
+            background-color: #bb5c40;
+            color: white;
+        }
+
+        .btn-add {
+            background-color: #d6a66f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .body-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 480px;
+            overflow-y: auto;
+        }
+
+        .context-wrapper, .annacoument-wrapper {
+            margin-bottom: 20px;
+            height: 490px;
+            overflow-y: auto;
+        }
+
+        .qoutes-card, .annacoument-card-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .qoutes-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qoutes-info {
+            margin-left: 10px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .annacoument-title {
+            margin: 0;
+        }
+
+        .nav-bellow {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (min-width: 768px) {
+            .body-nav {
+                flex-direction: row;
+            }
+
+            .context-wrapper, .annacoument-wrapper {
+                flex: 1;
+                margin: 0 10px;
+            }
+
+            .bar-private-container {
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+
+            .btn-bar, .username-style {
+                margin: 0 5px;
+            }
+
+            .nav-bellow {
+                justify-content: space-around;
+            }
+        }
+    </style>
 </head>
-
-<style>
-    body{
-        background-color: #dfdad5;
-    }
-   .username-style{
-    height:38px;
-    width:100px;
-    text-decoration: none;
-    border:0px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   }
-   .bar-private-container{
-    background-color: rgb(202, 166, 166);
-   }
-   .identity-private{
-    width:245px;
-    height: 36px;
-    background-color: rgb(201, 149, 149);
-    color:bisque;
-    border:0px;
-   }
-.btn-bar{
-    text-decoration: none;
-    width:150px;
-    height:36px;
-    background-color: rgb(202, 166, 166);
-    border:0px;
-    margin-left:6px;
-    
-}
-.prg-card{
-    text-align: center;
-    background-color: burlywood;
-    border:0px
-}
-
-.qoutes-card-container{
-    background-color: #dfdad5;
-    margin: 12px;
-    text-align: center;
-}
-
-
-
-.add-container{
-    background-color:transparentbrown;
-    text-align: left;
-}
-.btn-humanity{
-    width:200px;
-    height:39px;
-    background-color: #ffe4c4;
-    
-}
-.context-wrapper{
-    height:500px ;
-    overflow-y:auto ;
-    background-color: rgb(155, 173, 189);
-    text-align: center;
-}
-.qoutes-card{
-    width:500px;
-    overflow-y: auto;
-    margin-left:250px;
-    margin-top:24px
-
-}
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(233, 241, 210);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:rgb(173, 96, 96)
-
-}
-.coment-coloum{
-    background-color: blanchedalmond;
-}
-
-.qoutes-delete-btn{
-    color:rgb(247, 226, 226);
-    background-color:red;
-    text-decoration: none;
-    margin-left:45px;
-
-}
-   
-
-.annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
-
-    
-}
-.annacoument-body{
-    height:100px;
-    overflow-y: auto;
-}
-.btn-add{
-    margin-left:0px;
-         text-decoration: none;
-         margin-left:20px;
-         margin-top: 5px;
-         border:0px;
-         width:auto;
-         height: 30px;
-         border-radius: 9px;
-         border-color:rgb(147, 144, 54);
-         background-color:rgb(241, 232, 221) ;
-}
-</style>
-
-
 <body>
-   
-    
-    <b style="color:red;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(209, 203, 197);">mulut</b>
-
-<div class="bar-private-container">
-    <a href="/setting/<%=data.account_id%>" style="text-decoration: none;" ><button class="username-style"><%=data.username%></button></a>
-    <a href="/input/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:aqua">tambah</button></a>
-    <a href="/friends-list/<%=data.account_id%>"  style="text-decoration: none;"><button  class="btn-bar" style="color:rgb(229, 225, 234)">berteman</button></a>
-    <a href="/list-chat-open/<%=data.account_id%>" style="text-decoration: none;"><button  class="btn-add" style="color:rgb(85, 112, 99);">barusan</button> </a>
-    <a href="/beranda/<%=data.account_id%>"  style="text-decoration: none;">
- <button class="btn-add" style="color:rgb(51, 20, 20);">navigasi</button>
-</a>
-    
-</div>
-<div class="context-wrapper">
-
-<% paragraf.forEach(datas => { %>
-   <div class="qoutes-card"  style="background-color: <%=datas.bgcolor%>;" >
-    <div class="qoutes-bar">
-        <a href="/qoutes-update/<%=datas.qoutes_id%>/datas.account_id%>" style="text-decoration: none;">
-            <button>update</button>
-        </a>
-        <select  class="qoutes-info">
-            <option><%=datas.username%></option>
-            <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
-            <option><%=datas.carry.location%></option>
-        </select>
-        <a href="/delete-qoutes/<%=data.qoutes_id%>" style="text-decoration: none;">
-        <button style="color:red">hapus qoutes</button>
-        </a>
+    <div class="bar-private-container">
+        <a href="/setting/<%=data.account_id%>"><button class="username-style" style="background-color: burlywood;color:brown"><%=data.username%></button></a>
+        <a href="/friends/<%=data.account_id%>"><button class="btn-bar">Dikenal</button></a>
+        <a href="/friends-list/<%=data.account_id%>"><button class="btn-bar">Kenalan</button></a>
+        <a href="/list-chat-open/<%=data.account_id%>"><button class="btn-bar">Barusan</button></a>
+        <a href="/beranda/<%=data.account_id%>"><button class="btn-bar">Navigasi</button></a>
     </div>
 
-    
-<h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
-
-
-   
-</div>
-<% }) %>
-</div>
-<div class="annacoument-wrapper">
-    <% annacoument_user.forEach(DATA => { %>
-        <div class="annacoument-card-container" >
-        <h3 class="annacoument-title"><%=DATA.username%></h3>
-        <b><%=DATA.carry.place%></b>
-        <fieldset class="annacoument-body">
-            <h3><%=DATA.annacoument_title%></h3>
-            <span><%=DATA.annacoument_value%></span>
-        </fieldset>
-           <a href="/open-user-annacoument/<%=data.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
-          <span >buka</span>
-        </a>
-    
-    
+    <div class="body-nav">
+        <div class="context-wrapper">
+            <% paragraf.forEach(datas => { %>
+                <div class="qoutes-card" style="background-color: <%=datas.bgcolor%>;">
+                    <div class="qoutes-head">
+                        <b><%=datas.username%></b>
+                        <select class="qoutes-info">
+                            <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
+                            <option><%=datas.carry.location%></option>
+                        </select>
+                        <a href="/delete-qoutes/<%=datas.qoutes_id%>/<%=data.account_id%>">
+                            <button class="btn-delete">Hapus</button>
+                        </a>
+                    </div>
+                    <a href="/get-update-qoutes/<%=datas.qoutes_id%>/<%=data.account_id%>" style="text-decoration: none;">
+                        <h1 style="color: <%=datas.color%>"><%=datas.qoutes_value%></h1>
+                    </a>
+                </div>
+            <% }) %>
         </div>
-    
-       
-    
-    <% }) %>
-
-
-</div>
-
-
-
-
+        <div class="annacoument-wrapper">
+            <% annacoument_user.forEach(DATA => { %>
+                <div class="annacoument-card-container">
+                    <h3 class="annacoument-title"><%=DATA.username%></h3>
+                    <b><%=DATA.carry.place%></b>
+                    <div class="annacoument-body">
+                        <h3><%=DATA.annacoument_title%></h3>
+                        <span><%=DATA.annacoument_value%></span>
+                    </div>
+                    <a href="/open-user-annacoument/<%=data.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
+                        <button style="border:0px; background-color: #d6a66f;color:#ddd" >Buka</button>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <div class="nav-bellow">
+        <a href="/input/<%=data.account_id%>"><button class="btn-add">Quotes</button></a>
+        <a href="/add-annacoument-page/<%=data.account_id%>"><button class="btn-add">Pengumuman</button></a>
+    </div>
 </body>
 </html>

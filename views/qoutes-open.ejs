@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+        .qoutes-page-bar{
+            background-color: antiquewhite;
+        }
+        .btn-username{
+            width:100px;
+            height: 34px;
+            background-color: aliceblue;
+            color:blue;
+            margin-right: 20px;
+        }
+        .qoutes-info{
+            margin-left:0px;
+            width:400px;
+            height: 34px;
+            background-color: rgb(216, 231, 185);
+            color:brown;
+        }
+        .btn-bar{
+            width:100px;
+            height: 34px;
+            margin-left: 0px;
+            border:0pc;
+            background-color: antiquewhite;
+            
+        }
+        .text-qoutes{
+            width:1260px;
+            height: 400px;
+        
+        }
+        .coloum-coment{
+            background-color: #f1efd6;
+            text-align: center;
+            
+        }
+        .input-coment{
+            width:400px;
+            height: 34px;
+        }
+        .post-coment{
+            width:90px;
+            height: 34px;
+        }
+        .coment-value{
+            height: 300px;
+            overflow-y: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="qoutes-page-bar">
+      <a href="/first-page/<%=user_id%>" style="text-decoration: none;">
+      <button class="btn-username"><%=username%></button>
+    </a>
+   <a href='<%=back_method%>' style="text-decoration: none;">
+   <button class="btn-bar" style="color:brown">kembali</button>
+  </a>
+  <a href="/open-chat-system/<%=user_id%>/<%=qoutes.userId%>" style="text-decoration: none;">
+  <button class="btn-bar" style="color:rgb(75, 97, 97)">lebih lengkap</button>
+</a>
+
+  <select class="qoutes-info">
+    <option> judul:<%=qoutes.title%></option>
+    <option >pengarang:<%=qoutes.username%></option>
+    <option >waktu :<%=qoutes.carry.hours%>:<%=qoutes.carry.minutes%></option>
+    <option >lokasi:<%=qoutes.carry.location%></option>
+  </select>
+    </div>
+    <div>
+        <textarea class="text-qoutes">
+            <%=qoutes.qoutes_value%>
+        </textarea>
+    </div>
+    <div class="coloum-coment">
+        <form action="/post-coment" class="coment-input">
+            <input type="hidden" value="<%=qoutes.qoutes_id%>" name="qoutes_id">
+             <input type="hidden" value="<%=username%>" name="username">
+             <input type="hidden" name="qoutesId_input" value="<%=qoutes.qoutes_value%>">
+             <input type="hidden" name="targetId_input" value="<%=qoutes.userId%>">
+
+    <input type="text" name="input_comentValue" class="input-coment" placeholder="komentar ">
+    <button type="submit" class="post-coment">kirim</button>
+    </form>
+    <div class="coment-value">
+      <div class="coment-card">
+        
+      </div>
+        </form>
+    </div>
+
+</body>
+</html>

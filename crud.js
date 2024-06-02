@@ -17,16 +17,7 @@ function insert_annacoumentData(data,json,url){
     json.push(data);
     url.writeFileSync('mongodb/annacoument.json',JSON.stringify(json))
 }
-function post_comentAnnacoument(data,json,url){
-    json.push(data);
-    url.writeFileSync('mongodb/annacoumentComent_db.json',JSON.stringify(json))
-}
 
-function post_coment(data,json,url){
-    json.push(data);
-    url.writeFileSync('mongodb/coment.json',JSON.stringify(json))
-
-}
 
 function sent_chatData(json,data,url){
     json.push(data);
@@ -49,11 +40,12 @@ function get_annacoumentData(json,id){
     const annacoument_select=json.filter(data=>data.annacoument_id.includes(id));
     return annacoument_select
 }
-function annacoumentComents(json,id){
-    const annacoument_select=json.filter(datas=>datas.annacoument_id.includes(id));
-    return annacoument_select
-}
 
+function qoutes(datas,id){
+    const get=datas.filter(data=>data.qoutes_id.includes(id))[0]
+
+    return get
+}
 
 
 function get_qoutesAccount(userId,datas){
@@ -101,10 +93,7 @@ function DELETE_ANNACOUMENT(json,data_id,url){
 }
 
 
-function find_coment(json,qoutes_name){
-    const get_comentFilter=json.filter(datas=>datas.qoutes_id.includes(qoutes_name))
-    return get_comentFilter
-}
+
 
 
 function find_othersPrg(id,datas){
@@ -126,5 +115,5 @@ function findChat_toUser(json,address){
     return data_sent
 }
 
-module.exports={accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_annacoumentData,get_qoutesAccount,get_userAnnacoument,delete_qoutes,find_othersPrg,qoutes,post_coment,
-    find_coment,sent_chatData,findChat,findChat_toUser,findChat_fromUser,get_qoutesUpdate,get_annacoumentData,get_updateAnnacoument,DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}
+module.exports={accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_annacoumentData,get_qoutesAccount,get_userAnnacoument,delete_qoutes,find_othersPrg,qoutes,
+    sent_chatData,findChat,findChat_toUser,findChat_fromUser,get_qoutesUpdate,get_annacoumentData,qoutes,get_updateAnnacoument,DELETE_ANNACOUMENT}

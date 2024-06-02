@@ -1,5 +1,5 @@
 function find_paragraf(get,json){
-    const data_filter=json.filter(datas=>datas.qoutes_title.includes(get));
+    const data_filter=json.filter(datas=>datas.qoutes_value.includes(get));
     
     return data_filter
 }

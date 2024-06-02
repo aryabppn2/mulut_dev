@@ -6,7 +6,7 @@
     <title><%=title%></title>
     <style>
         .friends-bar-container{
-            background-color: beige;
+            background-color: rgb(222, 222, 160);
 
         }
         .btn-bar{
@@ -73,10 +73,10 @@
     <div class="friends-navigation">
         <% friends.forEach(element => { %>
             <fieldset class="orang-lain-card">
-              <legend class="username-place"><%=element.target_name%></legend>
+              <legend class="username-place"><%=element.user_name%></legend>
               
-              <a href="/others-content/<%=element.target_id%>/<%=userId%>" class="others-bar" style="color:gray">konten</a>
-              <a href="/open-chat-system/<%=userId%>/<%=element.target_id%>" class="others-bar" style="color:green">buka chat</a>
+              <a href="/others-content/<%=element.user_id%>/<%=userId%>" class="others-bar" style="color:gray">konten</a>
+              <a href="/open-chat-system/<%=userId%>/<%=element.user_id%>" class="others-bar" style="color:green">buka chat</a>
             </fieldset>     
       
      <%})%>

@@ -5,13 +5,13 @@ const port=7000;
 //configue local file system//
 const {accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_annacoumentData,get_qoutesAccount,get_userAnnacoument,delete_qoutes,
     find_othersPrg,sent_chatData,
-    findChat,findChat_fromUser,findChat_toUser,get_annacoumentData,get_updateAnnacoument,
-    DELETE_ANNACOUMENT,annacoumentComents,post_comentAnnacoument}=require('./crud.js')    
+    findChat,findChat_fromUser,findChat_toUser,get_annacoumentData,qoutes,get_updateAnnacoument,
+    DELETE_ANNACOUMENT}=require('./crud.js')    
 
 const {find_paragraf,get_annacouments,Find_account}=require('./machine.js')
 const {logo_design}=require('./logo.js')
 const {add_friendList,friends_find}= require('./friends-data.js')
-
+const {post_comentAnnacoument,ann_coment}=require('./coment-data.js')
 
 
 
@@ -24,7 +24,6 @@ const get_accountDB=url.readFileSync('mongodb/account.json','utf-8');
 const get_prgDb=url.readFileSync('mongodb/paragraf.json','utf-8');
 const chatDB_url=url.readFileSync('mongodb/chat_db.json','utf-8');
 const anncoument_db=url.readFileSync('mongodb/annacoument.json','utf-8');
-const annacoumentComent_db=url.readFileSync('mongodb/annacoumentComent_db.json','utf-8')
 
 //get//
 http.get('/mulut.com',function(req,res){
@@ -51,6 +50,7 @@ http.get('/input/:id',function(request,respont){
     logo:logo_design,
     title:'tambah qoutes ',
     data:account(JSON.parse(get_accountDB),get_id)[0],
+
     hours:time.getHours(),
     minutes:time.getMinutes(),
 
@@ -179,7 +179,17 @@ http.get('/friends-list/:user_id',function(input,output){
         userId:user_account[0].account_id,
     })
 })
+http.get('/friends/:user_id',function(input,output){
+    const user_id=input.params.user_id;
+    const user_account=account(JSON.parse(get_accountDB),user_id)
 
+    output.render('friends-page',{
+        title:'kenalan',
+        friends:user_account[0].friends,
+        username:user_account[0].username,
+        userId:user_account[0].account_id,
+    })
+})
 
 
 
@@ -229,8 +239,7 @@ http.get('/open-user-annacoument/:user_id/:annacoument_id',function(input,output
         user_id:get_data.user[0].account_id,
         username:get_data.user[0].username,
         annacoument:get_data.annacoument[0],
-        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument)
-
+        coments:ann_coment(get_id.annacoument,JSON.parse(anncoument_db))
     })
     
 })
@@ -250,8 +259,8 @@ http.get('/open-annacoument/:user_id/:annacoument_id',function(request,respont){
         user_id:get_id.user,
         username:get_data.user[0].username,
         annacoument:get_data.annacoument[0],
-        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument),
-        link_back:'beranda/'+get_id.user
+        link_back:'beranda/'+get_id.user,
+        coments:ann_coment(get_id.annacoument,JSON.parse(anncoument_db))
 
     })
 })
@@ -273,8 +282,8 @@ http.get('/open-annacoument/:user_id/:target_id/:annacoument_id',function(input,
         user_id:get_id.user,
         username:get_data.user[0].username,
         annacoument:get_data.annacoument[0],
-        coments:annacoumentComents(JSON.parse(annacoumentComent_db),get_id.annacoument),
-        link_back:'others-content/'+get_id.target+'/'+get_id.user
+        link_back:'others-content/'+get_id.target+'/'+get_id.user,
+        coments:ann_coment(get_id.annacoument,JSON.parse(anncoument_db))
 
     })
 })
@@ -325,13 +334,7 @@ http.get('/list-chat-open/:user_ip',function(request,respont){
 
    })
 })
-http.get('/friends-list/:user_id',function(input,output){
-    const id=input.params.user_id;
-    const data=account=account(JSON.parse(get_accountDB),id)[0];
-    respont.render('orang-lain-views',{
-        title:'berteman'
-    })
-})
+
 
 //post//
 
@@ -341,6 +344,8 @@ http.post('/sent-account-data',function(request,respont){
         password:request.body.password_input,
         location:request.body.input_location,
         account_id:`${request.body.username_input}byId${request.body.password_input}`,
+        friends:[],
+        friends_list:[]
        
     }
     accoundDb_Insert(data_input,JSON.parse(get_accountDB),url);
@@ -443,7 +448,8 @@ http.post('/post-annacoument',function(request,respont){
             time:request.body.input_time,
              place:request.body.input_location,
         },
-        annacoument_value:request.body.input_annacoumentValue
+        annacoument_value:request.body.input_annacoumentValue,
+        coments:[]
     }
     insert_annacoumentData(data_get,JSON.parse(anncoument_db),url)
     respont.redirect('/first-page/'+data_get.user_id)
@@ -460,7 +466,8 @@ http.post('/annacoument-update',function(input,output){
             date:input.body.new_date,
             time:input.body.new_time,
             place:input.body.new_place
-        }
+        },
+        coments:[]
     }
     get_updateAnnacoument(JSON.parse(anncoument_db),get_data,get_data.annacoument_id,url)
     output.redirect('/open-user-annacoument/'+get_data.user_id+'/'+get_data.annacoument_id)
@@ -542,66 +549,30 @@ http.post('/search-annacouments/:user_id',function(input,output){
 
 // post coment//
 
-http.post('/post-coment',function(request,respont){
-    const coment_input={
-       username:request.body.username_input,
-       userId:request.body.userId_input,
-       qoutes_id:request.body.qoutesId_input,
-       coment_Value:request.body.input_coment
 
-    }
-    post_coment(coment_input,JSON.parse(coment_db_url),url)
-   
-
-    respont.redirect(`/open-coment/${coment_input.qoutes_id}/${coment_input.userId}`)
-  
-
-})
-
-http.post('/post-coment-beranda/:user_id/:qoutes_id',function(request,respont){
-    const coment_input={
-        username:request.body.username_input,
-        userId:request.body.userId_input,
-        qoutes_id:request.body.qoutesId_input,
-        coment_Value:request.body.input_coment
- 
-     }
-     post_coment(coment_input,JSON.parse(coment_db_url),url)    
- respont.redirect('/open-coment-beranda/'+coment_input.qoutes_id+'/'+coment_input.userId)
-    
-})
-
-http.post('/post-coment-others/:others_id/:user_id/:qoutes_id',function(request,respont){
-    const coment_input={
-        username:request.body.username_input,
-        userId:request.body.userId_input,
-        qoutes_id:request.body.qoutesId_input,
-        coment_Value:request.body.input_coment
- 
-     }
-     post_coment(coment_input,JSON.parse(coment_db_url),url)
-     respont.redirect('/open-coment-others/'+request.params.qoutes_id+'/'+request.params.user_id+'/'+request.params.others_id)
-   
-})
 http.post('/post-annacoument-coment',function(request,respont){
-    const input_coment={
+    const id={
+        user:request.body.userId_input,
+        ann:request.body.annacoumentId_input
+    }
+    const data={
         username:request.body.username_input,
-        userId:request.body.userId_input,
-        annacoument_id:request.body.annacoumentId_input,
         coment_Value:request.body.input_coment
     }
-    post_comentAnnacoument(input_coment,JSON.parse(annacoumentComent_db),url);
-    respont.redirect('/open-user-annacoument/'+input_coment.userId+'/'+input_coment.annacoument_id)
+    post_comentAnnacoument(id.ann,JSON.parse(anncoument_db),data,url);
+    respont.redirect('/open-user-annacoument/'+id.user+'/'+id.ann)
 })
 http.post('/post-annacoument-coment-beranda',function(request,respont){
-    const get_data={
+    const id={
+        user:request.body.userId_input,
+        ann:request.body.annacoumentId_input
+    }
+    const data={
         username:request.body.username_input,
-        userId:request.body.userId_input,
-        annacoument_id:request.body.annacoumentId_input,
         coment_Value:request.body.input_coment
     }
-   post_comentAnnacoument(get_data,JSON.parse(annacoumentComent_db),url)
-   respont.redirect('/open-annacoument/'+get_data.userId+'/'+get_data.annacoument_id)
+    post_comentAnnacoument(id.ann,JSON.parse(anncoument_db),data,url);
+   respont.redirect('/open-annacoument/'+id.user+'/'+id.ann)
 })
 
 http.post('/chat-SentAt/:user_id/:target_id',function(request,respont){
@@ -631,21 +602,32 @@ http.post('/get-friends-data',function(input,output){
         user:input.body.get_userId,
         target:input.body.get_targetId
     }
-    const target_data=account(JSON.parse(get_accountDB),get_id.target)
+    const  data={
+        user:account(JSON.parse(get_accountDB),get_id.user),
+        target:account(JSON.parse(get_accountDB),get_id.target)
+    }
     add_friendList(
-       get_id.user,
-      JSON.parse(get_accountDB),
-      {
-        target_id:get_id.target,
-        target_name:target_data[0].username,
-        
-      },
-      url
-      
+    JSON.parse(get_accountDB),
+    {
+        userId:get_id.user,
+        targetData:{
+            user_id:data.target[0].account_id,
+            user_name:data.target[0].username
+        }
+    },
+    {
+        target:get_id.target,
+        user_data:{
+            user_id:data.user[0].account_id,
+            user_name:data.user[0].username
+        }
+    },
+    url
 
-        )
 
+    )
     output.redirect('/others-content/'+get_id.target+'/'+get_id.user)
+
 })
 http.post('/search-friends',function(input,output){
     const get={

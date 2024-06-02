@@ -31,10 +31,13 @@
          margin:100px;
          text-decoration: none;
       }
-      .prg-card{
-         background-color:burlywood;
-         border:0px
-      }
+      .qoutes-card{
+    width:500px;
+    overflow-y: auto;
+    margin-left:250px;
+    margin-top:24px
+
+}
       .qoutes-card-container{
     background-color: #dfdad5;
     
@@ -91,22 +94,24 @@
     <a href="/mulut.com" class="bar-btn" style="color:brown">beranda</a>
     </div>
    
-    <% paragraf.forEach(prg=> { %>
-      <div class="qoutes-card-container">
-         <div class="qoutes-bar">
-             <select class="qoutes-info">
-                 <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
-                 <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
-                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
-                 <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
-             </select>
-         </div>
-        <div class="qoutes-value">
-         <%=prg.qoutes%>
-         
+    <% paragraf.forEach(datas=> { %>
+        <div class="qoutes-card"  style="background-color: <%=datas.bgcolor%>;" >
+            <div class="qoutes-bar">
+                
+                <select  class="qoutes-info">
+                    <option><%=datas.username%></option>
+                    <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
+                    <option><%=datas.carry.location%></option>
+                </select>
+                
+            </div>
         
-
-
+            
+        <h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
+        
+        
+           
+        </div>
     <% }) %>
     </div>
     <div class="annacoument-wrapper">

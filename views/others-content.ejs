@@ -27,10 +27,12 @@
       .others-bar{
          background-color:lightgray;
       }
-      .qoutes-card-container{
-    background-color: #dfdad5;
-    margin: 12px;
-    text-align: center;
+      .qoutes-card{
+    width:500px;
+    overflow-y: auto;
+    margin-left:250px;
+    margin-top:24px
+
 }
 
 .qoutes-bar{
@@ -162,30 +164,27 @@ background-color: rgb(231, 201, 201);
     <input type="hidden" name="get_targetId" value="<%=others%>">
     <button class="get-friends-btn" type="submit">kenalan</button>
 </form>
-<form action="/delete-friends-data" method="post"  id="post-id">
-    <input type="hidden" name="get_userId" value="<%=user%>">
-    <input type="hidden" name="get_targetId" value="<%=others%>">
-    <button class="delete-friends-btn">tinggalkan</button>
-</form>
+
 <div class="context-wrapper">
-<% others_content.forEach(prg => { %>
-   <div class="qoutes-card-container">
-      <div class="qoutes-bar">
-          <select class="qoutes-info">
-              <option style="color:rgb(106, 131, 72);background-color:whitesmoke;"><%=prg.qoutes_title%></option>
-              <option style="color:green;background-color:whitesmoke;"><%=prg.userName%></option>
-              <option style="color:green;background-color:whitesmoke;"><%=prg.carry.time%></option>
-              <option style="color:green;background-color:whitesmoke;"><%=prg.carry.location%></option>
-          </select>
-      </div>
-      <div class="qoutes-value">
-        <%=prg.qoutes%>
+<% others_content.forEach(datas=> { %>
+    <div class="qoutes-card"  style="background-color: <%=datas.bgcolor%>;" >
+        <div class="qoutes-bar">
+            
+            <select  class="qoutes-info">
+                <option><%=datas.username%></option>
+                <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
+                <option><%=datas.carry.location%></option>
+            </select>
+            
+        </div>
+    
         
-        </div> 
-        <div class="coment-coloum">
-            <a href="/open-coment-others/<%=prg.id_prg%>/<%=user%>/<%=others%>" class="detail-container">lihat detail</a>
-         </div>
-  </div>
+    <h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
+    
+    
+       
+    </div>
+
 <% }) %>
 
 </div>
