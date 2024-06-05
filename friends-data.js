@@ -12,4 +12,12 @@ function friends_find(name,datas){
     return friends
 }
 
-module.exports={add_friendList,friends_find}
+
+
+function Myfriends_find(name,datas){
+    const get=datas.filter(data=>data.user_name.includes(name));
+
+    return get
+}
+
+module.exports={add_friendList,friends_find,Myfriends_find}

@@ -5,41 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=title%></title>
     <style>
+      body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #decece;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-bar {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            background-color: #f1baba;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .btn-bar-container {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-bar-container:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .correct-way-sign {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .login-style-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width:400px;
+            height: 300px;
+        }
+
+        .login-style-form b {
+            margin-bottom: 20px;
+            font-size: 2em;
+            padding: 5px 10px;
+            background-color: rgb(209, 203, 197);
+            color: red;
+        }
+
+        .login-style-form h1 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .login-sign {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .input-text-style {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submid-btn-style {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submid-btn-style:hover {
+            background-color: #45a049;
+        }
      
-      .login-style-form{
-        text-align: center;
-        background-color:rgb(232, 232, 221);
-        
-      }
-.login-sign{
- text-decoration: none;
-  color:brown;
-  background-color: azure;
-}
-      .input-text-style{
-         width:67%;
-         background-color:whitesmoke;
-         color:brown;
-         margin: 12px;
-         height:35px;
-         border:0px
-
-      }
-      .submid-btn-style{
-        background-color:whitesmoke;
-        width:25%;
-        height: 34px;
-        border:0px
-      
-      }
-      .login-bar{
-          background-color: azure;
-
-      }
-      .btn-bar-container{
-        margin-left: 160px;
-        text-decoration: none;;
-      }
     </style>
 </head>
 <body>

@@ -5,135 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=title%></title>
     <style>
-      body{
-         background-color: aliceblue;
-      }
-      .prg-card{
-         text-align: center;
-         background-color: burlywood;
+      body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-      }
-      .bar-btn{
-         width:100px;
-         height: 34px;
-         margin-left: 100px;
-         text-decoration: none;
-         background-color:lightgray;
-         border:7px;
+        .others-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
+        .othersname,
+        .bar-btn {
+            background-color: transparent;
+            border: 2px solid #af8e4c;
+            color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
+        .othersname:hover,
+        .bar-btn:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
 
-      }
-      .others-bar{
-         background-color:lightgray;
-      }
-      .qoutes-card{
-    width:500px;
-    overflow-y: auto;
-    margin-left:250px;
-    margin-top:24px
+        .bar-info {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+        }
 
-}
+        .get-friends-btn {
+            display: block;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 20px auto;
+            transition: background-color 0.3s;
+        }
 
-.qoutes-bar{
-    background-color:lightgray;
-    color:aliceblue;
-    
-}
-.bar-info{
-    height: 34px;
-    width:344px;
-    border:0px;
-    background-color: beige;
-    margin-left: 100px;
-}
+        .get-friends-btn:hover {
+            background-color: #e68900;
+        }
 
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(219, 226, 199);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:brown
+        .context-wrapper {
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-}
-.coment-coloum{
-    background-color: blanchedalmond;
-}
-.coment-container-input{
-    width:400px;
-    background-color: #ffe4c4;
-    color:green;
-    border: 0px;
-}
-.coment-list{
-    width:400px;
-    background-color: blanchedalmond;
-}
-.detail-container{
-    text-decoration: none;
-color:brown;
-background-color: rgb(231, 201, 201);
-}
-.othersname{
-    height:38px;
-    background-color: #ffe4c4;
-    text-decoration: none;
-    border-color:brown;
-    border:10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        .qoutes-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width:98.7%;
+            box-sizing: border-box;
+        }
 
+        .qoutes-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
+        .qoutes-info {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
 
-}
-.bar-option{
-    margin-left: 103px;
-    height: 29px;
-    background-color: antiquewhite;
-    border-radius: 7px;
-}
-.context-wrapper{
-    height: 480px;
-    overflow-y: auto;
-}
-.add-container{
-    background-color:transparentbrown;
-    text-align: left;
-}
-.btn-humanity{
-    width:200px;
-    height:39px;
-    background-color: #ffe4c4;
-    
-}
- .annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
+        .annacoument-wrapper {
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    
-}
-.annacoument-body{
-    height: 100px;
-    overflow-y: auto;
-}
-.get-friends-btn{
-    width:90px;
-    height:34px;
-    margin: 12px;
-    border-radius: 12px;
-    background-color: aqua;
-    color:brown
-}
-.delete-friends-btn{
-    width:90px;
-    height:34px;
-    margin: 12px;
-    border-radius: 12px;
-    background-color:gray;
-    color:rgb(233, 219, 219)
-}
+        .annacoument-card-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 98.7%;
+            box-sizing: border-box;
+        }
+
+        .annacoument-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .annacoument-body {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .annacoument-body h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .annacoument-body span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .annacoument-card-container a span {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .annacoument-card-container a span:hover {
+            color: #0056b3;
+        }
     </style>
 
 </head>

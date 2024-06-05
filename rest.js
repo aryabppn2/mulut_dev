@@ -10,7 +10,7 @@ const {accoundDb_Insert,account,getUpdate_location,Insert_qoutesData,insert_anna
 
 const {find_paragraf,get_annacouments,Find_account}=require('./machine.js')
 const {logo_design}=require('./logo.js')
-const {add_friendList,friends_find}= require('./friends-data.js')
+const {add_friendList,friends_find,Myfriends_find}= require('./friends-data.js')
 const {post_comentAnnacoument,ann_coment}=require('./coment-data.js')
 
 
@@ -183,8 +183,8 @@ http.get('/friends/:user_id',function(input,output){
     const user_id=input.params.user_id;
     const user_account=account(JSON.parse(get_accountDB),user_id)
 
-    output.render('friends-page',{
-        title:'kenalan',
+    output.render('friends',{
+        title:'dikenal',
         friends:user_account[0].friends,
         username:user_account[0].username,
         userId:user_account[0].account_id,
@@ -642,6 +642,23 @@ http.post('/search-friends',function(input,output){
         userId:user_account[0].account_id
     })
 })
+http.post('/search-myfriends',function(input,output){
+   const get={
+     user_id:input.body.user_id,
+     search:input.body.input_search
+   }
+   const get_data=account(JSON.parse(get_accountDB),get.user_id)[0];
+   output.render('friends',{
+    title:'menampilkan :'+get.search,
+    friends:Myfriends_find(get.search,get_data.friends),
+    username:get_data .username,
+    userId:get_data.account_id
+
+   })
+})
+
+
+
 
 http.listen(port,function(){
     console.log('berhasil terkoneksi dengan:localhost:'+port+'/mulut.com')

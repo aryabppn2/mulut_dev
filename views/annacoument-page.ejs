@@ -5,59 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beranda</title>
     <style>
-      .prg-card{
-        text-align: center;
-      }
-      .search-wrapper{
-         background-color: antiquewhite;
-        text-align: center;
+      body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ece1db;
+        }
 
-      }
-      .input-text-search{
-         width:67.3%;
-         height:36px;
-         color:brown 
-      }
-      .btn-search-type{
-         width:45px;
-         height:40px;
-         margin-left: 0px;
-      }
-      .bar-option{
-         background-color: rgb(199, 175, 145);
-         text-align: center;
-         
-      }
-      .bar-btn{
-         margin-left:0px;
-         text-decoration: none;
-         margin-left:20px;
-         border:0px;
-         width:auto;
-         height: 29px;
-         border-radius: 9px;
-         border-color:rgb(147, 144, 54);
-         background-color:rgb(220, 198, 171) ;
-      }
-      .bar-wrapeer{
-        text-align: left;
-        background-color: rgb(222, 199, 213);
-      }
-     
-     .username-value{
-        color:brown;
-        margin-right:12px;
-     }
-     .annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
+        .search-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-    
-}
-.annacoument-body{
-    height: 100px;
-    overflow-y: auto;
-}
+        .username-value {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .input-text-search {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .btn-search-type {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-search-type:hover {
+            background-color: #45a049;
+        }
+
+        .bar-option {
+            background-color: #e1b69e;
+            padding: 10px 0;
+        }
+
+        .bar-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bar-btn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .bar-btn:hover {
+            background-color: rgba(212, 166, 126, 0.2);
+        }
+
+        .annacoument-wrapper {
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .annacoument-card-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width:98.2%;
+            box-sizing: border-box;
+        }
+
+        .annacoument-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .annacoument-body {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .annacoument-body h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .annacoument-body span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .annacoument-card-container a span {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .annacoument-card-container a span:hover {
+            color: #0056b3;
+        }
     </style>
 </head>
 <body>

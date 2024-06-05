@@ -5,77 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beranda</title>
     <style>
-      .prg-card{
-        text-align: center;
-      }
-      .search-wrapper{
-         background-color: antiquewhite;
-        text-align: center;
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-      }
-      .input-text-search{
-         width:67.3%;
-         height:36px;
-         color:brown 
-      }
-      .btn-search-type{
-         width:45px;
-         height:40px;
-         margin-left: 0px;
-      }
-      .bar-option{
-         background-color: bisque;
-         
-      }
-      .bar-btn{
-         margin:100px;
-         text-decoration: none;
-      }
-      .qoutes-card{
-    width:500px;
-    overflow-y: auto;
-    margin-left:250px;
-    margin-top:24px
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-}
-      .qoutes-card-container{
-    background-color: #dfdad5;
-    
-}
+        .search-wrapper b {
+            margin-right: 10px;
+            font-size: 1.2em;
+            padding: 5px 10px;
+            background-color: rgb(209, 203, 197);
+            color: rgb(255, 183, 0);
+        }
 
-.qoutes-bar{
-    background-color: rgb(219, 226, 199);
-    
-}
+        .input-text-search {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
 
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(219, 226, 199);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:brown
+        .btn-search-type {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
 
-}
-.annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
+        .btn-search-type:hover {
+            background-color: #45a049;
+        }
 
-    
-}
+        .bar-option {
+            display: flex;
+            justify-content: center;
+            background-color: #dfc3c3;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
 
-.annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
+        .bar-btn {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
 
-    
-}
-.annacoument-body{
-    height:100px;
-    overflow-y: auto;
-}
+        .bar-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .qoutes-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .qoutes-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .qoutes-info {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .annacoument-wrapper {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .annacoument-card-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .annacoument-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .annacoument-body {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .annacoument-body h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .annacoument-body span {
+            font-size: 0.9em;
+            color: #666;
+        }
 
 
 

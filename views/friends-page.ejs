@@ -5,71 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=title%></title>
     <style>
-        .friends-bar-container{
-            background-color: rgb(222, 222, 160);
+        .friends-bar-container {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #e07878;
+    }
 
-        }
-        .btn-bar{
-            width:100px;
-            height: 25px;
-            border:0px;
-            background-color: lightgray;
-        }
-        .search{
-            width:199px;
-            height:25px;
-            color:brown;
-        }
-        .btn-search{
-            width:58px;
-            height: 25px;
-            border:0px;
-            background-color: blanchedalmond;
-        }
-        .orang-lain-card{
-            border:0px;
-            background-color: gainsboro;
-        }
-        .others-bar{
-            text-decoration: none;
-            margin-left: 20px;
-        }
+    .btn-bar {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .btn-bar:first-child { /* Style the first button (username) */
+      color: rgb(211, 160, 128);
+      font-weight: bold;
+    }
+
+    .search {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      width:200px
+    }
+
+    .btn-search {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* Style the friends navigation */
+    .friends-navigation {
+      margin-top: 20px;
+      height:450px;
+      overflow-y: auto;
+    }
+
+    .orang-lain-card {
+      border: 1px solid #d9b6b6;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #e7dede;
+    }
+
+    .username-place {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .others-bar {
+      text-decoration: none;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      margin-right: 10px;
+    }
     </style>
 </head>
 <body>
     <div class="friends-bar-container">
-        <table>
-            <tr>
-                <td>
+           
                   <a href="/first-page/<%=userId%>" style="text-decoration: none;">
-                  <button class="btn-bar" style="color:blue"><%=username%></button>
+                  <button class="btn-bar" style="color:rgb(125, 52, 99)"><%=username%></button>
                   </a>
-                </td>
-                <td>
+            
                     <a href="/list-chat-open/<%=userId%>" style="text-decoration: none;">
                     <button class="btn-bar">chatting</button>
                     </a>
-                </td>
-                <td>
-                    <a href="/beranda/<%=userId%>" style="text-decoration: none;">
-                        <button class="btn-bar">navigasi</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="/friends-list/<%=userId%>" style="text-decoration: none;">
-                    <button class="btn-bar"><--</button>
-                    </a>
-                </td>
-                <td>
-                    <form action="/search-friends" method="post">
-                        <input type="hidden" value="<%=userId%>" name="user_id">
-                        <input type="text" name="input_search" placeholder="cari siapa" class="search">
-                        <button type="submit" class="btn-search">cari</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
     </div>
+    <form action="/search-friends" method="post">
+      <input type="hidden" value="<%=userId%>" name="user_id">
+      <input type="text" name="input_search" placeholder="cari siapa" class="search">
+      <button type="submit" class="btn-search">cari</button>
+  </form>
     <div class="friends-navigation">
         <% friends.forEach(element => { %>
             <fieldset class="orang-lain-card">
@@ -80,6 +96,18 @@
             </fieldset>     
       
      <%})%>
+    </div>
+    <div class="bar-bellow">
+      <a href="/beranda/<%=userId%>" style="text-decoration: none;">
+        <button class="btn-bar">navigasi</button>
+    </a>
+
+    <a href="/friends-list/<%=userId%>" style="text-decoration: none;">
+    <button class="btn-bar"><--</button>
+    </a>
+    <a href="/orang-lain/<%= userId %>" style="text-decoration: none;">
+      <button class="btn-bar">cari kenalan</button>
+  </a>
     </div>
 </body>
 </html>

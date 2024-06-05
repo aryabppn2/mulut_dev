@@ -5,105 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beranda</title>
     <style>
-      .prg-card{
-        text-align: center;
-      }
-      .search-wrapper{
-         background-color: antiquewhite;
-        text-align: center;
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5eaea;
+        }
 
-      }
-      .input-text-search{
-         width:67.3%;
-         height:36px;
-         color:blue;
-      }
-      .btn-search-type{
-         width:45px;
-         height:40px;
-         margin-left: 0px;
-         border:0px;
-         background-color: burlywood;
-      }
-      .bar-option{
-         background-color: rgb(199, 175, 145);
-         text-align: center;
-         
-      }
-      .bar-btn{
-         margin-left:0px;
-         text-decoration: none;
-         margin-left:20px;
-         width:auto;
-         height: 29px;
-         border-style:solid;
-         border-color:rgb(147, 144, 54);
-         background-color:rgb(220, 198, 171) ;
-         border-radius: 14px;
-         border:0px;
-      }
-      .qoutes-card{
-    width:500px;
-    overflow-y: auto;
-    margin-left:250px;
-    margin-top:24px
+        .search-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-}
+        .username-value {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
 
-.qoutes-bar{
-    background-color: rgb(219, 226, 199);
-    
-}
+        .input-text-search {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
 
-.qoutes-info{
-    width:300px;
-    height: 30px;
-    background-color:rgb(219, 226, 199);
-    border:0px;
-}
-.qoutes-value{
-    background-color: #ffe4c4;
-    color:brown
+        .btn-search-type {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
 
-}
-.coment-coloum{
-    background-color: rgb(239, 232, 222);
-    
-}
-.bar-wrapper{
-    text-align: left;
-    background-color: #dfdad5;
-}
-.coment-container-input{
-    width:400px;
-    background-color: #ffe4c4;
-    color:green;
-    border: 0px;
-}
-.coment-list{
-    width:400px;
-    background-color: blanchedalmond;
-}
-.detail-container{
-    text-decoration: none;
-color:brown;
-background-color: rgb(231, 201, 201);
-}
-  
-     .username-value{
-        color:brown;
-        margin-right:12px;
-     }
-     .annacoument-card-container{
-    background-color: whitesmoke;
-    text-align: center;
+        .btn-search-type:hover {
+            background-color: #45a049;
+        }
 
-    
-}
-.annacoument-body{
-    height: 100px;
-    overflow-y: auto;
-}
+        .bar-option {
+            background-color: #d3b1b1;
+            padding: 10px 0;
+        }
+
+        .bar-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bar-btn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .bar-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .context-wrapper {
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .qoutes-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width:98.9%;
+            box-sizing: border-box;
+        }
+
+        .qoutes-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .qoutes-info {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +129,7 @@ background-color: rgb(231, 201, 201);
             </a>
             <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
             
-            <button class="bar-btn" style='color:blue'>pengumuman</button>
+            <button class="bar-btn" style='color:blue'>berita</button>
         
             </a>
 
