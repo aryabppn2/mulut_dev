@@ -10,8 +10,12 @@
             margin: 0;
             padding: 0;
         }
+        .body-nav{
+            height: 480px;
+            overflow-y: auto;
+        }
         .search-wrapper {
-            background-color: #e7b690;
+            background-color: #e68275;
             padding: 10px;
             display: flex;
             align-items: center;
@@ -49,22 +53,21 @@
             margin-right: 10px;
         }
         .context-wrapper {
-            padding: 10px;
+            width:98.7%;
+      height: 300px;
+      display:block;
+      overflow-x: auto;
+
+      background-color: #efdbdb;
+
         }
         .qoutes-card {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 15px;
+      width:99.7%;
+      height: 400px;
+      margin-left: 12px;
         }
-        .qoutes-card a {
-            text-decoration: none;
-            color: inherit;
-        }
-        .qoutes-card h3 {
-            margin-top: 0;
-        }
+       
+       
         .annacoument-wrapper {
             padding: 10px;
         }
@@ -86,10 +89,58 @@
             background-color: #f9f9f9;
             padding: 10px;
             border-radius: 5px;
+            height: 120px;
+            overflow-y: auto;
+        }
+        .orang-lain-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width:98.5%;
+            box-sizing: border-box;
+        }
+
+        .username-place {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .others-bar {
+            display:flex;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            text-align: center;
+            text-decoration: none;
+            color: #ff6a00;
+            margin:12px;
+            transition: background-color 0.3s ease;
+            
+        }
+
+        .others-bar:hover {
+            background-color: #e9e9e9;
+        }
+
+        .others-bar:first-of-type {
+            color: #333;
+        }
+
+        .others-bar:nth-of-type(2) {
+            color: gray;
+        }
+
+        .others-bar:last-of-type {
+            color: green;
         }
     </style>
 </head>
 <body>
+   <% if (page=="semua") { %>
     <form action='/search-data/<%=account.account_id%>'  method="post" class="search-wrapper">
         <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
            <span class="username-value"><%=account.username%></span>
@@ -100,7 +151,7 @@
     <div class="bar-option">
     
     <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
-    <button class="bar-btn" style="color:brown">semua</button>
+    <button class="bar-btn" style="color:brown;background-color: #ccc;">semua</button>
     </a>
     <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
     
@@ -117,19 +168,12 @@
     </a>
     
     </div>
+    <div class="body-nav">
     <div class="context-wrapper">
     <% paragraf.forEach(datas=> { %>
         <div class="qoutes-card" style="background-color:<%=datas.bgcolor%>;">
-            <div>
-                <a href="/others-content/<%=datas.userId%>/<%=account.account_id%>" style="text-decoration: none;">
-                 <b style="color:<%=datas.color%>"><%=datas.username%></b>
-                </a>
-                <select style="background-color: <%=datas.color%>;">
-                <option style="color:<%=datas.bgcolor%>"><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
-                <option  style="color:<%=datas.bgcolor%>"><%=datas.carry.location%></option>
-                </select>
-            </div>
-            <a href="/open-qoutes/<%=account.account_id%>/<%=datas.qoutes_id%>" style="text-decoration: none;">
+            
+            <a href="/open-qoutes-beranda/<%=account.account_id%>/<%=datas.qoutes_id%>" style="text-decoration: none;">
             <h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
             </a>           
         </div>
@@ -159,6 +203,165 @@
     
     
     </div>
+
+
+
+
+    </div>
+
     
+   <% } else if(page=="qoutes"){%>
+    <form action='/search_qoutes_input/<%=account.account_id%>'  method="post" class="search-wrapper">
+        <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
+           <span class="username-value"><%=account.username%></span>
+            </a>
+        <input type="text" name="search_input" class="input-text-search" placeholder="cari apa" >
+        <button class="btn-search-type" type="submit">🔍</button>
+    </form>
+    <div class="bar-option">
+    
+    <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
+    <button class="bar-btn" style="color:brown">semua</button>
+    </a>
+    <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+    
+    <button class="bar-btn" style='color:lightgreeen; background-color: #ccc;'>qoutes</button>
+
+    </a>
+    <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+    
+    <button class="bar-btn" style='color:blue'>berita</button>
+
+    </a>
+    <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
+    <button class="bar-btn" style="color:green">orang lain</button>
+    </a>
+    
+    </div>
+    <div class="body-nav">
+    <div class="context-wrapper">
+    <% paragraf.forEach(datas=> { %>
+        <div class="qoutes-card" style="background-color:<%=datas.bgcolor%>;">
+            
+            <a href="/open-qoutes-beranda/<%=account.account_id%>/<%=datas.qoutes_id%>" style="text-decoration: none;">
+            <h3 style="color:<%=datas.color%>"><%=datas.qoutes_value%></h3>
+            </a>           
+        </div>
+
+    <% }) %>
+    </div>
+
+  
+    </div>
+
+    
+
+
+    <%} else if(page=="ann"){%>
+        <form action='/search-annacouments/<%=account.account_id%>'  method="post" class="search-wrapper">
+            <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
+               <span class="username-value"><%=account.username%></span>
+                </a>
+            <input type="text" name="search_annacoument_input" class="input-text-search" placeholder="cari apa" >
+            <button class="btn-search-type" type="submit">🔍</button>
+        </form>
+        <div class="bar-option">
+        
+        <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
+        <button class="bar-btn" style="color:brown">semua</button>
+        </a>
+        <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+        
+        <button class="bar-btn" style='color:lightgreeen'>qoutes</button>
+    
+        </a>
+        <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+        
+        <button class="bar-btn" style='color:blue;background-color: #ccc;'>berita</button>
+    
+        </a>
+        <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
+        <button class="bar-btn" style="color:green">orang lain</button>
+        </a>
+        
+        </div>
+        <div class="body-nav">
+    
+        <div class="annacoument-wrapper">
+            <% annacouments.forEach(DATA => { %>
+                <div class="annacoument-card-container">
+                <h3 class="annacoument-title"><%=DATA.username%></h3>
+                <b><%=DATA.carry.place%></b>
+                <fieldset class="annacoument-body">
+                    <h3><%=DATA.annacoument_title%></h3>
+                    <span><%=DATA.annacoument_value%></span>
+                </fieldset>
+                   <a href="/open-annacoument/<%=account.account_id%>/<%=DATA.annacoument_id%>" style="text-decoration: none;">
+                  <span >buka</span>
+                </a>
+            
+            
+                </div>
+            
+            
+            
+            <% }) %>
+        
+        
+        </div>
+        </div>
+    
+        
+
+        <%}else if(page=="orang-lain"){%>
+            <form action='/searchAccount/<%=account.account_id%>'  method="post" class="search-wrapper">
+                <a href="/first-page/<%=account.account_id%>" style="text-decoration: none;">
+                   <span class="username-value"><%=account.username%></span>
+                    </a>
+                <input type="text" name="search_input" class="input-text-search" placeholder="cari apa" >
+                <button class="btn-search-type" type="submit">🔍</button>
+            </form>
+            <div class="bar-option">
+            
+            <a href="/beranda/<%=account.account_id%>" style="text-decoration: none;">
+            <button class="bar-btn" style="color:brown">semua</button>
+            </a>
+            <a href="/qoutes-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+            
+            <button class="bar-btn" style='color:lightgreeen'>qoutes</button>
+        
+            </a>
+            <a href="/annacoument-navigation/<%=account.account_id%>" style='text-decoration: none;'>
+            
+            <button class="bar-btn" style='color:blue'>berita</button>
+        
+            </a>
+            <a href="/orang-lain/<%=account.account_id%>" style="text-decoration: none;" >
+            <button class="bar-btn" style="color:green;background-color: #ccc;">orang lain</button>
+            </a>
+            
+            </div>
+            <div class="body-nav">
+        
+            <div class="annacoument-wrapper">
+                <% all_account.forEach(element => { %>
+                    <fieldset class="orang-lain-card">
+                      <legend class="username-place"><%=element.username%></legend>
+                      <a href="/others-content/<%=element.account_id%>/<%=account.account_id%>" class="others-bar" style="color:gray">konten</a>
+                      <a href="/open-chat-system/<%=account.account_id%>/<%=element.account_id%>" class="others-bar" style="color:green">buka chat</a>
+                    </fieldset>     
+                    
+              
+              
+              
+                  <% }) %>
+            
+            
+            </div>
+            </div>
+        
+
+
+            <%}%>
 </body>
 </html>

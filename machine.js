@@ -14,5 +14,11 @@ function Find_account(input,json){
     return acount_filter
 }
 
+function get_chatListSearch(datas,input_Value){
+    const chat=datas.filter(ch=>ch.chat_value.includes(input_Value));
 
-module.exports={find_paragraf,get_annacouments,Find_account}
+    return chat
+}
+
+
+module.exports={find_paragraf,get_annacouments,Find_account,get_chatListSearch}

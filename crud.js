@@ -33,18 +33,12 @@ function account(json,id){
    return find
 }
 function qoutes(json,id){
-    const datas_filter=json.filter(data=>data.id_prg.includes(id));
+    const datas_filter=json.filter(data=>data.qoutes_id.includes(id));
     return datas_filter
 }
 function get_annacoumentData(json,id){
     const annacoument_select=json.filter(data=>data.annacoument_id.includes(id));
     return annacoument_select
-}
-
-function qoutes(datas,id){
-    const get=datas.filter(data=>data.qoutes_id.includes(id))[0]
-
-    return get
 }
 
 

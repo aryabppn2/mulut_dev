@@ -3,91 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title>chatting:<%=targetname%></title>
     <style>
-        .chat-mini-bar{
-            background-color: bisque;
-        }
-        .btn-chat-bar{
-            text-decoration: none;
-            margin-left: 29px;
-        }
-        .user-chat-body{
-            height: 220px;
+     .chat-bar-name{
+        background-color: antiquewhite;
+     }
+
+.username-btn{
+    background-color:rgb(207, 220, 186);
+    color:green;
+    border:0px;
+    width:45.3%;
+            height: 30px;
+        
+}
+.target-btn{
+    background-color:rgb(238, 211, 199);
+    color:rgb(165, 78, 15);
+    border:0px;
+    width:45.3%;
+    height: 30px;
+}
+
+
+        .chat-body{
+            height: 400px;
             overflow-y: auto;
-            background-color: rgb(219, 235, 216);
         }
-        .target-chat-body{
-            height: 220px;
-            overflow-y: auto;
-            background-color: lightgray;
-        }
-        .chat-input-text{
-            width:1198px;
-            height:29px;
-            border:0px;
-        }
-        .btn-sent{
-            width:40px;
-            height: 29px;
-            border-radius: 1px;
-            border: 0px;
-            background-color: antiquewhite;
-        }
-        .target-chat-card{
-            background-color: antiquewhite;
-            margin-top:12px;
-            
-        }
-        .chat-info-wrapper{
-            background-color: antiquewhite;
-            border:0px
-        }
-        .user-chat-card{
-            background-color: rgb(220, 241, 234);
-            margin-top: 12px;;
-        }
+  .chat-sent{
+    background-color:rgb(210, 235, 210);
+    text-align:left;
+  }
+  .chat-accept{
+    background-color:rgb(218, 196, 173);
+    text-align:left;
+  }
+  .input-chat{
+    width:78.3%;
+    height:30px;
+    border:0px;
+    background-color: rgb(242, 237, 230);
+  }
+  .chat-sender{
+    width:10%;
+    height: 30px;
+    border:0px;
+    background-color: bisque;
+    color:brown
+  }
     </style>
 </head>
 <body>
-    <div class="chat-mini-bar">
-        <a href="/first-page/<%=userId%>" class="btn-chat-bar"><%=userName%></a>
-        <a href="/list-chat-open/<%=userId%>" class="btn-chat-bar" style="color:blue;">keluar</a>
-        <a href="/others-content/<%=targetId%>/<%=userId%>" class="btn-chat-bar" style="color:rgb(19, 95, 11);">lihat konten</a>
-        <h1 class="target-name-container"><%=targetName%></h1>
+    <div class="chat-bar-name">
+    <a href="/first-page/<%=user_id%>" style="text-decoration: none;">
+        <button class="username-btn"><%=username%></button>
+    </a>
+    <a href="/others-content/<%=target_id%>/<%=user_id%>" style="text-decoration: none;">
+        <button class="target-btn"><%=targetname%></button>
+    </a>
     </div>
-    <div class="target-chat-body" >
-       <% target_chat.forEach(element => { %>
-           <div class="target-chat-card">
-            <select class="chat-info-wrapper">
-                <option style="color:green"> nama pengirim:<%=element.user_name%></option>
-                <option><%=element.date%> </option>
-               </select><br>
-             <b style="color:gray">  <%=element.chat_value%></b>
-           </div>
-
-       <% }) %> 
+    <div class="chat-body">
+     <% chats.forEach(chat => { %>
+     <% if (user_id==chat.user_id) { %>
+        <div class="chat-sent">
+            <b style="color:green"><%=chat.name%></b>
+            <p style="color:green"><%=chat.chat_value%></p>
+          </div>
+     <% } else{ %>
+        <div class="chat-accept">
+            <b style="color:brown"><%=chat.name%></b>
+            <p style="color:brown"><%=chat.chat_value%></p>
+          </div>
+        <% } %>
+       
+     <% }) %>
     </div>
-    <div class="user-chat-body"> 
-    <% user_chat.forEach(element => { %>
-         <div class="user-chat-card" >
-            <select class="chat-info-wrapper" style="background-color:rgb(220, 241, 234);">
-                <option style="color:green"> nama pengirim:<%=element.user_name%></option>
-                <option><%=element.date%> </option>
-               </select><br>
-             <b style="color:rgb(36, 88, 44)">  <%=element.chat_value%></b>
-         </div>
-    <% }) %>
+    <form action="/sent-chat" method="post">
+        <input type="hidden" name="input_userId" value="<%=user_id%>">
+        <input type="hidden" name="input_targetId" value="<%=target_id%>">
+        <input type="hidden" name="get_username" value="<%=username%>">
+        <input type="hidden" name="time_get" value="<%-date%>">
+        <input type="text" name="input_chat_text" class="input-chat" placeholder="ketikan sesuatu">
+        <button class="chat-sender" type="submit">--></button>
+    </form><br><br>
+    
 
-
-    </div>
-   <form action="<%=chat_room_system%>" method="post" class="chat-input-wrapper">
-    <input type="hidden" name="input_userName" value="<%=userName%>">
-    <input type="hidden" name="input_targetName" value="<%=targetName%>">
-    <input type="hidden" name="input_date" value="<%=date%>">
-    <input type="hidden" name="input_location_update" value=>
- <textarea name="input_chat_value"  class="chat-input-text" placeholder="ketikan sesuatu"></textarea>
-  <button class="btn-sent">kirim</button>
-   </form>
 </body>
 </html>

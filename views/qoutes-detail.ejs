@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+     *{
+        background-color: <%=data.bgcolor%>;
+        color:<%=data.color%>;
+     }
+     .back-btn{
+        text-decoration: none;
+        margin-right:12px ;
+     }
+     .qoutes-info{
+        width:30%;
+        height: 34px;
+        border:0px;
+        text-align: center;
+     }
+    </style>
+</head>
+<body style="text-align: center;">
+<% if (page=='first-page') { %>
+ <div class="qoutes-bar">
+<a href="/first-page/<%=userId%>" class="back-btn"><%=username%></a>
+<select class="qoutes-info">
+    <option>informasi qoutes</option>
+   <option><%=data.username%></option>
+    <option><%=data.carry.hours%>:<%=data.carry.hours%></option>
+    <option ><%=data.carry.location%></option>
+</select>
+
+
+ </div>
+<h1 class="qoutes-value"><%=data.qoutes_value%></h1>
+
+
+<% }else if(page=="beranda"){ %> 
+    <div class="qoutes-bar">
+        <a href="/beranda/<%=userId%>" class="back-btn"><%=username%></a>
+        <select class="qoutes-info">
+            <option>informasi qoutes</option>
+
+            <a href="/others-content/<%=data.userId%>/<%=userId%>"><option><%=data.username%></option></a>
+            <option><%=data.carry.hours%>:<%=data.carry.hours%></option>
+            <option ><%=data.carry.location%></option>
+        </select>
+        <a href="/qoutes-navigation/<%=userId%>" style="text-decoration: none" class="btn-back">
+            navigasi
+        </a>
+        
+         </div>
+        <h1 class="qoutes-value"><%=data.qoutes_value%></h1>
+
+
+
+    
+ <%}%>   
+
+</body>
+</html>

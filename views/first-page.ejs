@@ -6,7 +6,7 @@
     <title>Home</title>
     <style>
         .body-nav{
-            height: 450px;
+            height: 480px;
             overflow-y: auto;
         }
         .bar-private-container, .bar-bellow {
@@ -36,10 +36,13 @@
     }
 
     /* Style the quotes card */
+  
     .qoutes-card {
-      margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 5px;
+      width:89.3%;
+      margin:12px;
+      height: 300px;
+      margin-left: 12px;
+     
     }
 
     .qoutes-head {
@@ -88,6 +91,19 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .content-wrapper{
+      width:99.7%;
+      height: 300px;
+      display:block;
+      overflow-x: auto;
+
+      background-color: #efdbdb;
+    }
+    .annacoument-wrapper{
+      height: 400px;
+      overflow-y: auto;
+      background-color: #ddd;
+    }
     </style>
 </head>
 <body>
@@ -99,7 +115,7 @@
     </div>
    
     <div class="body-nav">
-        <div class="context-wrapper">
+        <div class="content-wrapper">
             <div class="add-qoutes-btn">
                 <a href="/input/<%=data.account_id%>"><button class="btn-add">Quotes</button></a>
             </div>
@@ -107,16 +123,13 @@
             
                 <div class="qoutes-card" style="background-color: <%=datas.bgcolor%>;">
                     <div class="qoutes-head">
-                        <b><%=datas.username%></b>
-                        <select class="qoutes-info">
-                            <option><%=datas.carry.hours%>:<%=datas.carry.minutes%></option>
-                            <option><%=datas.carry.location%></option>
-                        </select>
+                       
+                        
                         <a href="/delete-qoutes/<%=datas.qoutes_id%>/<%=data.account_id%>">
                             <button class="btn-delete">Hapus</button>
                         </a>
                     </div>
-                    <a href="/get-update-qoutes/<%=datas.qoutes_id%>/<%=data.account_id%>" style="text-decoration: none;">
+                    <a href="/open-qoutes/<%=datas.qoutes_id%>/<%=data.account_id%>" style="text-decoration: none;">
                         <h1 style="color: <%=datas.color%>"><%=datas.qoutes_value%></h1>
                     </a>
                 </div>

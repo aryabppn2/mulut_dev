@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <style>
+
+.scroll-type{
+  height: 470px;
+  overflow-y: auto;
+}
+    .annacoument-bar{
+      background-color: antiquewhite;
+
+    }
+    .annacoument-paper{
+      height: 470px;
+      overflow-y: auto;
+    }
+    .btn-bar{
+      width:24%;
+      height: 39px;
+      background-color: blanchedalmond;
+      margin-left:4px;
+      border:0px;
+
+    }
+    .text-input{
+      width:91.2%;
+      height: 32px;
+      background-color: aliceblue;
+      border:0px
+    }
+    .textarea-container{
+      width:91.2%;
+      height:300px;
+      overflow-y: auto;
+      border: 0px;
+      background-color: aliceblue;
+    }
+    .mini-input{
+      width:34%;
+      height: 22px;
+      background-color: aliceblue;
+      border:0px
+    }
+    .location-input{
+      width:68%;
+      height: 22px;
+      border: 0px;
+      background-color: aliceblue;
+      text-align: center;
+    }
+    .btn-submit{
+      width:74%;
+      height: 33px;
+      background-color: blueviolet;
+      color:aliceblue;
+      border: 0px;
+    
+    }
+    .coment-input{
+       width:81.2%;
+       height: 34px;
+       border:0px
+    }
+    .btn-coment{
+      width:14%;
+      height: 34px;
+      background-color: brown;
+      color:aliceblue;
+      border-color:gold
+    }
+    .coment-card-container{
+      background-color: antiquewhite;
+    }
+    .input-qoutes-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+
+
+    .clock {
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .input-style {
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .input-color {
+      width: 100%;
+      padding: 5px;
+    }
+
+    .input-qoutes {
+      width: 87.2%;
+      max-width: 600px;
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 1em;
+      resize: vertical;
+    }
+
+    .submid-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .input-qoutes-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-name, .btn-bar, .input-qoutes, .submid-btn {
+        width: 89%;
+        margin: 5px 0;
+      }
+
+      .input-style {
+        margin: 10px;
+      }
+
+      table {
+        width: 100%;
+      }
+    }
+    </style>
+</head>
+<body style="background-color: aliceblue;text-align: center;">
+<% if (page=="add-ann") { %>
+  <div class="annacoument-bar">
+    <a href="/first-page/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(107, 38, 38)'><%= username %></button>
+    </a>
+    <a href="/input/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(159, 65, 185)'>qoutes</button>
+    </a>
+    <a href="/add-annacoument-page/<%= user_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(9, 45, 45);background-color: aliceblue;'>pengumuman</button>
+    </a>
+</div>
+
+<form action="/post-annacoument" method="post" class='annacoument-paper'>
+    <input type="hidden" value="<%= username %>" name="input_username">
+    <input type="hidden" value="<%= user_id %>" name="input_userId">
+    <h1 class="username"><%=username%></h1>
+    <a href='/open-chat-system/<%= user_id %>/<%= user_id %>' style='text-decoration:none'>
+        <b class='hub-class-btn'>hubungi <%= username %></b>
+    </a>
+    <fieldset class='annacoument-body'>
+        <input type='text' name='input_title' placeholder='judul pengumuman' class='text-input'><br>
+        <textarea name='input_annacoumentValue' class='textarea-container' placeholder='isi pengumuman'></textarea><br> 
+                    <input type='date' name='input_date' class='mini-input'>
+                    <input type='time' name='input_time' class='mini-input'><br>
+                    <input type='text' name='input_location' class='location-input' placeholder='lokasi'>
+    </fieldset>
+    <button type='submit' class='btn-submit'>posting</button>
+</form>
+
+<% }else if(page=="add-qoutes"){ %>
+  <div class="annacoument-bar">
+    <a href="/first-page/<%=data.account_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(107, 38, 38)'><%= data.username %></button>
+    </a>
+    <a href="/input/<%=data.account_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(159, 65, 185);;background-color: aliceblue'>qoutes</button>
+    </a>
+    <a href="/add-annacoument-page/<%=data.account_id %>" style="text-decoration: none;">
+        <button class="btn-bar" style='color:rgb(9, 45, 45)'>pengumuman</button>
+    </a>
+</div>
+<div class="input-style">
+  <table>
+    <tr>
+      <td>time</td>
+      <td> <h1><%=hours%>:<%=minutes%></h1></td>
+    </tr>
+    <tr>
+      <th>tulisan</th>
+      <td><input type="color" id="input-sign-color" class="input-color" onchange="updateColor('input-sign-color', 'sign', 'qoutes', 'color')"></td>
+    </tr>
+    <tr>
+      <td>latar belakang</td>
+      <td><input type="color" id="input-background-color" class="input-color" onchange="updateColor('input-background-color', 'background', 'qoutes', 'backgroundColor')"></td>
+    </tr>
+  </table>
+</div>
+<form action="/post-qoutes" method="post" class="scroll-type">
+  <input type="hidden" value="" name="input_signColor" id="sign">
+  <input type="hidden" name="input_background" value="" id="background">
+  <input type="hidden" name="input_username" value="<%=data.username %>">
+  <input type="hidden" name="input_userId" value="<%=data.account_id %>">
+  <input type="hidden" name="input_hours" value="<%= hours %>">
+  <input type="hidden" name="input_minutes" value="<%= minutes %>">
+  <input type="hidden" name="input_location" value="<%= data.location %>">
+  <textarea name="input_qoutes" placeholder="isi qoutes" class="input-qoutes" id="qoutes"></textarea><br>
+  <button class="submid-btn" type="submit">post</button>
+</form>
+</div>
+<script>
+function updateColor(inputId, hiddenInputId, elementId, styleProperty) {
+  const color = document.getElementById(inputId).value;
+  const hiddenInput = document.getElementById(hiddenInputId);
+  const element = document.getElementById(elementId);
+  
+  hiddenInput.value = color;
+  element.style[styleProperty] = color;
+}
+</script>
+
+
+
+
+
+  <%}%>
+</body>
+</html>
